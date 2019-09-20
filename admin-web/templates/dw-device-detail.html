@@ -1,0 +1,217 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li><a ui-sref="main.device/list">设备列表</a></li>
+        <li class="active">设备详情</li>
+    </ol>
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <div class="detail-basic-info">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <p class="detail-basic-title">基本信息</p>
+                </div>
+                <div class="ibox-content">
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">设备编号:</label>
+                        <div class=" each-detail-item-value">{{device.device_number}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">归属站点:</label>
+                        <div class=" each-detail-item-value">{{device.station_name}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">供应商名称:</label>
+                        <div class=" each-detail-item-value">{{device.manufacturer_name}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">桩类型:</label>
+                        <div class=" each-detail-item-value">{{device.apply_type_name}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">充电类型:</label>
+                        <div class=" each-detail-item-value">{{device.charge_type_name}}</div>
+                    </div>
+                    <!-- <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">带枪情况:</label>
+                        <div class=" each-detail-item-value">{{device.plug_type_name}}</div>
+                    </div> -->
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">当前状态:</label>
+                        <div class=" each-detail-item-value">
+                            <span ng-if="device.device_status == 1">未联网</span>
+                            <span ng-if="device.device_status == 2">正常使用</span>
+                            <span ng-if="device.device_status == 3">限流中</span>
+                            <span ng-if="device.device_status == 4">失去连接</span>
+                            <span ng-if="device.device_status == 5">整机故障</span>
+                        </div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">端口数:</label>
+                        <div class=" each-detail-item-value">{{device.port_cnt}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">安装时间:</label>
+                        <div class=" each-detail-item-value">{{device.built_date}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">质保年限:</label>
+                        <div class=" each-detail-item-value">{{device.serve_year}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">经纬度:</label>
+                        <div class=" each-detail-item-value">{{device.lng}}</div>
+                    </div>
+
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">地区:</label>
+                        <div class=" each-detail-item-value">{{device.eprovince}}{{device.city}}{{device.district}}</div>
+                    </div>
+
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">详细地址:</label>
+                        <div class=" each-detail-item-value">{{device.address}}</div>
+                    </div>
+
+                    <!-- <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">充电类型:</label>
+                        <div class=" each-detail-item-value">{{device.province}} {{device.city}} {{device.district}}</div>
+                    </div> -->
+
+                    <!-- <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">接口标准:</label>
+                        <div class=" each-detail-item-value">{{device.remarks}}</div>
+                    </div> -->
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">SIM卡号:</label>
+                        <div class=" each-detail-item-value">{{device.sim_number}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">SIM卡期限:</label>
+                        <div class=" each-detail-item-value" ng-if="device.sim_number">{{device.accepted_at}}--{{device.sim_expired_at}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dw-page-detail-container" style="margin-top:15px" ng-controller="LoadPortsCtrl">
+    <div class="detail-basic-info">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <p class="detail-basic-title">充电枪列表</p>
+                </div>
+                <div class="ibox-content clearfix" style="padding: 15px;">
+                    <table class="table table-bordered table-td-h">
+                        <thead>
+                            <tr>
+                                <td>序号</td>
+                                <td>设备名称</td>
+                                <td>充电枪端口号</td>
+                                <td>归属站点</td>
+                                <td>端口状态</td>
+                                <td>实时电压(V)</td>
+                                <td>实时电流(A)</td>
+                                <td>操作</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="port in ports">
+                              <td>{{$index+1+info.offset}}</td>
+                              <td>{{port.device_number}}</td>
+                              <td>{{port.port_number}}</td>
+                              <td>{{port.station_name}}</td>
+                              <td>{{port.status_name}}</td>
+                              <td>
+                                  <span ng-if="port.detail.length !== 0">{{port.detail.voltage/100}}</span>
+                                  <span ng-if="port.detail.length === 0">-</span>
+                                  
+                              </td>
+                              <td>
+                                    <span ng-if="port.detail.length !== 0">{{port.detail.current/1000}}</span>
+                                    <span ng-if="port.detail.length === 0">-</span>
+                              </td>
+                              <td>
+                                  <button class="btn btn-warning" ng-click="goDetail(port.id)">详情</button>
+                              </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <page-nation info="info" start-paging="startPaging()"></page-nation>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dw-page-detail-container" style="margin-top:15px" ng-controller="LoadChargeOrdersCtrl">
+    <div class="detail-basic-info">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title clearfix">
+                    <p class="detail-basic-title" style="vertical-align: top;">充电记录</p>
+                    <div style="display: inline-block;">
+                        <input class="form-control input-sm" id="start-date" placeholder="起始时间" style="display: inline-block;width: 126px;" ng-model="info.created_st" autocomplete="off">-
+                        <input class="form-control input-sm" id="end-date" placeholder="结束时间" style="display: inline-block;width: 126px;" ng-model="info.created_et" autocomplete="off">
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="search()" style="margin-left: 10px;">确定</button>
+                    </div>
+                    <button type="button" class="btn btn-default btn-sm pull-right" ng-click="export()" style="margin-right:15px;">导出</button>
+                </div>
+                <div class="ibox-content clearfix" style="padding: 15px;">
+                    <table class="table table-bordered table-td-h">
+                        <thead>
+                            <tr class="tr-no-wrap">
+                                <td>序号</td>
+                                <td>订单号</td>
+                                <td>端口号</td>
+                                <td>插座编号</td>
+                                <td>站点名称</td>
+                                <td>用户</td>
+                                <td>充电量 </td>
+                                <td>充电时长</td>
+                                <td>起始时间 </td>
+                                <td>结束时间 </td>
+                                <td>电费(元)</td>
+                                <td>总金额(元)</td>
+                                <td>实收(元)</td>
+                                <td>退款金额(元)</td>
+                                <td>支付来源</td>
+                                <td>充电状态</td>
+                                <td>订单状态</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="charge_order in charge_orders">
+                                <td>{{$index+1+info.offset}}</td>
+                                <td>{{charge_order.order_number}}</td>
+                                <td>{{charge_order.port_number}}</td>
+                                <td>{{charge_order.port_aliasname}}</td>
+                                <td>{{charge_order.station_name}}</td>
+                                <td>
+                                   {{charge_order.phone}}
+                                </td>
+                                <td>{{(charge_order.elec_quantity/1000).toFixed(2)}}</td>
+                                <td>{{charge_order.duration|second2format|limitTo:8}}</td>
+                                <td>{{charge_order.started_at}}</td>
+                                <td>{{charge_order.finished_at}}</td>
+                                <td>{{(charge_order.elec_cost/100).toFixed(2)}}</td>
+                                <td>{{(charge_order.payment/100).toFixed(2)}}</td>
+                                <td>{{(charge_order.payment_act/100).toFixed(2)}}</td>
+                                <td>{{(charge_order.refund_act/100).toFixed(2)}}</td>
+                                <td>{{charge_order.pay_type_name}}</td>
+                                <td>{{charge_order.order_status_name}}</td>
+                                <td>{{charge_order.pay_status_name}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <page-nation info="info" start-paging="startPaging()"></page-nation>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

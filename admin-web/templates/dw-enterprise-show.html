@@ -1,0 +1,98 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+		<li><a href="#">首页</a></li>
+		<li><a ui-sref="main.enterprise/list">公司列表</a></li>
+		<li class="active">公司详情</li>
+	</ol>
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <div class="detail-basic-info">
+        <div class="row">
+        	<div class="ibox">
+        		<div class="ibox-title">
+        			<p class="detail-basic-title">基本信息</p>
+        		</div>
+        		<div class="ibox-content">
+        			<div class="each-detail-item col-sm-3">
+		                <label class="each-detail-item-name pull-left">公司名称:</label>
+		                <div class=" each-detail-item-value">{{enterprise.name}}</div>
+		            </div>
+		            <div class="each-detail-item col-sm-3">
+		                <label class="each-detail-item-name pull-left">公司编码:</label>
+		                <div class=" each-detail-item-value">{{enterprise.code}}</div>
+		            </div>
+
+		            <div class="each-detail-item col-sm-3">
+		                <label class="each-detail-item-name pull-left">权限等级:</label>
+		                <div class=" each-detail-item-value">{{enterprise.level}}</div>
+		            </div>
+
+		            <div class="each-detail-item col-sm-3">
+		                <label class="each-detail-item-name pull-left">联系人:</label>
+		                <div class=" each-detail-item-value">{{enterprise.contacts}}</div>
+		            </div>
+
+		            <div class="each-detail-item col-sm-3">
+		                <label class="each-detail-item-name pull-left">手机号:</label>
+		                <div class=" each-detail-item-value">{{enterprise.phone}}</div>
+		            </div>
+
+		            <!-- <div class="each-detail-item col-sm-3">
+		                <label class="each-detail-item-name pull-left">紧急联系人:</label>
+		                <div class=" each-detail-item-value">{{enterprise.emergent_contacts}}</div>
+		            </div>
+
+		            <div class="each-detail-item col-sm-3">
+		                <label class="each-detail-item-name pull-left">联系人手机号:</label>
+		                <div class=" each-detail-item-value">{{enterprise.emergent_phone}}</div>
+		            </div> -->
+
+		            <div class="each-detail-item col-sm-3">
+		                <label class="each-detail-item-name pull-left">上级公司:</label>
+		                <div class=" each-detail-item-value">{{enterprise.parent_name}}</div>
+		            </div>
+
+		            <div class="each-detail-item col-sm-3">
+		                <label class="each-detail-item-name pull-left">所在城市:</label>
+		                <div class=" each-detail-item-value">{{enterprise.province}} {{enterprise.city}} {{enterprise.district}}</div>
+		            </div>
+
+		            <div class="each-detail-item col-sm-3">
+		                <label class="each-detail-item-name pull-left">电蛙账户:</label>
+		                <div class=" each-detail-item-value">
+		                	<span ng-repeat="frog in enterprise.frog_account">{{frog.name}}</span>
+		                </div>
+		            </div>
+		            <div class="each-detail-item col-sm-3">
+		                <label class="each-detail-item-name pull-left">引荐账户:</label>
+		                <div class=" each-detail-item-value">
+		                	<span ng-repeat="recommend in enterprise.recommend_account">{{recommend.name}},</span>
+		                </div>
+		            </div>
+		            <div class="each-detail-item col-sm-3" ng-if="enterprise.level != 2">
+		                <label class="each-detail-item-name pull-left">合伙账户:</label>
+		                <div class=" each-detail-item-value">
+		                	<span ng-repeat="copemate in enterprise.copemate_account">{{copemate.name}},</span>
+		                </div>
+		            </div>
+		            <div class="each-detail-item col-sm-3" ng-if="enterprise.level != 2">
+		                <label class="each-detail-item-name pull-left">电费账户:</label>
+		                <div class=" each-detail-item-value">
+		                	<span ng-repeat="elec in enterprise.elec_account">{{elec.name}},</span>
+		                </div>
+		            </div>
+		            <div class="each-detail-item col-sm-3" ng-if="enterprise.level != 2">
+		                <label class="each-detail-item-name pull-left">备用账户:</label>
+		                <div class=" each-detail-item-value">
+		                	<span ng-repeat="other in enterprise.other_account">{{other.name}},</span>
+		                </div>
+		            </div>
+		            <div class="each-detail-item col-sm-3">
+		                <label class="each-detail-item-name pull-left">备注:</label>
+		                <div class=" each-detail-item-value">{{enterprise.remarks}}</div>
+		            </div>
+        		</div>
+        	</div>
+        </div>
+    </div>
+</div>

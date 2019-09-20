@@ -1,0 +1,116 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">首页</a>
+        </li>
+        <li class="active">
+            升级报告
+        </li>
+    </ol>
+</div>
+<!-- 顶部搜索 -->
+<div class="dw-page-filter-upgrade">
+    <div class="tabs-container">
+        <ul class="nav nav-tabs">
+                       <li>
+                           <a ui-sref="main.upgrade/package">升级包</a>
+                       </li>
+                       <li  class="">
+                           <a ui-sref="main.upgrade/device">升级桩</a>
+                       </li>
+                       <li class="active">
+                           <a ui-sref="main.upgrade/report">升级报告</a>
+                       </li>
+        </ul>
+        <div class="tab-content">
+            <div id="tab-3" class="tab-pane active">
+                <div class="panel-body">
+                    <div role="form" class="form-inline">
+                        <div class="form-group margin-r-5 upgrade">
+                            <span>升级包:</span>
+                            <fuzzy-search type="packs" query="" queryid="info.pack_id"></fuzzy-search>
+                        </div>
+                        <div class="form-group margin-r-5 upgrade">
+                            <span>站点:</span>
+                            <fuzzy-search type="station" query='info.station_name' queryid="info.station_id"></fuzzy-search>
+                        </div>
+                    </div>
+                    <div style="padding-top:10px;">
+                        <table class="table table-bordered table-td-h input-display-none">
+                                        <thead>
+                                            <tr class="tr-no-wrap">
+                                                <td>序号</td>
+                                                <td>包名</td>
+                                                <td>目标软件版本</td>
+                                                <td>设备制造商</td>
+                                                <td>软件型号</td>
+                                                <td>升级时间</td>
+                                                <td>操作</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="x in reports">
+                                                <td>{{$index + info.offset + 1}}</td>
+                                                <td>{{x.name}}</td>
+                                                <td>{{x.soft_version}}</td>
+                                                <td>{{x.manufacturer_name}}</td>
+                                                <td>{{x.model}}</td>
+                                                <td>{{x.created_at}}</td>
+                                                <td>
+                                                    <button class="btn btn-warning btn-sm btn-outline" data-target="#SelectPackage" data-toggle="modal" type="button" ng-click="info.current_pack_id = x.id; getReport();" >详情</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                        </table>
+                        <page-nation info="info" start-paging="startPaging()"></page-nation>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- 升级报告详情 -->
+<div class="modal inmodal" id="SelectPackage" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title text-center">升级报告详情</h4>
+            </div>
+            <div class="modal-body" style="overflow-y: scroll;">
+                <div class="list-item">升级包：{{report.packInfo.name}}</div>
+                <div class="list-item">软件型号：{{report.packInfo.model}}</div>
+                <div class="list-item">目标升级版本：{{report.packInfo.soft_version}}</div>
+                <div class="list-item">升级时间：{{report.packInfo.created_at}}</div>
+                <div class="ibox" style="padding-top: 20px;">
+                    <table class="table table-bordered table-td-h input-display-none">
+                        <thead>
+                            <tr class="tr-no-wrap">
+                                <td>设备编号</td>
+                                <td>站点</td>
+                                <td>升级前软件版本</td>
+                                <td>当前软件版本</td>
+                                <td>升级结果</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in report.list">
+                                <td>{{x.device_number}}</td>
+                                <td>{{x.station_name}}</td>
+                                <td>{{x.pre_soft_version}}</td>
+                                <td>{{x.current_version}}</td>
+                                <td>{{x.status}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" ng-click="getReport()">刷新</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

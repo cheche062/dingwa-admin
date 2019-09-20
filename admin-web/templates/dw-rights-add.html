@@ -1,0 +1,52 @@
+<div class="dw-rights-add-page">
+    <form class="dw-add-form form-horizontal rights-add-form">
+
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">权限级别</label>
+            <div class="col-sm-3">
+                <select class="form-control" placeholder="请输入权限级别"  ng-model="add.level"  ng-options="rights_level.name for rights_level in rights_levelOpts"  ng-change="changeRightsLevel()">
+                </select>
+            </div>
+        </div>
+        <div class="form-group" ng-if="info.show_parentsRights">
+            <label for="inputEmail3" class="col-sm-2 control-label">上级权限</label>
+            <div class="col-sm-3">
+                <select  class="form-control" ng-model="add.parent_right" placeholder="请选择上级权限" ng-options="parent_right.name for parent_right in parent_rightsOpts">
+                    <option value="0" selected>请选择上级权限</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">权限类型</label>
+            <div class="col-sm-3">
+                <select  class="form-control"  placeholder="请选择权限类型" ng-disabled="true"  ng-model="add.module_type" ng-options="module_type.name for module_type in module_typeOpts">
+                    <option value="0" selected>请选择权限类型</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">权限计费参数</label>
+            <div class="col-sm-3">
+                <select class="form-control" ng-model="add.purchase_type" placeholder="请输入权限计费参数" ng-options="purchase_type.name for purchase_type in purchase_typeOpts track by purchase_type.id">
+                    <option value="0" selected>请选择权限计费参数</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">权限标识</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" ng-model="add.key" placeholder="请输入权限标识">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">权限名称</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" ng-model="add.name"  placeholder="请输入权限名称">
+            </div>
+        </div>
+        <div class="dw-form-btn-group">
+            <button type="button" name="button" class="btn btn-default dw-form-btn">取消</button>
+            <button type="button" name="button" class="btn btn-primary dw-form-btn" ng-click="submit()">确认</button>
+        </div>
+    </form>
+</div>

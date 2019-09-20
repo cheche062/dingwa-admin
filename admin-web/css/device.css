@@ -1,0 +1,40 @@
+.detail-info-item-name{
+    height: 40px;
+    line-height: 40px;
+}
+.detail-info-item-value{
+    height: 40px;
+    line-height: 40px;
+}
+.charging-socket-container{
+    width: 100%;
+    background-color: #fff;
+    padding: 15px;
+    margin-top: 20px;
+}
+.charging-socket-item{
+    width: 150px;
+    height: 180px;
+    border:1px solid #ddd;
+    border-radius:5px;
+    position: relative;
+    background-color: transparent;
+    z-index: 3;
+    overflow: hidden;
+}
+.socket-img{
+    width: 80px;
+    height: 80px;
+    margin:0 auto;
+    margin-top: 25px;
+}
+.socket-img img{
+    width: 100%;
+    height: 100%;
+}
+.socket-item-status{
+    text-align: center;
+    font-size: 18px;
+    color:#1afa29;
+    margin-top: 15px;
+}

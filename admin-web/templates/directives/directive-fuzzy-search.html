@@ -1,0 +1,7 @@
+<input class="form-control" type="text" ng-change="fuzzySearch()" ng-model="query" ng-click="
+hidden=!hidden" placeholder="{{placeholder}}" />
+<ul class="list-group input-select-dropdown" ng-show="showDropdownFlag" aria-labelledby="dropdownMenuDivider">
+	<li class="list-group-item" ng-repeat="x in dropdownDatas" ng-click="clickDropdownItem(x)" ng-if="type != 'user' && type !='systemuserPhone'">{{x.name}}</li>
+    <li class="list-group-item" ng-repeat="x in dropdownDatas" ng-click="clickDropdownItem(x)" ng-if="type == 'user'">{{x.phone}}</li>
+	<li class="list-group-item" ng-repeat="x in dropdownDatas" ng-click="clickDropdownItem(x)" ng-if="type == 'systemuserPhone'">{{x.phone}}</li>
+</ul>

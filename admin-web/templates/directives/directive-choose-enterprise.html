@@ -1,0 +1,25 @@
+<div class="modal inmodal" id="ChooseEnterprise" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">选择归属公司</h4>
+            </div>
+            <div class="modal-body" style="max-height: 600px;overflow-y:auto;">
+                <div class="ibox-content" style="border-top:none;">
+                    <div class="choose-user-enterprise choose-user-groups2">
+                        <div ng-if="ent.level<4" class="choose-user-groups-item checkbox cdot-checkbox-level-{{ent.level}}" ng-repeat="ent in enterprises">
+                            <input  type="radio" ng-model="enterprise.parent_id" id="radio-1-{{ent.id}}" name="radio-1s-set-enterprise" class="regular-radio" value="{{ent.id}}" />
+                            <label for="radio-1-{{ent.id}}"></label>
+                            <span >{{ent.name}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" ng-click="cancle()">取消</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="confirm()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>

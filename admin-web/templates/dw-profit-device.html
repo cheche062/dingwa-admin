@@ -1,0 +1,39 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li><a ui-sref="main.profit/list">分润数据</a></li>
+        <li><a ui-sref="main.profitStation/list">站点汇总</a></li>
+        <li class="active">设备汇总</a></li>
+    </ol>
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>桩号</td>
+                <td>上次上报电量(度)</td>
+                <td>本次上报电量(度)</td>
+                <td>充电电量(度)</td>
+                <td>电费单价(元)</td>
+                <td>订单数量</td>
+                <td>用户支付总收入(元)</td>
+                <td>生成日期</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in devices">
+                <td>{{$index + data.offset + 1}}</td>
+                <td>{{item.device_number}}</td>
+                <td>{{item.elec_quantity_pre/1000}}</td>
+                <td>{{item.elec_quantity_cur/1000}}</td>
+                <td>{{item.elec_quantity/1000}}</td>
+                <td>{{item.prime_cost/100}}</td>
+                <td>{{item.order_cnt}}</td>
+                <td>{{item.order_payment/100}}</td>
+                <td>{{item.created_at}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <page-nation info="info" start-paging="startPaging()"></page-nation>
+</div>

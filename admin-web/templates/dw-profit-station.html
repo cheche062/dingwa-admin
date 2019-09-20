@@ -1,0 +1,55 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li><a ui-sref="main.profit/list">分润数据</a></li>
+        <li class="active">站点汇总</a></li>
+    </ol>
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>站点名称</td>
+                <td>站点单日电量(度)</td>
+                <td>站点电费单价(元)</td>
+                <td>站点电费总价(元)</td>
+                <td>订单数量</td>
+                <td>用户支付总收入(元)</td>
+                <td>电费成本(元)</td>
+                <td>角色名称</td>
+                <td>分润比例</td>
+                <td>分润钱数(元)</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in stations">
+                <td>{{$index + data.offset + 1}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.elec_quantity/1000}}</td>
+                <td>{{item.prime_cost/100}}</td>
+                <td>{{item.prime_cost_total/100}}</td>
+                <td>{{item.order_cnt}}</td>
+                <td>{{item.order_payment/100}}</td>
+                <td>{{item.margin_fee/100}}</td>
+                <td>{{item.role_name}}</td>
+                <td>{{item.ratio}}</td>
+                <td>{{item.account_fee/100}}</td>
+                <td>
+                    <button class="btn btn-warning" ng-click="goDetail(item.id)">设备汇总</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <page-nation info="info" start-paging="startPaging()"></page-nation>
+    <!-- <div class="table-bottom">
+        <div class="more-operation-btn-group">
+            <a ui-sref="main.enterprise/add">
+                <button class="btn btn-primary">
+                        添加
+                </button>
+            </a>
+        </div>
+    </div> -->
+</div>

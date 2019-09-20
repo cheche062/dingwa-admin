@@ -1,0 +1,54 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a> </li>
+        <li class="active">系统用户组列表</li>
+    </ol>
+</div>
+<div class="dw-page-filter">
+    <form  class="dw-fliter-group form-inline ">
+        <div class="form-group">
+           <label for="">系统用户组</label>
+            <fuzzy-search type="systemgroup" query='systemgroup.name' queryid="systemgroup.id"></fuzzy-search>
+        </div>
+        <button class="btn btn-primary" type="button" name="button" ng-click="searchList()">查询</button>
+    </form >
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <div class="more-operation-btn-group pull-right" style="margin-bottom:10px;">
+        <a ui-sref="main.systemusergroup/add">
+            <button class="btn btn-primary" ng-if="userAuthId.indexOf(37) != -1">
+                    添加
+            </button>
+        </a>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>名称</td>
+                <td>用户个数</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in info.list">
+                <td>{{$index + info.offset + 1}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.users_num}}</td>
+                <td class="table-operation-td">
+                    <button class="btn btn-warning" ng-click="goDetail(item)" ng-if="userAuthId.indexOf(36) != -1">详情</button>
+                    <a ui-sref="main.systemusergroup/edit({id:item.id})" ng-if="userAuthId.indexOf(38) != -1">
+                        <button class="btn btn-primary">编辑</button>
+                    </a>
+                    <a ng-click="delete(item.id)" ng-if="userAuthId.indexOf(39) != -1">
+                        <button class="btn btn-danger">删除</button>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <page-nation info="info" start-paging="startPaging()"></page-nation>
+    <!-- <div class="table-bottom">
+        
+    </div> -->
+</div>

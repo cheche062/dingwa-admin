@@ -1,0 +1,57 @@
+<div class="modal inmodal" id="ChooseFeeDetail" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">选择计费规则</h4>
+                <button type="button" class="btn btn-primary pull-right" ng-if="fee_rules_buf.length<4" ng-click="fee_rule_add()">添加</button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-striped" style="border-right: 0; border-bottom: 0; margin-bottom: 15px;">
+                    <thead>
+                        <tr>
+                            <td>充电时长</td>
+                            <td>电费</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat = "x in fee_rules_buf">
+                            <td style="width: 30%;">
+                                <input type="number" class="form-control" min="1" max="10" step="1" ng-model="x.hour" onkeyup="this.value=this.value.toString().match(/^[1-9]+\d*$/)" style="width:50%;display:inline-block;">{{key}}小时
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" min="0" step="0.01" ng-model="x.fee" onkeyup="this.value=this.value.toString().match(/^\d+(?:\.\d{0,2})?/)" style="width:90%;display:inline-block;">/元
+                            </td>
+                            <td ng-if="fee_rules_buf.length>1" style="border: 0; background-color: #FFF;">
+                                <button type="button" ng-click="fee_rule_detele($index)" style="border-radius:50%;border:0;padding:6px 12px;width:30px;height:30px;background-image:url(../../img/delete_button.png);background-position:center;background-color:transparent;"></button>
+                            </td>
+                        </tr>
+                        <!-- <tr>
+                            <td>1小时</td>
+                            <td>
+                                <input type="number" class="form-control" min="0" step="0.01" ng-model="fee_rules[3600]" style="width:90%;display:inline-block;">/元
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2小时</td>
+                            <td>
+                                <input type="number" class="form-control" min="0" step="0.01" ng-model="two_hour" style="width:90%;display:inline-block;">/元
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>10小时</td>
+                            <td>
+                                <input type="number" class="form-control" min="0" step="0.01" ng-model="charge_full" style="width:90%;display:inline-block;">/元
+                            </td>
+                        </tr> -->
+                    </tbody>
+                </table>
+                <div ng-if="fee_edit_warning!=''"" style="text-align: center; color: red;font-size: 16px;">{{fee_edit_warning}}</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" ng-click="fees_cancle()">取消</button>
+                <button type="button" class="btn btn-primary" ng-click="fees_confirm()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>

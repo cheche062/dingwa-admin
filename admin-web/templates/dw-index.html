@@ -1,0 +1,256 @@
+<my-header></my-header>
+<div class="dw-main-page">
+    <div class="dw-header-index">
+        <!-- 修改：给导航加个标题 -->
+        <div class="dw-title">
+            <span>首页</span>
+        </div>
+        <div class="system-user-name">
+            <!-- <a ui-sref="index">
+                <button type="button" class="button btn btn-default" style="margin-right:15px;">首页</button>
+            </a> -->
+            <!-- <a ui-sref="main.index" style="color:black;text-decoration: none;">首页</a> -->
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span>{{$root.login_name}}</span> <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li ng-click="loginOut()"><a>退出登录</a></li>
+                <li ng-click="edit_pwd()" ng-if="userAuthId.indexOf(50) != -1"><a >修改密码</a></li>
+              </ul>
+            </div>
+        </div>
+    </div>
+    <div class="index_page">
+        <div class="index-warper">
+            <h1 class="index-title-h1">顶蛙平台总数据展示</h1>
+            <div class="index_number">
+                <div class="charge_ele" ng-repeat="number in frog_data.quantity_total track by $index">{{number}}</div>
+                <div style="display: inline-block;height: 144px;vertical-align:middle;position: relative;" class="electricity">
+                    <span style="position: absolute;top:12px;height: 100%;">度</span>
+                </div>
+            </div>
+            <h2 class="tonow_data">至今累计数据 &nbsp;&nbsp;&nbsp;&nbsp;Cumulative data</h2>
+            <div class="index_data">
+                <div class="index_data_div">
+                    <div class="index_content">
+                        <div class="content-left">
+                            <img src="../img/index-clock.png" alt="" class="index-clock">
+                        </div>
+                        <div class="content-right">
+                            <div class="right-top title-name">累计充电时长</div>
+                            <div class="right-bottom title-content" ng-if="frog_data.duration_total/3600 < 10000">
+                                {{frog_data.duration_total/3600|number:0}}
+                                <span class="unit">小时</span>
+                            </div>
+                            <div class="right-bottom title-content" ng-if="frog_data.duration_total/3600 >= 10000">
+                                {{frog_data.duration_total/3600/10000|number:2}}
+                                <span class="unit">万小时</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="index_content">
+                        <div class="content-left">
+                            <img src="../img/index-bicycle.png" alt="" class="index-bicycle">
+                        </div>
+                        <div class="content-right">
+                            <div class="right-top title-name">累计充电车次</div>
+                            <div class="right-bottom title-content" ng-if="frog_data.charge_total <10000">
+                                {{frog_data.charge_total}}
+                                <span class="unit">辆</span>
+                            </div>
+                            <div class="right-bottom title-content" ng-if="frog_data.charge_total >=10000">
+                                {{frog_data.charge_total/10000 |number:2}}
+                                <span class="unit">万辆</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="index_content">
+                        <div class="content-left">
+                            <img src="../img/index-station.png" alt="" class="index-station">
+                        </div>
+                        <div class="content-right">
+                            <div class="right-top title-name">累计站点总数</div>
+                            <div class="right-bottom title-content" ng-if="frog_data.station_total < 10000">
+                                {{frog_data.station_total}}
+                                <span class="unit">个</span>
+                            </div>
+                            <div class="right-bottom title-content" ng-if="frog_data.station_total >= 10000">
+                                {{frog_data.station_total/10000 |number:2}}
+                                <span class="unit">万个</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="index_data_div" style="margin-top: 100px;">
+                    <div class="index_content" style="flex:1;margin-right: 70px;">
+                        <div class="content-left" style="width: 40%;">
+                            <img src="../img/index-device.png" alt="" class="index-device">
+                        </div>
+                        <div class="content-right" style="width: 59%;">
+                            <div class="right-top title-name right-top-big">累计充电终端数</div>
+                            <div class="linear"></div>
+                            <div class="right-bottom title-content" ng-if="frog_data.device_total < 10000">
+                                {{frog_data.device_total}}
+                                <span class="unit">个</span>
+                            </div>
+                            <div class="right-bottom title-content" ng-if="frog_data.device_total >= 10000">
+                                {{frog_data.device_total/10000 |number:2}}
+                                <span class="unit">万个</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="index_content" style="flex: 1">
+                        <div class="content-left" style="width: 40%;">
+                            <img src="../img/index-plug.png" alt="">
+                        </div>
+                        <div class="content-right" style="width: 59%;">
+                            <div class="right-top title-name right-top-big" class="index-plug">累计充电插座总数</div>
+                            <div class="right-bottom title-content" ng-if="frog_data.port_total < 10000">
+                                {{frog_data.port_total}}
+                                <span class="unit">个</span>
+                            </div>
+                            <div class="right-bottom title-content" ng-if="frog_data.port_total >= 10000">
+                                {{frog_data.port_total/10000 |number:2}}
+                                <span class="unit">万个</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="index_content">
+                        <div class="content-left">
+                            <img src="../img/index-user.png" alt="" class="index-user">
+                        </div>
+                        <div class="content-right">
+                            <div class="right-top title-name">累计充电用户数</div>
+                            <div class="right-bottom title-content" ng-if="frog_data.user_total < 10000">
+                                {{frog_data.user_total}}
+                                <span class="unit">人</span>
+                            </div>
+                            <div class="right-bottom title-content" ng-if="frog_data.user_total >= 10000">
+                                {{frog_data.user_total/10000 |number:2}}
+                                <span class="unit">万人</span>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- <div class="index-warper">
+            <h1 class="index-title-h1">我的平台总数据展示</h1>
+            <div class="index_number">
+                <div class="charge_ele" ng-repeat="number in my_data.quantity_total track by $index">{{number}}</div>
+                <div style="display: inline-block;height: 144px;vertical-align:middle;position: relative;" class="electricity">
+                    <span style="position: absolute;top:12px;height: 100%;">度</span>
+                </div>
+            </div>
+            <h2 class="tonow_data">至今累计数据 &nbsp;&nbsp;&nbsp;&nbsp;Cumulative data</h2>
+            <div class="index_data" style="margin-bottom: 45px;">
+                <div class="index_data_div">
+                    <div class="index_content">
+                        <div class="content-left">
+
+                            <img src="../img/index-clock.png" alt="" class="index-clock">
+                        </div>
+                        <div class="content-right">
+                            <div class="right-top title-name">累计充电时长</div>
+                            <div class="right-bottom title-content" ng-if="my_data.duration_total/3600 < 10000">
+                                {{my_data.duration_total/3600|number:0}}
+                                <span class="unit">小时</span>
+                            </div>
+                            <div class="right-bottom title-content" ng-if="my_data.duration_total/3600 >= 10000">
+                                {{my_data.duration_total/3600/10000|number:2}}
+                                <span class="unit">万小时</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="index_content">
+                        <div class="content-left">
+                            <img src="../img/index-bicycle.png" alt="" class="index-bicycle">
+                        </div>
+                        <div class="content-right">
+                            <div class="right-top title-name">累计充电车次</div>
+                            <div class="right-bottom title-content" ng-if="my_data.charge_total < 10000">
+                                {{my_data.charge_total}}
+                                <span class="unit">辆</span>
+                            </div>
+                            <div class="right-bottom title-content" ng-if="my_data.charge_total >= 10000">
+                                {{my_data.charge_total/10000 |number:2}}
+                                <span class="unit">万辆</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="index_content">
+                        <div class="content-left">
+
+                            <img src="../img/index-station.png" alt="">
+                        </div>
+                        <div class="content-right">
+                            <div class="right-top title-name" class="index-station">累计站点总数</div>
+                            <div class="right-bottom title-content" ng-if="my_data.station_total < 10000">
+                                {{my_data.station_total}}
+                                <span class="unit">个</span>
+                            </div>
+                            <div class="right-bottom title-content" ng-if="my_data.station_total >= 10000">
+                                {{my_data.station_total/10000 |number:2}}
+                                <span class="unit">万个</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="index_data_div" style="margin-top: 100px;">
+                    <div class="index_content">
+                        <div class="content-left">
+
+                            <img src="../img/index-device.png" alt="" class="index-device">
+                        </div>
+                        <div class="content-right">
+                            <div class="right-top title-name">累计充电终端数</div>
+                            <div class="right-bottom title-content" ng-if="my_data.device_total < 10000">
+                                {{my_data.device_total}}
+                                <span class="unit">个</span>
+                            </div>
+                            <div class="right-bottom title-content" ng-if="my_data.device_total >= 10000">
+                                {{my_data.device_total/10000 |number:2}}
+                                <span class="unit">万个</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="index_content">
+                        <div class="content-left">
+                            <img src="../img/index-plug.png" alt="" class="index-plug">
+                        </div>
+                        <div class="content-right">
+                            <div class="right-top title-name">累计充电插座总数</div>
+                            <div class="right-bottom title-content" ng-if="my_data.port_total < 10000">
+                                {{my_data.port_total}}
+                                <span class="unit">个</span>
+                            </div>
+                            <div class="right-bottom title-content" ng-if="my_data.port_total >= 10000">
+                                {{my_data.port_total/10000 |number:2}}
+                                <span class="unit">万个</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="index_content">
+                        <div class="content-left">
+                            <img src="../img/index-user.png" alt="" class="index-user">
+                        </div>
+                        <div class="content-right">
+                            <div class="right-top title-name">累计充电用户数</div>
+                            <div class="right-bottom title-content" ng-if="my_data.user_total < 10000">
+                                {{my_data.user_total}}
+                                <span class="unit">人</span>
+                            </div>
+                            <div class="right-bottom title-content" ng-if="my_data.user_total >= 10000">
+                                {{my_data.user_total/10000 |number:2}}
+                                <span class="unit">万人</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>

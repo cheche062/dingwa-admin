@@ -1,0 +1,90 @@
+<div class="dw-login-page">
+    <div class="login-page-header">
+        <div class="login-page-logo">
+            <img src="../img/logo.png" alt="LOGO" class="logo-img">
+        </div>
+    </div>
+    <div class="dw-login-page-bk">
+        <img src="../img/login-bk.png" alt="登录页背景" class="dw-login-bk-img">
+        <div class="login-text">
+            <img src="../img/login-text.png" alt="功能介绍" class="dw-login-text-img">
+        </div>
+        <div class="dw-login-img-two-box">
+            <img src="../img/login-img-2.png" alt="" class="dw-login-img-2">
+        </div>
+        <form action="" class="login-form">
+            <div class="dw-system-name">欢迎登录电蛙后台管理系统</div>
+            <div class="input-group login-input-group">
+                <span class="input-group-addon dw-login-icon"><i class="fa fa-user"></i></span>
+                <input type="text" class="form-control login-form-input" placeholder="用户名" ng-model="info.name">
+            </div>
+            <div class="input-group login-input-group">
+                <span class="input-group-addon dw-login-icon"><i class="fa fa-lock"></i></span>
+                <input type="password" class="form-control login-form-input" placeholder="密码" ng-model="info.pwd" ng-keyup="keyup($event)">
+            </div>
+            <button type="button" name="button" class="btn login-form-btn" ng-click="login()">登录</button>
+        </form>
+    </div>
+    <div class="login-page-icon-box">
+        <div class="login-page-icon-group">
+            <div class="login-page-icon-item">
+                <div class="each-icon-img">
+                    <img src="../img/login-icon-one.png" alt="">
+                    安全
+                </div>
+            </div>
+            <div class="login-page-icon-item">
+                <div class="each-icon-img">
+                    <img src="../img/login-icon-two.png" alt="">
+                    智能
+                </div>
+            </div>
+            <div class="login-page-icon-item">
+                <div class="each-icon-img">
+                    <img src="../img/login-icon-three.png" alt="">
+                    便捷
+                </div>
+            </div>
+            <div class="login-page-icon-item">
+                <div class="each-icon-img">
+                    <img src="../img/login-icon-four.png" alt="">
+                    共享
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="system-copyright-text">Copyright(c)2018 版权所有 上海联桩新能源技术股份有限公司</div>
+</div>
+<div class="modal fade" id="AlertDialog" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">提示</h4>
+            </div>
+            <div class="modal-body">
+                <h4>{{root.msg}}</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ConfirmDialog" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">请确认</h4>
+            </div>
+            <div class="modal-body">
+                <h4>{{root.msg}}</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="root.confirm()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>

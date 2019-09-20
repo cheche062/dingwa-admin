@@ -1,0 +1,288 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li class="active">提现申请</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:grey; font-size:14px">数据以每天0：00为时间节点核算</span></li>
+    </ol>
+</div>
+<div class="dw-page-filter">
+    <div class="dw-page-point">
+        <span class="span-title">账户数据&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:grey; font-size:14px">分润额提取时间单位最小为月</span></span>
+        <div class="dw-page-point1">
+            <div class="div-page-point">
+                <span>总分润额</span>
+                <br>
+                <span class="span-data">22222</span>
+            </div>
+        </div>
+        <div class="dw-page-point2">
+            <div class="div-page-point">
+                <span>剩余分润额</span>
+                <br>
+                <span class="span-data">22222</span>
+            </div>
+        </div>
+        <div class="dw-page-point3">
+            <div class="div-page-point">
+                <span>可提现分润额</span>
+                <br>
+                <span class="span-data">8888</span>
+            </div>
+        </div>
+        <div class="dw-page-point4">
+            <div class="form-inline clearfix" style="margin-bottom:15px;padding-right:15px;" ng-if="systemUser.type == 2">  
+                <!-- <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#withDrawsModal"> -->
+                <button class="btn btn-primary pull-right" ng-click="withDrawHand()">            
+                    提现
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="div-data-table" style="margin-top:80px;padding: 20px;">
+        <span style="margin-left: 0px;">|&nbsp;&nbsp;提现记录</span>
+        <div class="table-data" style="width: 100%;height:auto;">
+            <table id="table-data" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <!-- <td>序号</td> -->
+                        <td>时间</td>
+                        <td>提现流水号</td>
+                        <td>提现金额</td>
+                        <td>提现账号</td>
+                        <!-- <td>申请人手机号</td> -->
+                        <td>申请备注</td>
+                        <!-- <td>处理备注</td>
+                        <td>创建时间</td> -->
+                        <td>处理状况</td>
+                        <td  ng-if="userAuthId.indexOf(51) != -1">操作</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in withDrawList">
+                        <!-- <td>{{$index+1+info.offset}}</td> -->
+                        <td>{{item.created_at}}</td>
+                        <td>{{item.trade_number}}</td>
+                        <td>{{item.payment/100 |number:2}}</td>
+                        <!-- <td>{{item.type_name}}</td> -->
+                        <td>{{item.transfer_account}}</td>
+                        <!-- <td>{{item.system_user_phone}}</td> -->
+                        <td>{{item.remarks}}</td>
+                        <!-- <td>{{item.deal_remarks}}</td> -->
+                        
+                        <td>{{item.status_name}}</td>
+                        <td  ng-if="userAuthId.indexOf(51) != -1"> 
+                            <!-- <button class="btn btn-warning" ng-click="deal(item)" ng-disabled="item.status !== 1 ">处理</button> -->
+                            <a ui-sref="main.withDraw/detail({id:item.id})" ng-if="userAuthId.indexOf(51) != -1">
+                                <button style="height: 30px; padding: 0px 10px;" class="btn anniu" ng-click="">详情</button>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <page-nation info="info" start-paging="startPaging()"></page-nation>
+                          
+        </div>
+    </div>
+    <!-- 修改：注释 -->
+    <!-- <form  class="dw-fliter-group form-inline ">
+        <div class="form-group">
+           <label for="">创建时间</label>
+           <input class="form-control" id="start-date-start" placeholder="起始时间" style="width: 150px;">-
+           <input class="form-control" id="start-date-end" placeholder="结束时间" style="width: 150px;">
+        </div>
+        <div class="form-group">
+           <label for="">提现状态</label>
+           <select ng-model="info.status" class="form-control" ng-model="info.status">
+                <option value="0">全部</option>
+                <option value="1">待处理</option>
+                <option value="2">提现成功</option>
+                <option value="3">提现驳回</option>
+            </select>
+        </div>
+        <div class="form-group">
+           <label for="">提现方式</label>
+           <select ng-model="info.filter_type" class="form-control" ng-model="info.type">
+                <option value="0">全部</option>
+                <option value="1">线下</option>
+                <option value="2">银行卡</option>
+                <option value="3">支付宝</option>
+                <option value="4">微信</option>
+            </select>
+        </div>
+    </form>
+    <div class="form-inline clearfix">
+        <button class="btn btn-primary pull-right" type="button" name="button" ng-click="search()">查询</button>
+    </div> -->
+</div>
+
+<!-- 修改：注释 -->
+<!-- <div class="dw-page-detail-container table-responsive">
+    <div class="form-inline clearfix" style="margin-bottom:15px;padding-right:15px;" ng-if="systemUser.type == 2">   -->
+            <!-- <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#withDrawsModal"> -->
+            <!-- <button class="btn btn-primary pull-right" ng-click="withDrawHand()">            
+                提现
+            </button>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>订单编号</td>
+                <td>申请金额</td>
+                <td>提现方式</td>
+                <td>提现账号</td>
+                <td>申请人手机号</td>
+                <td>申请备注</td>
+                <td>处理备注</td>
+                <td>创建时间</td>
+                <td>提现状态</td>
+                <td  ng-if="userAuthId.indexOf(51) != -1">操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in withDrawList">
+            <td>{{$index+1+info.offset}}</td>
+            <td>{{item.trade_number}}</td>
+            <td>{{item.payment/100 |number:2}}</td>
+            <td>{{item.type_name}}</td>
+            <td>{{item.transfer_account}}</td>
+            <td>{{item.system_user_phone}}</td>
+            <td>{{item.remarks}}</td>
+            <td>{{item.deal_remarks}}</td>
+            <td>{{item.created_at}}</td>
+            <td>{{item.status_name}}</td>
+            <td  ng-if="userAuthId.indexOf(51) != -1"> 
+                    <button class="btn btn-warning" ng-click="deal(item)" ng-disabled="item.status !== 1 ">处理</button>
+            </td>
+            </tr>
+        </tbody>
+    </table>
+    <page-nation info="info" start-paging="startPaging()"></page-nation>
+</div> -->
+<!-- 用户提现 -->
+<div class="modal fade" id="withDrawsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h3 class="modal-title text-center" id="myModalLabel">用户提现</h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-group clearfix">
+                <label class="col-sm-3 col-xs-3">提现方式</label>
+                <select ng-model="info.type" class="form-control col-sm-5" style="width: 200px;position:relative;">
+                    <!-- <option value="1">线下</option> -->
+                    <option value="2">银行卡</option>
+                    <!-- <option value="3">支付宝</option>
+                    <option value="4">微信</option> -->
+                </select>
+                <span class="red-start">*</span>
+            </div>
+            <!-- <div class="form-group clearfix" style="margin-top: 20px;">
+                <label class="col-sm-3 col-xs-3">提现账户</label>
+                <input type="text" class="col-sm-5 form-control"style="width: 200px;position:relative;" ng-model="info.transfer_account">
+                <span class="red-start">*</span>
+            </div> -->
+            <!-- <div class="form-group clearfix" style="margin-top: 20px;position:relative;">
+                <label class="col-sm-3 col-xs-3">分润金额</label>
+                <span class="col-sm-5 form-control" style="width: 200px;">{{systemUser.balance/100 |number:2}}元</span>
+            </div>
+            <div class="form-group clearfix" style="margin-top: 20px;position:relative;">
+                <label class="col-sm-3 col-xs-3">补扣金额</label>
+                <span class="col-sm-5 form-control" style="width: 200px;">{{systemUser.refund/100 |number:2}}元</span>
+                <button style="background-color: #FFF; border: 0;" data-toggle="modal" ng-disabled="systemUser.refund<1" ng-click="getRefund(2)">查看详情</button>
+            </div> -->
+            <div class="form-group clearfix" style="margin-top: 20px;position:relative;">
+                <label class="col-sm-3 col-xs-3">金额(元)</label>
+                <span class="col-sm-5 form-control" style="width: 200px;">{{systemUser.balance/100 |number:2}}元</span>
+                <!-- <input type="text" class="col-sm-5 form-control"style="width: 200px;position:relative;" ng-model="info.count" placeholder="提现最小金额200元">  -->
+                <span ng-class="systemUser.balance<20000 ? 'red-start' : 'green-start'">大于200元可提现</span>
+            </div>
+            <div class="form-group clearfix" style="margin-top: 20px;">
+                <label class="col-sm-3 col-xs-3">备注</label>
+                <input type="text" class="col-sm-5 form-control"style="width: 200px;position:relative;" ng-model="info.remarks">
+                <!-- <span class="red-start">*</span> -->
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary" ng-disabled="systemUser.balance<20000" ng-click="withDraw()">确认</button>
+        </div>
+        </div>
+    </div>
+</div>
+<!-- 补扣款详情 -->
+<!-- <div class="modal fade" id="fixBalanceDetailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" style="width: 50%; min-width: 800px;" role="document">
+        <div class="modal-content" style="min-height: 500px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title text-center" id="myModalLabel">补扣金额详情</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>序号</td>
+                            <td>订单号</td>
+                            <td>端口号</td>
+                            <td>站点名称</td>
+                            <td>用户</td>
+                            <td>补扣时间</td> 
+                            <td>补扣金额</td> 
+                            <td>支付来源</td>
+                            <td>支付金额</td>                 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in refundList.list">
+                            <td>{{$index+1+refundList.offset}}</td>
+                            <td>{{item.order_number}}</td>
+                            <td>{{item.port_number}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.phone}}</td>
+                            <td>{{item.refund_order_at}}</td>
+                            <td>{{item.refund_act/100 |number:2}}元</td>
+                            <td>{{item.pay_type}}</td>
+                            <td>{{item.payment_act/100 |number:2}}元</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <page-nation info="refundList" start-paging="startPagingRefund()"></page-nation>
+            </div>
+            <div class="modal-footer" style="margin-top: 50px;">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">确认</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!-- 提现申请处理 -->
+<div class="modal fade" id="withDrawsDealModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title text-center" id="myModalLabel">提现申请处理</h3>
+      </div>
+      <div class="modal-body">
+         <div class="form-group clearfix">
+             <label class="col-sm-3">处理方式</label>
+             <select ng-model="info.deal_status" class="form-control col-sm-5" style="width: 200px;position:relative;">
+                 <option value="2">通过</option>
+                 <option value="3">驳回</option>
+             </select>
+             <span class="red-start">*</span>
+         </div>
+         <div class="form-group clearfix" style="margin-top: 15px;">
+             <label class="col-sm-3">备注</label>
+             <input type="text" class="col-sm-5 form-control"style="width: 200px" ng-model="info.deal_remarks">
+             <span class="red-start">*</span>
+         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" ng-click="confirmWithDraw()">确认</button>
+      </div>
+    </div>
+  </div>
+</div>

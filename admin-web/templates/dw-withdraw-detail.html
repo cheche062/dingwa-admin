@@ -1,0 +1,62 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li><a ui-sref="main.withDraw/list">提现申请</a></li>
+        <li class="active">提现申请详情</li>
+    </ol>
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <div class="detail-basic-info">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <p class="detail-basic-title">基本信息</p>
+                </div>
+                <div class="ibox-content">
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">提现流水账号:</label>
+                        <div class=" each-detail-item-value">{{withDraw.trade_number}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">提现账号:</label>
+                        <div class=" each-detail-item-value">{{withDraw.transfer_account}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">提现方式:</label>
+                        <div class=" each-detail-item-value">{{withDraw.type_name}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">申请提现金额:</label>
+                        <div class=" each-detail-item-value">￥{{withDraw.payment/100 |number:2}}元</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">申请备注:</label>
+                        <div class=" each-detail-item-value">{{withDraw.remarks}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">申请时间:</label>
+                        <div class=" each-detail-item-value">{{withDraw.created_at}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">处理备注:</label>
+                        <div class=" each-detail-item-value">{{withDraw.deal_remarks}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">处理时间:</label>
+                        <div class=" each-detail-item-value">{{withDraw.updated_at}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">申请人手机号:</label>
+                        <div class=" each-detail-item-value">{{withDraw.system_user_phone}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class=" each-detail-item-name pull-left">处理状况:</label>
+                        <div class=" each-detail-item-value">{{withDraw.status_name}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    

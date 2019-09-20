@@ -1,0 +1,149 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li class="active">站点列表</li>
+    </ol>
+</div>
+<div class="dw-page-filter">
+    <form  class="dw-fliter-group form-inline ">
+        <div class="form-group">
+           <label for="">站点类型</label>
+            <select ng-model="info.type" class="form-control">
+                <option value="0">全部</option>
+                <option value="1">公共</option>
+                <option value="2">专用</option>
+            </select>
+        </div>
+        <!-- <div class="form-group">
+           <label for="">站点状态</label>
+           <select ng-model="info.status" class="form-control">
+                <option value="0">全部</option>
+                <option value="1">运营中</option>
+                <option value="2">建设中</option>
+                <option value="3">规划中</option>
+            </select>
+        </div> -->
+        <!-- <div class="form-group">
+           <label for="">运营类型</label>
+           <select ng-model="info.provider" class="form-control">
+                <option value="0">全部</option>
+                <option value="1">电蛙</option>
+            </select>
+        </div> -->
+        <div class="form-group">
+            <label for="">所在城市:</label>
+            <area-choose class="form-control" style="border:0px;padding:0px"></area-choose>
+         </div>
+        <div class="form-group">
+           <label for="">站点名称</label>
+           <fuzzy-search type="station" query="info.station_obj.name" queryid="info.station_obj.id"></fuzzy-search>
+        </div>
+    </form>
+    <form  class="dw-fliter-group form-inline ">
+        <div class="form-group">
+           <label for="">公司名称</label>
+           <fuzzy-search type="enterprise" query="info.enter_obj.name" queryid="info.enter_obj.id"></fuzzy-search>
+        </div>
+        <div class="form-group" style="visibility: hidden;">
+            <label for="">运营类型</label>
+            <select ng-model="info.provider" class="form-control">
+                 <option value="0">全部</option>
+                 <option value="1">电蛙</option>
+            </select>   
+        </div>
+    </form >
+    <div class="form-inline clearfix">
+        <button class="btn btn-primary pull-right" type="button" name="button" ng-click="search()">查询</button>
+    </div>
+
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <div class="form-inline clearfix" style="margin-bottom:15px;padding-right:15px;">
+        <a ui-sref="main.station/add" class="pull-right">
+            <button class="btn btn-primary" ng-if="userAuthId.indexOf(21) != -1">
+                    添加
+            </button>
+        </a>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td ng-click="sort('name')" class="table-sort">
+                    站点名称
+                    <i class="fa fa-sort table-sort-icon" aria-hidden="true" ng-if="info.order_by !== 'name'"></i>
+                    <i class="fa fa-sort-asc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'name' && info.order =='asc'"></i>
+                    <i class="fa fa-sort-desc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'name' && info.order =='desc'"></i>
+                </td>
+                <td ng-click="sort('enterprise_id')" class="table-sort">
+                    归属公司
+                    <i class="fa fa-sort table-sort-icon" aria-hidden="true" ng-if="info.order_by !== 'enterprise_id'"></i>
+                    <i class="fa fa-sort-asc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'enterprise_id' && info.order =='asc'"></i>
+                    <i class="fa fa-sort-desc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'enterprise_id' && info.order =='desc'"></i>
+                </td>
+                <td ng-click="sort('province_id')" class="table-sort">
+                    省份
+                    <i class="fa fa-sort table-sort-icon" aria-hidden="true" ng-if="info.order_by !== 'province_id'"></i>
+                    <i class="fa fa-sort-asc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'province_id' && info.order =='asc'"></i>
+                    <i class="fa fa-sort-desc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'province_id' && info.order =='desc'"></i>
+                </td>
+                <td ng-click="sort('city_id')"  class="table-sort">
+                    市
+                    <i class="fa fa-sort table-sort-icon" aria-hidden="true" ng-if="info.order_by !== 'city_id'"></i>
+                    <i class="fa fa-sort-asc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'city_id' && info.order =='asc'"></i>
+                    <i class="fa fa-sort-desc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'city_id' && info.order =='desc'"></i>
+                </td>
+                <td ng-click="sort('district_id')"  class="table-sort">
+                    区县
+                    <i class="fa fa-sort table-sort-icon" aria-hidden="true" ng-if="info.order_by !== 'district_id'"></i>
+                    <i class="fa fa-sort-asc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'district_id' && info.order =='asc'"></i>
+                    <i class="fa fa-sort-desc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'district_id' && info.order =='desc'"></i>
+                </td>
+                <td>详细地址</td>
+                <!-- <td>运营类型</td> -->
+                <!-- <td ng-click="sort('status')" class="table-sort">
+                    站点状态
+                    <i class="fa fa-sort table-sort-icon" aria-hidden="true" ng-if="info.order_by !== 'status'"></i>
+                    <i class="fa fa-sort-asc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'status' && info.order =='asc'"></i>
+                    <i class="fa fa-sort-desc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'status' && info.order =='desc'"></i>
+                </td> -->
+                <td ng-click="sort('open_forbin_date')" class="table-sort">
+                    运营时间
+                    <i class="fa fa-sort table-sort-icon" aria-hidden="true" ng-if="info.order_by !== 'open_forbin_date'"></i>
+                    <i class="fa fa-sort-asc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'open_forbin_date' && info.order =='asc'"></i>
+                    <i class="fa fa-sort-desc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'open_forbin_date' && info.order =='desc'"></i>
+                </td> 
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="station in stations">
+               <td>{{$index+1+info.offset}}</td>
+               <td>{{station.name}}</td>
+               <td>{{station.enterprise_name}}</td>
+               <td>{{station.province}}</td>
+               <td>{{station.city}}</td>
+               <td>{{station.district}}</td>
+               <td>{{station.address}}</td>
+               <!-- <td>{{station.provider}}</td> -->
+               <!-- <td>{{station.status}}</td> -->
+               <td>{{station.open_forbin_date}}</td>
+               <td>
+                  <button class="btn btn-warning" ng-click="goDetail(station.id)" ng-if="userAuthId.indexOf(20) != -1">详情</button>
+                  <button class="btn btn-primary" ng-click="goEdit(station.id)" ng-if="userAuthId.indexOf(22) != -1">编辑</button> 
+                  <button class="btn btn-danger" ng-click="delete(station.id)" ng-if="userAuthId.indexOf(23) != -1">删除</button>
+               </td>
+            </tr>
+        </tbody>
+    </table>
+    <page-nation info="info" start-paging="startPaging()"></page-nation>
+    <!-- <div class="table-bottom">
+        <div class="more-operation-btn-group">
+            <a ui-sref="main.station/add">
+                <button class="btn btn-primary">
+                        添加
+                </button>
+            </a>
+        </div>
+    </div> -->
+</div>

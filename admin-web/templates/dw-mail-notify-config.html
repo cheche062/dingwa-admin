@@ -1,0 +1,119 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li class="active">邮件提醒设置</li>
+    </ol>
+</div>
+<div class="dw-page-filter">
+    <form  class="dw-fliter-group form-inline ">
+        <div class="form-group">
+           <label for="">邮件地址</label>
+           <input class="form-control" ng-model="info.emails"  placeholder="邮件地址">
+        </div>
+
+        <div class="clearfix">
+            <button class="btn btn-primary pull-right" type="button" name="button" ng-click="search()">查询</button>
+        </div>
+    </form>
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <div class="form-inline clearfix" style="margin-bottom:15px;padding-right:15px;">  
+        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#addModal">
+            新增
+        </button>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>邮箱地址</td>
+                <td>通知类型</td>
+                <td>创建时间</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in mail_list">
+            <td>{{$index+1+info.offset}}</td>
+            <td>{{item.emails}}</td>
+            <td>{{item.type_name}}</td>
+            <td>{{item.created_at}}</td>
+            <td> 
+                <button class="btn btn-primary" ng-click="editClick(item)">编辑</button>
+                <button class="btn btn-danger" ng-click="delete(item.id)">删除</button>
+            </td>
+            </tr>
+        </tbody>
+    </table>
+    <page-nation info="info" start-paging="startPaging()"></page-nation>
+</div>
+<!-- 新增 -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h3 class="modal-title text-center" id="myModalLabel">新增通知提醒邮箱</h3>
+        </div>
+        <div class="modal-body" style="line-height: 35px;">
+            <div class="form-group clearfix" style="margin-top: 20px;">
+                <label class="col-sm-3 col-xs-3">邮箱地址:</label>
+                <input type="text" class="col-sm-5 form-control" style="width: 200px;position:relative;" ng-model="mailAdd.emails">
+                <!-- <input type="text" class="col-sm-5 form-control" style="width: 220px;position:relative;" ng-model="mailAdd.emails"> -->
+                <span class="red-start">*</span>
+            </div>
+            <div class="form-group clearfix">
+                <label class="col-sm-3 col-xs-3">通知类型:</label>
+                <select ng-model="mailAdd.type" class="form-control col-sm-5 selectpicker" style="width: 200px;position:relative;">
+                    <option value="1">提现申请通知</option>
+                    <!-- <option value="2">处理通知</option> -->
+                </select>
+                <!-- <select ng-model="mailAdd.type" id="addSelecter" class="selectpicker" multiple style="width: 220px;position:relative;">
+                    <option value="1" selected="selected">提现申请通知</option>
+                    <option value="2">处理通知</option>
+                </select> -->
+                <span class="red-start">*</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary" ng-click="addMail()">确认</button>
+        </div>
+        </div>
+    </div>
+</div>
+<!-- 编辑 -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h3 class="modal-title text-center" id="myModalLabel">编辑通知提醒邮箱</h3>
+        </div>
+        <div class="modal-body" style="line-height: 35px;">
+            <div class="form-group clearfix" style="margin-top: 20px;">
+                <label class="col-sm-3 col-xs-3">邮箱地址：</label>
+                <!-- <input type="text" class="col-sm-5 form-control" style="width: 220px;position:relative;" ng-model="mailEdit.emails"> -->
+                <input type="text" class="col-sm-5 form-control" style="width: 200px;position:relative;" ng-model="mailEdit.emails">
+                <span class="red-start">*</span>
+            </div>
+            <div class="form-group clearfix">
+                <label class="col-sm-3 col-xs-3">通知类型：</label>
+                <!-- <select ng-model="mailEdit.type" id="editSelecter" class="selectpicker" multiple style="width: 220px;position:relative;">
+                    <option value="1">提现申请通知</option>
+                    <option value="2">处理通知</option>m
+                </select> -->
+                <select ng-model="mailEdit.type" class="form-control col-sm-5 selectpicker" style="width: 200px;position:relative;">
+                    <option value="1">提现申请通知</option>
+                    <!-- <option value="2">处理通知</option> -->
+                </select>
+                <span class="red-start">*</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary" ng-click="editConfirm()">确认</button>
+        </div>
+        </div>
+    </div>
+</div>

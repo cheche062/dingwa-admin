@@ -1,0 +1,63 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li> <a href="#">首页</a> </li>
+        <li><a ui-sref="main.deviceport/list">充电桩列表</a></a></li>
+        <li class="active">充电桩添加</a></li>
+    </ol>
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <form class="dw-add-form form-horizontal">
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">桩号</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <div class="form-control">
+                        <span ng-repeat="device in devices" style="font-size:12px;overflow:hidden" ng-show="device.id == info.device_id">{{device.name|limitTo:12}}</span>
+                    </div>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#ChooseDevice">选择</button>
+                    </span>
+                </div>
+                <span class="must-input-icon">*</span>
+            </div>
+
+            <label for="inputEmail3" class="col-sm-2 control-label">端口号</label>
+            <div class="col-sm-3 must-input">
+                <input type="text" class="form-control" placeholder="请输入端口号" ng-model="info.port_name">
+                <span class="must-input-icon">*</span>
+            </div>
+            
+            
+        </div>
+        <div class="dw-form-btn-group">
+            <button type="button" name="button" class="btn btn-default dw-form-btn" ng-click="goDevicePortList()">取消</button>
+            <button type="button" name="button" class="btn btn-primary dw-form-btn" ng-click="submit()">确认</button>
+        </div>
+    </form>
+</div>
+<!-- 选择桩号 -->
+<div class="modal inmodal" id="ChooseDevice" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">选择桩号</h4>
+            </div>
+            <div class="modal-body">
+                <div class="ibox-content">
+                    <div class="choose-user-groups choose-user-groups2">
+                        <div class="choose-user-groups-item checkbox cdot-checkbox-level-{{device.id}}" ng-repeat="device in devices">
+                            <input  type="radio" ng-model="$parent.info.device_id" id="radio-1-{{device.id}}" name="radio-1s-set" class="regular-radio" value="{{device.id}}" />
+                            <label for="radio-1-{{device.id}}"></label>
+                            <span >{{device.name}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" ng-click="cancle()">取消</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="confirm()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>

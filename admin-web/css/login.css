@@ -1,0 +1,128 @@
+.dw-login-page{
+    width: 100%;
+    height: 100%;
+    background-color: ##f1f1f1;
+}
+.login-page-header{
+    width:100%;
+    height: 113px;
+}
+.login-page-logo{
+	/*width: 140px;*/
+    width: 90px;
+    position: relative;
+    left: 15%;
+    top: 15px;
+}
+.dw-login-page-logo-img{
+    width: 100%;
+    height: 100%
+}
+.logo-img{
+    width: 100%;
+}
+.dw-login-page-bk{
+    width: 100%;
+    position: relative;
+}
+.dw-login-bk-img{
+    width: 100%;
+    height: auto;
+}
+.login-text{
+    position: absolute;
+    left: 15%;
+    top:15%;;
+    width: 35%;
+}
+.dw-login-text-img{
+    width: 100%;
+}
+.dw-login-img-two-box{
+    position: absolute;
+    left: 15%;
+    bottom: 5px;
+    width: 25%;
+}
+.dw-login-img-2{
+    width: 100%;
+}
+.login-page-icon-box{
+    width: 100%;
+    height: 125px;
+    background-color: #e1e1e1;
+
+}
+.login-page-icon-group{
+    width: 60%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items:center;
+}
+.login-page-icon-item{
+    margin: 0px 30px;
+    font-size: 24px;
+    color: #9fa0a0;
+}
+.each-icon-img img{
+    margin-right: 15px;
+}
+.login-form{
+    width: 395px;
+    background-color: #fff;
+    padding: 28px;
+    position: absolute;
+    right: 10%;
+    top: 18%;
+    border-radius: 10px;
+}
+.dw-system-name{
+    font-size: 18px;
+    margin-bottom: 35px;
+}
+.login-input-group{
+    margin-bottom: 18px;
+    height: 48px;
+    width: 100%;
+    border-radius:5px;
+}
+.login-form-input{
+    /*height: 100%;*/
+    height: 48px;
+    width: 100%;
+    padding-left: 48px;
+    border-radius: 5px!important;
+    z-index: 2
+}
+.dw-login-icon{
+    position: absolute;
+    background:transparent;
+    border:0px;
+    font-size: 18px;
+    color:#ccc;
+    padding-left: 15px;
+    z-index: 999;
+    top:10px;
+}
+.login-form-btn{
+    width: 100%;
+    background-color: #5684c3;
+    height: 48px;
+    font-size:14px;
+    color:#fff;
+    margin-top:20px;
+    margin-bottom: 42px;
+}
+.system-copyright-text{
+    position: absolute;
+    left:0px;
+    right: 0px;
+    bottom: 0px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 14px;
+    color:#272728;
+}

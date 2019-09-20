@@ -1,0 +1,104 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li class="active">提现审批</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:grey; font-size:14px">数据以每天0：00为时间节点核算</span></li>
+    </ol>
+</div>
+<div class="dw-page-filter">
+	<div class="dw-page-commany">
+		<form  class="dw-fliter-group form-inline">
+			<div class="form-group">
+				<label for="">用户标识:</label>
+				<fuzzy-search type="enterprise" query='enterprise.name' queryid="enterprise.id"></fuzzy-search>
+			</div>
+						
+			<div class="form-group">
+				<label for="">流水号:</label>
+				<fuzzy-search type="station" query='station.name' queryid="station.id"></fuzzy-search>
+			</div>
+			<div class="form-group">
+				<label for="">银行卡:</label>
+				<fuzzy-search type="enterprise" query='enterprise.name' queryid="enterprise.id"></fuzzy-search>
+			</div>
+							
+			<div class="form-group">
+				<label for="">选择身份:</label>
+				<fuzzy-search type="station" query='station.name' queryid="station.id"></fuzzy-search>
+			</div>
+			<div class="form-group" style="display:flex;position: absolute;top:185px;justify-content: flex-start;left: 25%;">
+				<input class="form-control" id="start-date-start" placeholder="起始时间" style="width: 160px;" ng-model="info.created_st" autocomplete="off">
+				&nbsp;&nbsp;至&nbsp;&nbsp;
+				<input class="form-control" id="start-date-end" placeholder="结束时间" style="width: 160px;" ng-model="info.created_et" autocomplete="off">
+			</div>
+		</form>
+		<div style="margin-left:800px;margin-bottom:50px;">
+			<div class="form-inline clearfix">
+				<button class="btn anniu" type="button" name="button" ng-click="searchList()">确认筛选</button>
+			</div>
+		</div>
+		
+    </div>
+
+    <div class="dw-page-point">
+        <span class="span-title">账户数据&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:grey; font-size:14px">分润额提取时间单位最小为月</span></span>
+        <div class="dw-page-point1">
+            <div class="div-page-point">
+                <span>总分润额</span>
+                <br>
+                <span class="span-data">22222</span>
+            </div>
+        </div>
+        <div class="dw-page-point2">
+            <div class="div-page-point">
+                <span>剩余分润额</span>
+                <br>
+                <span class="span-data">22222</span>
+            </div>
+        </div>
+        <div class="dw-page-point3">
+            <div class="div-page-point">
+                <span>可提现余额</span>
+                <br>
+                <span class="span-data">8888</span>
+            </div>
+        </div>
+        <div class="dw-page-point4">
+        </div>
+    </div>
+
+    <div class="div-data-table" style="margin-top:80px;padding: 20px;">
+        <span style="margin-left: 0px;">|&nbsp;&nbsp;提现记录</span>
+        <div class="table-data" style="width: 100%;height:auto;">
+            <table id="table-data" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>时间</td>
+                        <td>提现流水号</td>
+                        <td>提现身份</td>
+                        <td>用户标识</td>
+                        <td>银行卡号</td>
+                        <td>申请备注</td>
+                        <td>处理状况</td>
+                        <td>处理备注</td>
+                        <td  ng-if="userAuthId.indexOf(51) != -1">操作</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>时间</td>
+                        <td>提现流水号</td>
+                        <td>提现身份</td>
+                        <td>用户标识</td>
+                        <td>银行卡号</td>
+                        <td>申请备注</td>
+                        <td>处理状况</td>
+                        <td>处理备注</td>
+                        <td  ng-if="userAuthId.indexOf(51) != -1">操作</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- <page-nation info="info" start-paging="startPaging()"></page-nation> -->
+                          
+        </div>
+    </div>
+</div>

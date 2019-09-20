@@ -1,0 +1,44 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+		<li><a href="#">首页</a></li>
+		<li><a ui-sref="main.deviceport/list">充电枪列表</a></li>
+		<li class="active">端口详情</li>
+	</ol>
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <div class="detail-basic-info">
+        <div class="row">
+        	<div class="ibox">
+        		<div class="ibox-title">
+        			<p class="detail-basic-title">基本信息</p>
+        		</div>
+        		<div class="ibox-content">
+        			<div class="each-detail-item col-sm-3">
+		                <label class="pull-left each-detail-item-name">端口号:</label>
+		                <div class="each-detail-item-value">{{port.port_number}}</div>
+		            </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class="pull-left each-detail-item-name">最近一次失联时间:</label>
+                        <div class="each-detail-item-value">{{port.losted_at}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class="pull-left each-detail-item-name">充电枪完整编码:</label>
+                        <div class="each-detail-item-value">{{port.port_number}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class="pull-left each-detail-item-name">站点名称:</label>
+                        <div class="each-detail-item-value">{{port.station_name}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class="pull-left each-detail-item-name">充电枪状态:</label>
+                        <div class="each-detail-item-value">{{port.status_name}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class="pull-left each-detail-item-name">占用的用户名称:</label>
+                        <div class="each-detail-item-value">{{port.try_occupy_user_name}}</div>
+                    </div>
+        		</div>
+        	</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+<my-header></my-header>
+
+<div class="dw-main-page">
+    <!-- 修改：首页的导航颜色 -->
+    <div class="dw-header-index" style="position: fixed">
+        <!-- 修改：给导航加个标题 -->
+        <div class="dw-title">
+            <span></span>
+        </div>
+        <!-- <a class="btn btn-default change-side" style="margin-left: 15px;">
+            <i class="fa fa-bars"></i>
+        </a> -->
+        <div class="system-user-name">
+            <a ui-sref="index">
+                <button type="button" class="button btn btn-default" style="margin-right:15px;">首页</button>
+            </a>
+            <!-- <a ui-sref="main.index" style="color:black;text-decoration: none;">首页</a> -->
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span>{{$root.login_name}}</span> <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li ng-click="loginOut()"><a>退出登录</a></li>
+                <li ng-click="edit_pwd()" ng-if="userAuthId.indexOf(50) != -1"><a >修改密码</a></li>
+              </ul>
+            </div>
+        </div>
+    </div>
+    <div class="dw-main-container" ui-view='layout'>
+
+    </div>
+</div>
+<div class="loading" ng-show="root.loading">
+    <div><i class="fa fa-spinner fa-pulse"></i></div>
+</div>
+
+<div class="modal inmodal" id="AlertDialog" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h3 class="modal-title">提示</h3>
+            </div>
+            <div class="modal-body text-center" style="min-height:40px;">
+                <h4>{{root.msg}}</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-outline" data-dismiss="modal">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal inmodal" id="ConfirmDialog" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">请确认</h4>
+            </div>
+            <div class="modal-body">
+                <h4>{{root.msg}}</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="root.confirm()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>

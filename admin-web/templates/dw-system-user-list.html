@@ -1,0 +1,112 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li class="active">系统用户列表</li>
+    </ol>
+</div>
+<div class="dw-page-filter">
+    <form  class="dw-fliter-group form-inline ">
+        <div class="form-group">
+           <label for="">系统用户:</label>
+           <fuzzy-search type="systemuser" query='systemuser.name' queryid="systemuser.id"></fuzzy-search>
+        </div>
+        <div class="form-group">
+           <label for="" style="width: 110px;">归属系统用户组:</label>
+          <fuzzy-search type="systemgroup" query='systemGroup.name' queryid="systemGroup.id"></fuzzy-search>
+        </div>
+        
+        <div class="form-group">
+           <label for="">手机号:</label>
+           <fuzzy-search type="systemuserPhone" query='info.phone' queryid=""></fuzzy-search>
+        </div>
+    </form >
+    <div class="form-inline clearfix">
+        <button class="btn btn-primary pull-right" type="button" name="button" ng-click="searchList()">查询</button>
+    </div>
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <div class="more-operation-btn-group pull-right" style="margin-bottom: 10px;">
+            <a ui-sref="main.systemuser/add">
+                <button class="btn btn-primary" ng-if="userAuthId.indexOf(13) != -1">
+                        添加
+                </button>
+            </a>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>用户名</td>
+                <td>权限类型</td>
+                <td>角色详情</td>
+                <td>归属公司</td>
+                <td>手机号</td>
+                <td>地区</td>
+                <td>详细地址</td>
+                <td>注册时间</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in info.list">
+                <td>{{$index + info.offset + 1}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.type}}</td>
+                <td>
+                    <span ng-repeat="role in item.role_detail">{{role.role_name}}<br></span>
+                </td>
+                <td>{{item.enterprise_name}}</td>
+                <td>{{item.phone}}</td>
+                <td>{{item.province}}</td>
+                <td>{{item.address}}</td>
+                <td>{{item.created_at}}</td>
+                <td class="table-operation-td">
+                    <a ui-sref="main.systemuser/detail({id:item.id})" ng-if="userAuthId.indexOf(11) != -1">
+                        <button class="btn btn-warning">详情</button>
+                    </a>
+                    <a ui-sref="main.systemuser/edit({id:item.id})">
+                        <button class="btn btn-primary" ng-if="userAuthId.indexOf(12) != -1">编辑</button>
+                    </a>
+                    <a ng-click="delete(item.id)">
+                        <button class="btn btn-danger" ng-if="userAuthId.indexOf(14) != -1">删除</button>
+                    </a>
+                    <a ng-click="reset(item.id)">
+                        <button class="btn btn-success">重置密码</button>
+                    </a>
+                    <!-- <a ng-click="withDraw(item.id)">
+                        <button class="btn btn-success" ng-disabled="item.type !='分润账户'">提现</button>
+                    </a> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <page-nation info="info" start-paging="startPaging()"></page-nation>
+    <!-- <div class="table-bottom">
+        
+    </div> -->
+</div>
+<!-- 用户提现 -->
+<div class="modal fade" id="withDrawsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title text-center" id="myModalLabel">用户提现</h4>
+      </div>
+      <div class="modal-body">
+         <div class="form-group clearfix">
+             <label class="col-sm-3">金额(元)</label>
+             <input type="number" min="0.01" step="0.01" class="col-sm-5 form-control"style="width: 200px" ng-model="info.count"> 
+         </div>
+         <div class="form-group clearfix" style="margin-top: 15px;">
+             <label class="col-sm-3">备注</label>
+             <input type="text" class="col-sm-5 form-control"style="width: 200px" ng-model="info.remarks">
+         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="confirmWithDraw()">确认</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>

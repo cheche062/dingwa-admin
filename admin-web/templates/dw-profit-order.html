@@ -1,0 +1,51 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li><a ui-sref="main.profit/list">分润数据</a></li>
+        <li class="active">订单汇总</a></li>
+    </ol>
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <button type="button" class="btn btn-default pull-right" ng-click="toExport()" style="margin-bottom:15px;">导出</button>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>订单号</td>
+                <td>端口号</td>
+                <td>开始充电时间</td>
+                <td>结束充电时间</td>
+                <td>手机号</td>
+                <td>理论充电时长(时)</td>
+                <!-- <td>订单类型</td> -->
+                <td>用户实付(元)</td>
+                <td>支付退款状态</td>
+                <td>充电状态</td>
+                <td>用户支付方式</td>
+                <td>站点名称</td>
+                <td>桩号</td>
+                <td>订单跑批日期</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in orders">
+                <td>{{$index + info.offset + 1}}</td>
+                <td>{{item.order_number}}</td>
+                <td>{{item.port_number}}</td>
+                <td>{{item.started_at}}</td>
+                <td>{{item.finished_at}}</td>
+                <td>{{item.phone}}</td>
+                <td>{{item.duration_plan/3600}}</td>
+                <!-- <td>{{item.order_type}}</td> -->
+                <td>{{item.payment_act/100}}</td>
+                <td>{{item.pay_status}}</td>
+                <td>{{item.order_status}}</td>
+                <td>{{item.pay_type}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.device_number}}</td>
+                <td>{{item.created_at}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <page-nation info="info" start-paging="startPaging()"></page-nation>
+</div>

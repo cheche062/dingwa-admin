@@ -1,0 +1,254 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li>
+            <a href="/">首页</a>
+        </li>
+        <li class="active">
+            充电订单管理
+        </li>
+    </ol>
+</div>
+<!-- 顶部搜索 -->
+    <div class="dw-top-display">
+        <div class="row display-flex">
+            <div class="flex-item-grow">
+                <div class="flex-item-content">
+                    <span class="left-item-label green-backgroud">累计电量</span>
+                    <span class="right-item-content">{{statistics.ele_quantity/1000}}度</span>
+                </div>
+            </div>
+            <div class="flex-item-grow">
+                <div class="flex-item-content">
+                    <span class="left-item-label blue-backgroud">累计充电时长</span>
+                    <span class="right-item-content">{{statistics.duration/3600|number:2}}小时</span>
+                </div>
+            </div>
+            <div class="flex-item-grow">
+                <div class="flex-item-content">
+                    <span class="left-item-label yellow-backgroud">累计充电金额</span>
+                    <span class="right-item-content">{{statistics.payment/100}}元</span>
+                </div>
+            </div>
+            <div class="flex-item-grow">
+                <div class="flex-item-content">
+                    <span class="left-item-label red-backgroud">累计实收金额</span>
+                    <span class="right-item-content">{{statistics.payment_recv/100}}元</span>
+                </div>
+            </div>
+            <div class="flex-item-grow">
+                <div class="flex-item-content">
+                    <span class="left-item-label gray-backgroud">累计退款金额</span>
+                    <span class="right-item-content">{{statistics.refund/100}}元</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dw-page-filter">
+        <form  class="dw-fliter-group form-inline ">
+            <div class="form-group">
+               <label for="">起始时间</label>
+                <div class="form-group">
+                    <input class="form-control" id="start-date" placeholder="起始时间" style="width: 146px;" ng-model="info.created_st" autocomplete="off">
+                    -
+                    <input class="form-control" id="end-date" placeholder="结束时间" style="width: 146px;" ng-model="info.created_et" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+               <label for="">支付状态</label>
+               <select ng-model="info.pay_status" class="form-control">
+                    <option value="0">全部</option>
+                    <option value="1">待支付</option>
+                    <option value="2">支付成功</option>
+                    <option value="3">支付失败</option>
+                    <option value="4">已退款</option>
+                    <option value="5">已开票</option>
+                </select>
+            </div>
+            <div class="form-group">
+               <label for="">充电状态</label>
+               <select ng-model="info.order_status" class="form-control">
+                    <option value="0">全部</option>
+                    <option value="1">待充电</option>
+                    <option value="2">进行中</option>
+                    <option value="3">已完成</option>
+                    <option value="4">过流停充</option>
+                    <option value="5">未充电</option>
+                </select>
+            </div>
+        </form>
+        <form  class="dw-fliter-group form-inline ">
+            <div class="form-group">
+                <label for="">订单号</label>
+                <input type="text" class="form-control" ng-model="info.order_number" placeholder="订单号">
+            </div>
+            <div class="form-group">
+               <label for="">站点类型</label>
+               <select ng-model="info.pay_status" class="form-control">
+                    <option value="0">全部</option>
+                    <option value="1">运营中</option>
+                    <option value="2">建设中</option>
+                    <option value="3">规划中</option>
+                </select>
+            </div>
+            <div class="form-group">
+               <label for="">站点名称</label>
+               <fuzzy-search type="station" query="info.station_obj.name" queryid="info.station_obj.id"></fuzzy-search>
+            </div>
+        </form>
+        <form  class="dw-fliter-group form-inline ">
+            <div class="form-group">
+               <label for="">设备名称</label>
+               <fuzzy-search type="device" query="info.device_obj.name" queryid="info.device_obj.id"></fuzzy-search>
+            </div>
+            <div class="form-group">
+               <label for="">用户名称</label>
+               <fuzzy-search type="user" query="info.user_obj.name" queryid="info.user_obj.id"></fuzzy-search>
+            </div>
+            <div class="form-group">
+               <label for="">端口号</label>
+               <fuzzy-search type="port" query="info.port_obj.name" queryid="info.port_obj.id"></fuzzy-search>
+            </div>
+        </form>
+        <div class="form-inline clearfix">
+            <button class="btn btn-primary pull-right" type="button" name="button" ng-click="search()">查询</button>
+        </div>
+    </div>
+    <div class="dw-page-detail-container table-responsive">
+        <div class="form-inline clearfix" style="padding-right: 15px;margin-bottom: 10px;">
+            <button class="btn btn-primary pull-right" type="button" name="button" ng-click="downExcel()">导出</button>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr class="tr-no-wrap">
+                    <!-- <td>
+                        <div style="">
+                            <input type="checkbox" ng-change="checkedAll()" id="checkbox-6-checked-all" ng-model="info.checked_all" class="order-checkbox" />
+                            <label style="margin-right:10px;margin-bottom:0;transform:scale(0.8)" for="checkbox-6-checked-all"></label>
+                        </div>
+                    </td> -->
+                    <td>序号</td>
+                    <td>订单号</td>
+                    <td>端口号</td>
+                    <td>插座编号</td>
+                    <!-- <td ng-click="order('device_number')">桩号 </td> -->
+                    <td>站点名称</td>
+                    <td ng-click="sort('user_id')" class="table-sort">
+                        用户
+                        <i class="fa fa-sort table-sort-icon" aria-hidden="true" ng-if="info.order_by !== 'user_id'"></i>
+                        <i class="fa fa-sort-asc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'user_id' && info.order =='asc'"></i>
+                        <i class="fa fa-sort-desc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'user_id' && info.order =='desc'"></i>
+                    </td>
+                    <td>充电量 </td>
+                    <td>充电时长</td>
+                    <td ng-click="sort('started_at')" class="table-sort">
+                        起始时间
+                        <i class="fa fa-sort table-sort-icon" aria-hidden="true" ng-if="info.order_by !== 'started_at'"></i>
+                        <i class="fa fa-sort-asc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'started_at' && info.order =='asc'"></i>
+                        <i class="fa fa-sort-desc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'started_at' && info.order =='desc'"></i>
+                    </td>
+                    <td ng-click="sort('finished_at')" class="table-sort">
+                        结束时间
+                        <i class="fa fa-sort table-sort-icon" aria-hidden="true" ng-if="info.order_by !== 'finished_at'"></i>
+                        <i class="fa fa-sort-asc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'finished_at' && info.order =='asc'"></i>
+                        <i class="fa fa-sort-desc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'finished_at' && info.order =='desc'"></i>
+                    </td>
+                    <td>电费(元)</td>
+                    <!-- <td ng-click="order('serve_cost')">服务费 </td> -->
+                    <td>总金额(元)</td>
+                    <td>实收(元)</td>
+                    <td>退款金额(元)</td>
+                    <td>支付来源</td>
+                    <td ng-click="sort('order_status')" class="table-sort">
+                        充电状态
+                        <i class="fa fa-sort table-sort-icon" aria-hidden="true" ng-if="info.order_by !== 'order_status'"></i>
+                        <i class="fa fa-sort-asc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'order_status' && info.order =='asc'"></i>
+                        <i class="fa fa-sort-desc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'order_status' && info.order =='desc'"></i>
+                    </td>
+                    <td ng-click="sort('pay_status')" class="table-sort">
+                        订单状态
+                        <i class="fa fa-sort table-sort-icon" aria-hidden="true" ng-if="info.order_by !== 'pay_status'"></i>
+                        <i class="fa fa-sort-asc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'pay_status' && info.order =='asc'"></i>
+                        <i class="fa fa-sort-desc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'pay_status' && info.order =='desc'"></i>
+                    </td>
+                    <td ng-if="authKey.indexOf('OrderDeal') != -1">操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="charge_order in charge_orders">
+                            <!-- <td>
+                                <div style="">
+                                    <input type="checkbox" ng-disabled="charge_order.status=='已开票'||charge_order.status=='异常退款'||charge_order.status=='异常未扣款'" id="checkbox-6-{{charge_order.id}}" ng-model="charge_order.checked" class="order-checkbox" />
+                                    <label style="margin-right:10px;margin-bottom:0;transform:scale(0.8)" for="checkbox-6-{{charge_order.id}}"></label>
+                                </div>
+                            </td> -->
+                            <td>{{$index+1+info.offset}}</td>
+                            <td>{{charge_order.order_number}}</td>
+                            <td>{{charge_order.port_number}}</td>
+                            <td>{{charge_order.port_aliasname}}</td>
+                            <!-- <td>{{charge_order.device_number}}</td> -->
+                            <td>{{charge_order.station_name}}</td>
+                            <td>
+                               {{charge_order.phone}}
+                            </td>
+                            <td>{{(charge_order.elec_quantity/1000).toFixed(2)}}</td>
+                            <td>{{charge_order.duration|second2format|limitTo:8}}</td>
+                            <td>{{charge_order.started_at}}</td>
+                            <td>{{charge_order.finished_at}}</td>
+                            <td>{{(charge_order.elec_cost/100).toFixed(2)}}</td>
+                            <!-- <td>{{(charge_order.serve_cost/100).toFixed(2)}}</td> -->
+                            <!-- <td ng-if="charge_order.status == '已支付'||charge_order.status =='人工已支付'||charge_order.status == '已开票'||charge_order.status == '系统自动扣款'">{{((charge_order.elec_cost_final+charge_order.serve_cost_final-charge_order.exchange_pay_elec-charge_order.exchange_pay_serve)/100).toFixed(2)}}</td>
+                            <td ng-if="charge_order.status != '已支付'&&charge_order.status !='人工已支付'&&charge_order.status != '已开票'&&charge_order.status != '系统自动扣款'">0.00</td> -->
+                            <td>{{(charge_order.payment/100).toFixed(2)}}</td>
+                            <td>{{(charge_order.payment_act/100).toFixed(2)}}</td>
+                            <td>{{(charge_order.refund_act/100).toFixed(2)}}</td>
+                            <td>{{charge_order.pay_type_name}}</td>
+                            <td>{{charge_order.order_status_name}}</td>
+                            <td>{{charge_order.pay_status_name}}</td>
+                            <td ng-if="authKey.indexOf('OrderDeal') != -1">
+                                <button type="button" class="btn btn-default" ng-click="deal(charge_order)" 
+                                ng-disabled="charge_order.pay_card_type !==2">处理</button>
+                            </td>
+                </tr>
+            </tbody>
+        </table>
+        <page-nation info="info" start-paging="startPaging()"></page-nation>
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="deal()">处理订单</button> -->
+    </div>
+    <!--  添加卡 -->
+    <div class="modal fade" id="ChangeOrderStatusModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h3 class="modal-title text-center" id="myModalLabel">更改订单状态</h4>
+          </div>
+          <div class="modal-body">
+             <div class="form-group clearfix">
+                 <label for="" class="control-label col-sm-3">状态:</label>
+                 <div class="col-sm-5">
+                     <select name="" id="" class="form-control col-sm-7">
+                        <option value="7" ng-model="order.pay_status">人工代支付</option>
+                    </select>
+                 </div>
+                 <span style="color:#ff0000;margin-left: 5px;" class="red-star">*</span>
+             </div>
+             <div class="form-group clearfix">
+                 <label for="" class="control-label col-sm-3">补扣时长:</label>
+                 <div class="col-sm-5">
+                     <input type="number" class="form-control" ng-model="order.commit_value">
+                 </div>
+                 <span style="color:#ff0000;margin-left: 5px;" class="red-star">(分钟)</span>
+             </div>
+             <div class="form-group clearfix">
+                 <label for="" class="control-label col-sm-3">备注:</label>
+                 <div class="col-sm-5">
+                     <textarea name="" id="" cols="30" rows="5" class="form-control" ng-model="order.remarks"></textarea>
+                 </div>
+                 <span style="color:#ff0000;margin-left: 5px;" class="red-star"></span>
+             </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="confirmChangeStatus()">确认</button>
+          </div>
+        </div>
+      </div>
+    </div>

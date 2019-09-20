@@ -1,0 +1,161 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li class="active">广告下发</a></li>
+    </ol>
+</div>
+<div class="dw-page-filter">
+    <div class="wrapper wrapper-content">
+        <div class="tabs-container" style="margin-bottom: 20px;">
+            <ul class="nav nav-tabs">
+                <li>
+                    <a ui-sref="main.advert/show">广告中心</a>
+                </li>
+                <li  class="active">
+                    <a ui-sref="main.advert/lssued">广告下发</a>
+                </li>    
+            </ul>
+            <div class="tab-content">
+                <div id="tab-3" class="tab-pane active">
+                    <div class="panel-body">
+                        <form class="form-inline flex-input-box" style="margin-bottom: 15px">
+                                <div class="form-group">
+                                    <div class="inline-block-60">设备编号</div>
+                                    <input type="text" ng-model='info.device_number' class="form-control" placeholder="请输入设备名称" style="width: 200px;display: inline-block;">
+                                    <!-- <input-select type='device' query='info.query' id='info.device_id'></input-select> -->
+                                </div>
+                                <div class="form-group">
+                                    <div class="inline-block-60" style="text-align: center;">站点</div>
+                                    <input ng-model='info.station_name' ng-change='searchStationList()' type="text" class="form-control" placeholder="请输入站点名称" style="width: 200px;display: inline-block;">
+                                    <ul style="margin-left:33px;" class="list-group input-select-dropdown" ng-show="info.show_station_list">
+                                            <li class="list-group-item" ng-repeat="x in station_lists" ng-click="clickStationList(x)">{{x.name}}</li>
+                                    </ul>
+                                    <!-- <input-select type='station' query='info.station' id='info.station_id'></input-select> -->
+
+                                </div>
+                                <!-- <div class="form-group">
+                                    <div class="inline-block-60" style="text-align: center;">软件型号</div>
+                                    <input type="text" class="form-control" placeholder="请输入软件型号" ng-model='info.version' style="width: 200px;display: inline-block;">
+                                </div> -->
+                                <div class="form-group">
+                                     <div class="inline-block-60" style="text-align: center;">软件版本</div>
+                                    <input ng-model='info.soft_version' type="text" class="form-control" placeholder="请输入软件版本" style="width: 200px;display: inline-block;">
+                                </div>
+                                <button class="btn btn-sm btn-outline btn-primary" ng-click="search()">确定</button>
+                        </form>
+                        <table class="table table-bordered">
+    							<thead>
+    							  	<tr>
+                                        <td>
+                                            <div>
+                                                <input style='display: none' type="checkbox" ng-change="checkedAll()" id="checkbox-6-checked-all" ng-model="info.checked_all" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                                <input type="checkbox" ng-change="checkedAll()" id="checkbox-6-checked-all" ng-model="info.checked_all" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                                <!-- <label style="margin-right:10px;margin-bottom:0;transform:scale(0.8)" for="checkbox-6-checked-all"></label> -->
+                                            </div>
+                                        </td>
+    							  		<td>序号</td>
+    							  		<td>设备编号</td>
+    							  		<td>站点</td>
+                                        <td>软件版本</td>
+                                        <td>充电类型</td>
+                                        <!-- <td>解锁广告</td> -->
+                                        <td>待机广告</td>
+                                        <!-- <td>车端拔枪广告</td> -->
+                                        <td>设备状态</td>
+    							  		<td>操作</td>
+    							  	</tr>
+    							</thead>
+    							<tbody>
+                                    <tr ng-repeat='advert in adverts'>
+                                        <td>
+                                            <!-- <input style='display: none' type="checkbox" id="checkbox-6-{{advert.id}}" class="ng-pristine ng-untouched ng-valid ng-empty" ng-model="advert.checked">
+                                            <label style="margin-right:10px;margin-bottom:0;transform:scale(0.8)" for="checkbox-6-{{advert.id}}"></label> -->
+                                            <input type="checkbox" type="checkbox" id="checkbox-6-{{advert.id}}" class="ng-pristine ng-untouched ng-valid ng-empty" ng-model="advert.checked">
+                                        </td>
+                                        <td>{{$index+1}}</td>
+                                        <td>{{advert.device_number}}</td>
+                                        <td>{{advert.name}}</td>
+                                        <td>{{advert.soft_version}}</td>
+                                        <td>{{advert.charge_type}}</td>
+                                        <!-- <td>{{advert.unlock_name}}</td> -->
+                                        <td>{{advert.standby_name}}</td>
+                                        <!-- <td>{{advert.unplug_name}}</td> -->
+                                        <td>{{advert.status}}</td>
+                                        <td>
+                                            <a ui-sref='main.advert/edit({id:advert.id})'>
+                                                <button type="button" class="btn btn-warning btn-sm">详情</button>
+                                            </a>
+                                            <button type="button" class="btn btn-primary btn-sm" ng-click='upgrade(advert.id)'>广告下发</button>
+                                            <button type="button" class="btn btn-danger btn-sm" ng-click='stop(advert.device_number)'>停止</button>
+                                            <!-- <button type="button" class="btn btn-outline btn-primary btn-sm">
+                                                <a style="color:#1ab394" ui-sref='main.advert/edit({id:advert.id})'>编辑</a>
+                                            </button> -->
+                                            <!-- <button type="button" class="btn btn-outline btn-danger btn-sm">禁用</button> -->
+                                        </td> 
+                                    </tr>                 
+                                </tbody>
+    					</table>
+                        <page-nation info="info" start-paging="startPaging()"></page-nation>
+                        <button type="button" class="btn btn-sm btn-outline btn-primary" ng-click='upgrades()'>批量下发</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 广告下发弹出窗 -->
+<div class="modal inmodal" id="Modaladvert" tabindex="-1" role="dialog" aria-hidden="false" ng-model="DevicesShowCtrl">
+    <div class="modal-dialog" style="width: 800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title">广告下发</h4>
+            </div>
+            <div class="modal-body" style="overflow-y: scroll;padding-bottom:5px;">
+                <div class="ibox">
+                        <form class="form-horizontal ng-pristine ng-valid">
+                            <div class="form-group">
+                                <span class="col-lg-2 control-label">广告播放模式</span>
+                                <select name="" id=""  class="form-control col-lg-3" style="display: inline-block;width: 200px;" ng-model='broadcast_mode' ng-init='broadcast_mode="1"'>
+                                    <option value="1">立即模式</option>
+                                    <option value="2">其它模式</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <span class="col-lg-2 control-label">待机广告</span>
+                                <select name="" id=""  ng-model='standby' ng-options='standby.name for standby in standbys' class="form-control col-lg-3" style="display: inline-block;width: 200px;">
+                                    <option value="">请选择</option>
+                                </select>
+                                <span class="col-lg-1"></span>
+                                <span class="col-lg-2 control-label">到期时间</span>
+                                <input type="text" id="start-date-daiji" ng-model="standbyexpiry_time" class="form-control col-lg-3" placeholder="请选择到期时间" style="width: 200px;display: inline-block;">
+                            </div>
+                            <!-- <div class="form-group">
+                                <span class="col-lg-2 control-label">解锁广告</span>
+                                <select name="" id="" ng-model='unlock' ng-options='unlock.name for unlock in unlocks' class="form-control col-lg-3" style="display: inline-block;width: 200px;">
+                                    <option value="">请选择</option>
+                                </select>
+                                 <span class="col-lg-1"></span>
+                                <span class="col-lg-2 control-label">到期时间</span>
+                                <input type="text" id="start-date-daiji" ng-model='unlockexpiry_time' class="form-control col-lg-3" placeholder="请选择到期时间" style="width: 200px;display: inline-block;">
+                            </div> 
+                            <div class="form-group">
+                                <span class="col-lg-2 control-label">车端拔枪广告</span>
+                                <select name="" id="" ng-model='unplug' ng-options='unplug.name for unplug in unplugs' class="form-control col-lg-3" style="display: inline-block;width: 200px;">
+                                    <option value="">请选择</option>
+                                </select>
+                                 <span class="col-lg-1"></span>
+                                <span class="col-lg-2 control-label">到期时间</span>
+                                <input type="text" id="start-date-daiji" ng-model='unplugexpiry_time' class="form-control col-lg-3" placeholder="请选择到期时间" style="width: 200px;display: inline-block;">
+                            </div>  -->
+                        </form>
+                </div>
+
+            </div>
+            <div class="modal-footer" style="text-align: center !important;">
+                <button type="button" class="btn btn-primary" ng-click="confirmLssued()">确认</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

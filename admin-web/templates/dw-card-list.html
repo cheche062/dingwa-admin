@@ -1,0 +1,273 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li class="active">充值卡管理</li>
+    </ol>
+</div>
+<div class="dw-page-filter">
+    <div class="dw-page-commany">
+        <form  class="dw-fliter-group form-inline">
+            <div class="form-group">
+                <label for="">用户手机号:</label>
+                <fuzzy-search type="enterprise" query='enterprise.name' queryid="enterprise.id"></fuzzy-search>
+            </div>           
+            <div class="form-group">
+                <label for="">用户类型:</label>
+                <fuzzy-search type="station" query='station.name' queryid="station.id"></fuzzy-search>
+            </div>
+            <div class="form-group">
+                <label for="">用户状态:</label>
+                <fuzzy-search type="station" query='station.name' queryid="station.id"></fuzzy-search>
+            </div>
+        </form>
+        <div class="form-inline clearfix">
+            <button style="width: 100px;" class="btn anniu" type="button" name="button" ng-click="filterSearch()">查询</button>
+        </div>
+    </div>
+    <!-- 修改：注释 -->
+    <!-- <form  class="dw-fliter-group form-inline ">
+        <div class="form-group">
+           <label for="">创建时间</label>
+           <input class="form-control" id="start-date-start" placeholder="起始时间" style="width: 150px;" ng-model="info.created_st" autocomplete="off">
+           -
+           <input class="form-control" id="start-date-end" placeholder="结束时间" style="width: 150px;" ng-model="info.created_et" autocomplete="off">
+        </div>
+        <div class="form-group">
+           <label for="">卡号</label> -->
+           <!-- <fuzzy-search type="card" query="info.user_obj.name" queryid="info.user_obj.id"></fuzzy-search> -->
+           <!-- <input type="text" class="form-control" ng-model="info.card_number" placeholder="卡号">
+        </div>
+        <div class="form-group">
+            <label for="">卡类型</label>
+            <select name="" id="" class="form-control" ng-model="info.type">
+                <option value="0">全部</option>
+                <option value="1">包月次卡</option>
+                <option value="2">包月时卡</option>
+                <option value="3">充值卡</option>
+            </select>
+        </div>
+    </form> 
+    <div class="form-inline clearfix">
+        <button class="btn btn-primary pull-right" type="button" name="button" ng-click="filterSearch()">查询</button>
+    </div>-->
+
+    <div class="div-data-table" style="margin-top:80px;padding: 20px;">
+        <span style="margin-left: 0px;">|&nbsp;&nbsp;充值卡详情</span>
+        <div class="input-group" style="position: absolute;right: 8%;top: 1%;width: 400px;">
+            <input id='location' class="form-control" onclick="$('#i-file').click();">
+            <label class="input-group-btn">
+                <input type="button" id="i-check" value="批量导入" class="btn anniu" ng-click="importData()">
+            </label>
+        </div> 
+        <input type="file" name="file" id='i-file' onchange="$('#location').val($('#i-file').val());" accept=".csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" style="display: none;">
+        <!-- <button type="button" style="position: absolute;right: 8%;top: 1%;" class="btn anniu1" ng-if="userAuthId.indexOf(29) != -1"  ng-click="importData()">
+            批量导入<input type="file" id="filename" nv-file-select="" accept=".csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" uploader="uploader" multiple="">
+        </button> -->
+        <!-- <button style="position: absolute;right: 8%;top: 1%;" class="btn anniu" ng-if="userAuthId.indexOf(29) != -1"  ng-click="importData()">
+            批量导入
+        </button>
+        <input type="file" id="filename" ng-change="uploadFile()" style="display: none"> -->
+        <button style="position: absolute;right: 3.5%;top: 1%;" class="btn anniu" ng-if="userAuthId.indexOf(29) != -1"  ng-click="addCard()">
+            添加
+        </button>
+        <div class="table-data" style="width: 100%;height:auto">
+            <table id="table-data" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>序号</td>
+                        <td>卡号</td>
+                        <td>卡类型</td>
+                        <td>创建时间</td>
+                        <td>截止日期</td>
+                        <td>备注</td>
+                        <td>可充电状态</td>
+                        <td>封禁状态</td>
+                        <td>可用额度</td>
+                        <td>操作</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="card in list">
+                        <td>{{$index+1+(info.page-1)*info.limit}}</td>
+                        <td>{{card.card_number}}</td>
+                        <td>{{card.type_name}}</td>
+                        <td>{{card.created_at}}</td>
+                        <td>{{card.finished_at}}</td>
+                        <td>{{card.remarks}}</td>
+                        <td>{{card.card_status_name}}</td>
+                        <td>{{card.forbid_status_name}}</td>
+                        <td>{{card.cur_value_name}}</td>
+                        <td>
+                            <button class="btn" ng-click="forbid(card)" ng-if="authKey.indexOf('CardForbid') != -1" ng-class="card.forbid_status == 1 ? 'btn-warning':'btn-success'">
+                                <span ng-if="card.forbid_status == 1">封禁</span>
+                                <span ng-if="card.forbid_status == 2">激活</span>
+                            </button>
+                            <button class="btn anniu" ng-click="edit(card)">编辑</button>
+                            <button class="btn btn-danger" ng-click="delete(card.id)" ng-if="authKey.indexOf('CardDelete') != -1">删除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <page-nation info="info" start-paging="startPaging()"></page-nation> 
+        </div>
+    </div>
+</div>
+<!-- 修改：注释 -->
+<!-- <div class="dw-page-detail-container table-responsive">
+    <div class="form-inline clearfix" style="margin-bottom:15px;padding-right:15px;">
+        <button class="btn btn-primary pull-right" ng-if="userAuthId.indexOf(29) != -1" ng-click="addCard()">
+            添加
+        </button>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>卡号</td>
+                <td>卡类型</td>
+                <td>创建时间</td>
+                <td>截止日期</td>
+                <td>备注</td>
+                <td>可充电状态</td>
+                <td>封禁状态</td>
+                <td>可用额度</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="card in list">
+               <td>{{$index+1+(info.page-1)*info.limit}}</td>
+               <td>{{card.card_number}}</td>
+               <td>{{card.type_name}}</td>
+               <td>{{card.created_at}}</td>
+               <td>{{card.finished_at}}</td>
+               <td>{{card.remarks}}</td>
+               <td>{{card.card_status_name}}</td>
+               <td>{{card.forbid_status_name}}</td>
+               <td>{{card.cur_value_name}}</td>
+               <td>
+                    <button class="btn" ng-click="forbid(card)" ng-if="authKey.indexOf('CardForbid') != -1" ng-class="card.forbid_status == 1 ? 'btn-warning':'btn-success'">
+                        <span ng-if="card.forbid_status == 1">封禁</span>
+                        <span ng-if="card.forbid_status == 2">激活</span>
+                    </button>
+                    <button class="btn btn-primary" ng-click="edit(card)">编辑</button>
+                    <button class="btn btn-danger" ng-click="delete(card.id)" ng-if="authKey.indexOf('CardDelete') != -1">删除</button>
+               </td>
+            </tr>
+        </tbody>
+    </table>
+    <page-nation info="info" start-paging="startPaging()"></page-nation>
+</div> -->
+<!--  添加卡 -->
+<div class="modal fade" id="AddCardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title text-center" id="myModalLabel">添加卡</h4>
+      </div>
+      <div class="modal-body">
+         <div class="form-group clearfix">
+             <label class="col-sm-3 control-label">卡类型:</label>
+             <div class="col-sm-7">
+                 <select name="" id="" class="form-control col-sm-7" ng-model="card.type" ng-options="type.value as type.name for type in cardType">
+                    <!-- <option value="1">包月次卡</option> -->
+                    <!-- <option value="2">包月时卡</option>
+                    <option value="3">充值卡</option> -->
+                </select>
+             </div>
+             <span style="color:#ff0000;margin-left: 5px;" class="red-star">*</span>
+         </div>
+         <div class="form-group clearfix">
+             <label class="col-sm-3 control-label">卡号(最长16位):</label>
+             <div class="col-sm-7">
+                <input type="text" class="col-sm-7 form-control" ng-model="card.card_number">
+             </div>
+             <span style="color:#ff0000;margin-left: 5px;" class="red-star">*</span>
+         </div>
+         <div class="form-group clearfix" style="margin-top: 15px;">
+             <label class="col-sm-3 control-label">归属公司:</label>
+             <div class="col-sm-7">
+                <div class="input-group">
+                    <div class="form-control">
+                        <span ng-repeat="ent in enterprises" style="font-size:12px;overflow:hidden" ng-show="ent.id == enterprise.parent_id">{{ent.name|limitTo:15}}</span>
+                    </div>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ChooseEnterprise">选择</button>
+                    </span>
+                </div>
+             </div>
+             <span style="color:#ff0000;margin-left: 5px;" class="red-star">*</span>
+         </div>
+         <div class="form-group clearfix">
+             <label class="col-sm-3 control-label">截止日期:</label>
+             <div class="col-sm-7">
+                <input class="col-sm-7 form-control" id="close-date" ng-model="card.finished_at">
+             </div>
+             <span style="color:#ff0000;margin-left: 5px;" class="red-star">*</span>
+         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancelAdd()">取消</button>
+        <button type="button" class="btn btn-primary" ng-click="confirmAdd()">确认</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 编辑卡 -->
+<div class="modal fade" id="EditCardModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title text-center" id="myModalLabel">编辑卡</h4>
+      </div>
+      <div class="modal-body">
+         <div class="form-group clearfix">
+             <label class="col-sm-3 control-label">卡类型:</label>
+             <div class="col-sm-7">
+                 <select name="" id="" class="form-control col-sm-7" ng-model="editCard.type" ng-options="type.value as type.name for type in cardType">
+                    <!-- <option value="1">包月次卡</option> -->
+                    <!-- <option value="2">包月时卡</option>
+                    <option value="3">充值卡</option> -->
+                </select>
+             </div>
+             <span style="color:#ff0000;margin-left: 5px;" class="red-star">*</span>
+         </div>
+         <div class="form-group clearfix">
+             <label class="col-sm-3 control-label">卡号(最长16位):</label>
+             <div class="col-sm-7">
+                <input type="text" class="col-sm-7 form-control" ng-model="editCard.card_number">
+             </div>
+             <span style="color:#ff0000;margin-left: 5px;" class="red-star">*</span>
+         </div>
+         <!-- <div class="form-group clearfix" style="margin-top: 15px;">
+             <label class="col-sm-3 control-label">归属公司:</label>
+             <div class="col-sm-7">
+                <div class="input-group">
+                    <div class="form-control">
+                        <span ng-repeat="ent in enterprises" style="font-size:12px;overflow:hidden" ng-show="ent.id == enterprise.parent_id">{{ent.name|limitTo:15}}</span>
+                    </div>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ChooseEnterprise">选择</button>
+                    </span>
+                </div>
+             </div>
+             <span style="color:#ff0000;margin-left: 5px;" class="red-star">*</span>
+         </div> -->
+         <div class="form-group clearfix">
+             <label class="col-sm-3 control-label">截止日期:</label>
+             <div class="col-sm-7">
+                <input class="col-sm-7 form-control" id="close-date" ng-model="editCard.finished_at" disabled="disabled">
+             </div>
+             <span style="color:#ff0000;margin-left: 5px;" class="red-star">*</span>
+         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" ng-click="confirmEdit()">确认</button>
+      </div>
+    </div>
+  </div>
+</div>
+<choose-enterprise3></choose-enterprise3>

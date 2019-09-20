@@ -1,0 +1,417 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li><a ui-sref="main.advert/lssued">广告下发</a></li>
+        <li class="active">广告详情</a></li>
+    </ol>
+</div>
+
+        <div class="dw-page-detail-container">
+            <div class="detail-basic-info">
+                <div class="row">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <p class="detail-basic-title">设备详情</p>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">设备编号:</label>
+                                <div class=" each-detail-item-value">{{device.device_number}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">归属站点:</label>
+                                <div class=" each-detail-item-value">{{device.station_name}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">区域类型:</label>
+                                <div class=" each-detail-item-value">{{device.region_type}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">安装时间:</label>
+                                <div class=" each-detail-item-value">{{device.built_date}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">经纬度:</label>
+                                <div class=" each-detail-item-value">{{device.longitude}}, {{device.latitude}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">地区:</label>
+                                <div class=" each-detail-item-value">{{device.province}} {{device.city}} {{device.district}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">详细地址:</label>
+                                <div class=" each-detail-item-value">{{device.address}}</div>
+                            </div>
+                            <!-- <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">范围:</label>
+                                <div class=" each-detail-item-value">{{device.region_type}}</div>
+                            </div> -->
+                            <!-- <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">资产成本:</label>
+                                <div class=" each-detail-item-value">{{device.assets_cost}}</div>
+                            </div> -->
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">充电类型:</label>
+                                <div class=" each-detail-item-value">{{device.charge_type}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">接口标准:</label>
+                                <div class=" each-detail-item-value">{{device.standard_type}}</div>
+                            </div>
+                            <!-- <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">设备供应商:</label>
+                                <div class=" each-detail-item-value"> {{device.manufacturer_name}}</div>
+                            </div> -->
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">安装方式:</label>
+                                <div class=" each-detail-item-value">{{device.install_type}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">带枪情况:</label>
+                                <div class=" each-detail-item-value">{{device.plug_type}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">SIM卡号:</label>
+                                <div class=" each-detail-item-value">{{device.sim_number}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">SIM卡期限:</label>
+                                <div class=" each-detail-item-value">{{device.sim_expired_at}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">型号:</label>
+                                <div class=" each-detail-item-value">{{device.version}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">额定功率:</label>
+                                <div class=" each-detail-item-value">{{device.elec_power}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">软件版本:</label>
+                                <div class=" each-detail-item-value">{{device.soft_version}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">资产编号:</label>
+                                <div class=" each-detail-item-value">{{device.assets_number}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">生效日期:</label>
+                                <div class=" each-detail-item-value">{{device.accepted_at}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">报废日期:</label>
+                                <div class=" each-detail-item-value"> {{device.scrapped_at}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">当前状态:</label>
+                                <div class=" each-detail-item-value"> {{device.status}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">使用年限:</label>
+                                <div class=" each-detail-item-value">{{device.serve_year}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">保险费用:</label>
+                                <div class=" each-detail-item-value">{{device.insurance_cost/100}}元</div>
+                            </div>
+                            <!-- <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">维修费用:</label>
+                                <div class=" each-detail-item-value">{{device.maintain_cost/100}}元</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">维修日期:</label>
+                                <div class=" each-detail-item-value">{{device.maintained_at}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">盘点日期:</label>
+                                <div class=" each-detail-item-value">{{device.checked_at}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">备注:</label>
+                                <div class=" each-detail-item-value">{{device.remarks}}</div>
+                            </div>
+                            <div class="each-detail-item col-sm-3">
+                                <label class=" each-detail-item-name pull-left">设备别名:</label>
+                                <div class=" each-detail-item-value">{{device.alias_number}}</div>
+                            </div> -->
+                            <!-- <div class="form-horizontal label-text-left">
+                                <div class="form-group">
+                                    <div class="col-lg-2 control-label">设备编号:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.device_number}}
+                                    </div>
+                                    <div class="col-lg-2 control-label">归属站点:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.station_name}}
+                                    </div>
+                                    <div class="col-lg-2 control-label">区域类型:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.region_type}}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-2 control-label">安装时间:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.built_date}}
+                                    </div>
+                                    <div class="col-lg-2 control-label">经纬度:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.longitude}}, {{device.latitude}}
+                                    </div>
+                                    <div class="col-lg-2 control-label">地区:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.province}} {{device.city}} {{device.district}}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-2 control-label">详细地址:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.address}}
+                                    </div>
+                                    <div class="col-lg-2 control-label">范围:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.region_type}}
+                                    </div>
+                                    <div class="col-lg-2 control-label">资产成本:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.assets_cost}}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-2 control-label">充电类型:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.charge_type}}
+                                    </div>
+                                    <div class="col-lg-2 control-label">接口标准:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.standard_type}}
+                                    </div>
+                                    <div class="col-lg-2 control-label">设备供应商:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.manufacturer_name}}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-2 control-label">安装方式:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.install_type}}
+                                    </div>
+                                    <div class="col-lg-2 control-label">带枪情况:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.plug_type}}
+                                    </div>
+                                    <div class="col-lg-2 control-label">SIM卡号:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.sim_number}}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-2 control-label">SIM卡期限:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.sim_expired_at}}
+                                    </div>
+                                    <div class="col-lg-2 control-label">型号:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.version}}
+                                    </div>
+                                    <div class="col-lg-2 control-label">额定功率:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.elec_power}}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-2 control-label">额定电流:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.rated_current}}
+                                    </div>
+                                    <div class="col-lg-2 control-label">软件版本:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.soft_version}}
+                                    </div>
+                                    <div class="col-lg-2 control-label">资产编号:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.assets_number}}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-2 control-label">生效日期:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.accepted_at}}
+                                    </div>
+                                    <div class="col-lg-2 control-label">报废日期:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.scrapped_at}}
+                                    </div>
+                                    <div class="col-lg-2 control-label">当前状态:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.status}}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-2 control-label">使用年限:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.serve_year}}
+                                    </div>
+                                    <div class="col-lg-2 control-label">保险费用:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.insurance_cost/100}}元
+                                    </div>
+                                    <div class="col-lg-2 control-label">维修费用:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.maintain_cost/100}}元
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-2 control-label">维修日期:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.maintained_at}}
+                                    </div>
+                                    <div class="col-lg-2 control-label">盘点日期:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.checked_at}}
+                                    </div>
+                                    <div class="col-lg-2 control-label">备注:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.remarks}}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-2 control-label">设备别名:</div>
+                                    <div class="col-lg-2 control-label-left">
+                                        {{device.alias_number}}
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav nav-tabs" role="tablist" id="tablist">  
+                <li role="presentation" class="active"><a href="#xiangqing" role="tab" data-toggle="tab">广告详情</a></li>  
+                <li role="presentation"><a href="#huizong"  role="tab" data-toggle="tab">广告汇总</a></li>  
+            </ul>
+            <div class="tab-content">  
+              <div role="tabpanel" class="tab-pane active" id="xiangqing">
+                  <table class="table table-bordered" id="advertable">
+                    <thead>
+                        <tr>
+                            <td>广告类型</td>
+                            <td>广告名称</td>
+                            <td>缩略图</td>
+                            <td>下发时间</td>
+                            <td>到期时间</td>
+                            <!-- <td>状态</td> -->
+                            <!-- <td>操作</td> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat='advert in adverts'>
+                            <td>{{advert.type_name}}</td>
+                            <td>{{advert.name}}</td>
+                            <td ><img style="width: 60px;height: 60px;" ng-src="{{advert.pic_url}}" alt=""></td>
+                            <td>{{}}</td>
+                            <td>{{advert.expiry_time}}</td>
+                            <!-- <td>{{advert.status}}</td> -->
+                            <!-- <td><a href="">编辑</a> <a href="" style="color: red">删除</a></td> -->
+                        </tr>        
+                    </tbody>
+                </table>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="huizong">
+                  <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>广告类型</td>
+                            <td>广告名称</td>
+                            <td>缩略图</td>
+                            <td>下发时间</td>
+                            <td>到期时间</td>
+                            <!-- <td>状态</td> -->
+                            <!-- <td>操作</td> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat='collect in collects'>
+                            <td>{{collect.type_name}}</td>
+                            <td>{{collect.name}}</td>
+                            <td ><img style="width: 60px;height: 60px;" ng-src="{{collect.pic_url}}" alt=""></td>
+                            <td>{{}}</td>
+                            <td>{{collect.expiry_time}}</td>
+                            <!-- <td>{{collect.status}}</td> -->
+                        </tr>     
+                    </tbody>
+                </table>
+              </div>   
+            </div>
+            <!-- <button type="button" class="btn  btn-primary btn-outline btn-sm btn-w" data-target="#Modaladvert" data-toggle="modal">编辑</button> -->
+            <!-- <button type="button" class="btn btn-danger btn-outline btn-sm btn-w">批量删除</button> -->
+        </div>
+<!-- 广告编辑弹窗 -->
+<div class="modal inmodal" id="Modaladvert" tabindex="-1" role="dialog" aria-hidden="false" ng-model="DevicesShowCtrl">
+    <div class="modal-dialog" style="width: 800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <!-- <i class="fa fa-laptop modal-icon"></i> -->
+                <h4 class="modal-title">广告编辑</h4>
+            </div>
+            <div class="modal-body" style="overflow-y: scroll;padding-bottom:5px;">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <form class="form-horizontal ng-pristine ng-valid">
+                           <div class="form-group">
+                                <span class="col-lg-2 control-label">广告播放模式</span>
+                                <select name="" id="" class="form-control col-lg-3" style="display: inline-block;width: 200px;" ng-model='broadcast_mode' ng-init='broadcast_mode="1"'>
+                                    <option value="1">立即模式</option>
+                                    <option value="2">其它模式</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <span class="col-lg-2 control-label">待机广告</span>
+                                <select name="" id="" class="form-control col-lg-3" style="display: inline-block;width: 200px;" ng-model='standby' ng-options='standby.name for standby in standbys'>
+                                    <!-- <option  value="{{standby.id}}" ng-repeat='standby in standbys'>{{standby.name}}</option> -->
+                                    <option value="">请选择</option>
+                                </select>
+                                <span class="col-lg-1"></span>
+                                <span class="col-lg-2 control-label">到期时间</span>
+                                <!-- <select name="" id="" class="form-control col-lg-3" style="display: inline-block;width: 200px;"></select> -->
+                                <input type="text" id="start-date-daiji" ng-model='info.daiji_time' class="form-control col-lg-3" placeholder="请选择到期时间" style="width: 200px;display: inline-block;">
+                            </div>
+                           <div class="form-group">
+                               <span class="col-lg-2 control-label">解锁广告</span>
+                               <select name="" id="" ng-model='unlock' ng-options='unlock.name for unlock in unlocks' class="form-control col-lg-3" style="display: inline-block;width: 200px;">
+                                   <!-- <option value="{{unlock.id}}" ng-repeat='unlock in unlocks'>{{unlock.name}}</option> -->
+                                   <option value="">请选择</option>
+                               </select>
+                                <span class="col-lg-1"></span>
+                               <span class="col-lg-2 control-label">到期时间</span>
+                               <!-- <select name="" id="" class="form-control col-lg-3" style="display: inline-block;width: 200px;"></select> -->
+                               <input type="text" id="start-date-daiji" ng-model='info.jiesuo_time' class="form-control col-lg-3" placeholder="请选择到期时间" style="width: 200px;display: inline-block;">
+                           </div>
+                            <div class="form-group">
+                                <span class="col-lg-2 control-label">车端拔枪广告</span>
+                                <select name="" id="" ng-model='unplug' ng-options='unplug.name for unplug in unplugs' class="form-control col-lg-3" style="display: inline-block;width: 200px;">
+                                    <!-- <option value="{{unplug.id}}" ng-repeat='unplug in unplugs'>{{unplug.name}}</option> -->
+                                    <option value="">请选择</option>
+                                </select>
+                                 <span class="col-lg-1"></span>
+                                <span class="col-lg-2 control-label">到期时间</span>
+                                <!-- <select name="" id="" class="form-control col-lg-3" style="display: inline-block;width: 200px;"></select>
+                                 -->
+                                <input type="text" id="start-date-daiji" ng-model='info.baqiang_time' class="form-control col-lg-3" placeholder="请选择到期时间" style="width: 200px;display: inline-block;">
+                            </div> 
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" ng-click="confirmUpload()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+                            

@@ -1,0 +1,185 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li class="active">充电枪列表</a></li>
+    </ol>
+</div>
+<div class="dw-page-filter">
+    <form  class="dw-fliter-group form-inline">
+        <div class="form-group">
+           <label for="">端口状态</label>
+           <select class="form-control" ng-model="info.port_status">
+               <option value="0">全部</option>
+               <option value="1">未联网</option>
+               <option value="2">空闲中</option>
+               <option value="3">占用中</option>
+               <option value="4">充电中</option>
+               <option value="5">故障中</option>
+               <option value="6">失去连接</option>
+           </select>
+        </div>
+        <div class="form-group">
+           <label for="">站点状态</label>
+           <select class="form-control" ng-model="info.status">
+               <option value="0">全部</option>
+               <option value="1">运营中</option>
+               <option value="2">建设中</option>
+               <option value="3">规划中</option>
+           </select>
+        </div>
+        <div class="form-group">
+           <label for="">所在城市</label>
+           <area-choose class="form-control" style="border:0px;padding:0px"></area-choose>
+        </div>
+    </form >
+    <form class="dw-fliter-group form-inline">
+        <div class="form-group">
+           <label for="">站点名称</label>
+           <fuzzy-search type="station" query="info.station_obj.name" queryid="info.station_obj.id"></fuzzy-search>
+        </div>
+        <div class="form-group">
+           <label for="">公司名称</label>
+           <fuzzy-search type="enterprise" query="info.enter_obj.name" queryid="info.enter_obj.id"></fuzzy-search>
+        </div>
+        <div class="form-group">
+           <label for="">设备名称</label>
+           <fuzzy-search type="device" query="info.device_obj.name" queryid="info.device_obj.id"></fuzzy-search>
+        </div>
+    </form>
+    <div class="form-inline clearfix">
+        <button class="btn btn-primary pull-right" type="button" name="button" ng-click="search()">查询</button>
+    </div>
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <div class="form-inline clearfix" style="margin-bottom:15px;padding-right:15px;">
+        <!-- <a ui-sref="main.deviceport/add" class="pull-right">
+            <button class="btn btn-primary">
+                添加
+            </button>
+        </a> -->
+        <!-- <button class="btn btn-primary pull-right" ng-click="addPort()">
+            添加
+        </button> -->
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>充电端口号</td>
+                <td>设备名称</td>
+                <td>插座号</td>
+                <td>归属站点</td>
+                <td>端口状态</td>
+                <td>实时电压(V)</td>
+                <td>实时电流(A)</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="port in ports">
+                <td>{{$index+1+info.offset}}</td>
+                <td>{{port.port_number}}</td>
+                <td>{{port.device_number}}</td>
+                <td>
+                    <span ng-if="port.port_aliasname.length">{{port.port_aliasname}}</span>
+                    <span ng-if="!port.port_aliasname.length">-</span>
+                </td>
+                <td>{{port.station_name}}</td>
+                <td>{{port.status_name}}</td>
+                <td>
+                    <span ng-if="port.detail.length !== 0">{{port.detail.voltage/100}}</span>
+                    <span ng-if="port.detail.length === 0">-</span>
+                    
+                </td>
+                <td>
+                        <span ng-if="port.detail.length !== 0">{{port.detail.current/1000}}</span>
+                        <span ng-if="port.detail.length === 0">-</span>
+                </td>
+                <td>
+                    <button class="btn btn-warning" ng-click="goDetail(port.id)" ng-disable="userAuthId.indexOf(20) != -1">详情</button>
+                    <!-- <button class="btn btn-primary" ng-click="goEdit(port.id)">编辑</button> 
+                    <button class="btn btn-danger" ng-click="delete(port.id)">删除</button> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <page-nation info="info" start-paging="startPaging()"></page-nation>
+    <!-- <div class="table-bottom">
+        <div class="more-operation-btn-group">
+            <a ui-sref="main.deviceport/add">
+                <button class="btn btn-primary" data-target="#AddPortModal" data-toggle="modal">
+                        添加
+                </button>
+            </a>
+        </div>
+    </div> -->
+</div>
+<!-- 添加端口 -->
+<div class="modal fade" id="AddPortModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title text-center" id="myModalLabel">添加端口</h4>
+      </div>
+      <div class="modal-body">
+         <div class="form-group clearfix">
+             <label class="col-sm-3">桩号</label>
+             <div class="input-group col-sm-5">
+                <div class="form-control">
+                    <span ng-repeat="device in devices" style="font-size:12px;overflow:hidden" ng-show="device.id == info.device_id">{{device.name|limitTo:12}}</span>
+                </div>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#ChooseDevice">选择</button>
+                </span>
+            </div>
+            <!-- <div class="input-group col-sm-5">
+                <div class="form-control">
+                    <span ng-repeat="device in devices" style="font-size:12px;overflow:hidden" ng-show="device.id == info.device_id">{{device.name|limitTo:12}}</span>
+                    </div>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#ChooseDevice">选择</button>
+                </span>
+            </div> -->
+         </div>
+         <div class="form-group clearfix" style="margin-top: 15px;">
+             <label class="col-sm-3">端口号</label>
+             <input type="text" class="col-sm-5 form-control"style="width: 200px;position:relative;" ng-model="info.port_name">
+         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="confirmAddPort()">确认</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 选择桩号 -->
+<div class="modal inmodal" id="ChooseDevice" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">选择桩号</h4>
+            </div>
+            <div class="modal-body">
+                <div class="ibox-content">
+                    <div class="choose-user-groups choose-user-groups2">
+                        <div class="choose-user-groups-item checkbox cdot-checkbox-level-{{device.id}}" ng-repeat="device in devices" style="width: 50%;">
+                            <input  type="radio" ng-model="$parent.info.device_id" id="radio-1-{{device.id}}" name="radio-1s-set" class="regular-radio" value="{{device.id}}" />
+                            <label for="radio-1-{{device.id}}"></label>
+                            <span >{{device.name}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" ng-click="cancle()">取消</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="confirm()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

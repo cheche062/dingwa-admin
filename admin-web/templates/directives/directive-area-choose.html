@@ -1,0 +1,17 @@
+<div  style="display:flex; justify-content:flex-start;">
+    <div class="padding-left0" style=" margin-right: 4px;">
+        <select  class="form-control padding-left0 width-80" ng-model="provinceOption" ng-change="loadCityDict()" ng-options="province.name for province in provinces track by province.id">
+            <option value="" disabled selected>选择省</option>
+        </select>
+    </div>
+    <div class="padding-left0" style="margin-right: 4px;">
+        <select class="form-control padding-left0 width-80" ng-model="cityOption"  ng-change="loadDistrictDict()" ng-options="city.name for city in cities track by city.id">
+            <option value="" disabled selected>选择市</option>
+        </select>
+    </div>
+    <div class="padding-left0" style="margin-right: 0px;">
+        <select class="form-control padding-left0 width-80" ng-model="districtOption" ng-options="district.name for district in districts track by district.id">
+            <option value="" disabled selected>选择区县</option>
+        </select>
+    </div>
+</div>

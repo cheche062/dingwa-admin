@@ -1,0 +1,435 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li><a ui-sref="main.station/list">站点列表</a></li>
+        <li class="active">站点添加</li>
+    </ol>
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <div class="dw-add-form form-horizontal">
+
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">站点名称</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="请输入站点名称" ng-model="info.name">
+                <span class="must-input-icon">*</span>
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">所在城市</label>
+            <div class="col-sm-7 must-input">
+                <area-choose></area-choose>
+                <span class="must-input-icon">*</span>
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">归属公司</label>
+            <div class="col-sm-7">
+                <div class="input-group">
+                    <div class="form-control">
+                        <span ng-repeat="ent in enterprises" style="font-size:12px;overflow:hidden" ng-show="ent.id == enterprise.parent_id">{{ent.name|limitTo:12}}</span>
+                    </div>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#ChooseEnterprise">选择</button>
+                    </span>
+                </div>
+                <span class="must-input-icon">*</span>
+            </div>
+            <choose-enterprise-station></choose-enterprise-station>
+
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">站点计费规则</label>
+            <div class="col-sm-7">
+                <div class="input-group">
+                    <div class="form-control">
+                        <span>{{fee_rules_info}}</span>
+                    </div>
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#ChooseFeeDetail">选择</button>
+                    </div>
+                </div>
+                <span class="must-input-icon">*</span>
+            </div>
+            <fee-detail></fee-detail>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">经纬度</label>
+            <div class="col-sm-7">
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="info.lnglat">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-info btn-outline btn-size-12" data-toggle="modal" data-target="#LocationModal" ng-click="getMap()">选经纬度
+                        </button>
+                    </span>
+                </div>
+                <span class="must-input-icon">*</span>
+            </div>
+
+            <!-- <label class="col-sm-2 control-label">运营类型</label>
+            <div class="col-sm-3">
+                <select class="form-control" ng-model="info.provider">
+                    <option value="1">电蛙</option>
+                </select>
+                <span class="must-input-icon">*</span>
+            </div> -->
+
+        </div>
+
+
+         <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">建立时间</label>
+            <div class="col-sm-7">
+                <input type="text" placeholder="建立时间" id="start-date" class="form-control" ng-model="info.built_date" autocomplete="off">
+
+            </div>
+
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">开放时间</label>
+            <div class="col-sm-7">
+                <div class="input-group">
+                    <input id="open-date-start" type="text" class="form-control" ng-model="info.open_at_st"  autocomplete="off">
+                    <span class="input-group-addon">
+                        至
+                    </span>
+                    <input id="open-date-end" type="text" class="form-control" ng-model="info.open_at_et"  autocomplete="off">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">联系人</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="请输入联系人" ng-model="info.contacts">
+                <span class="must-input-icon"></span>
+
+            </div>
+
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">联系电话</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="请输入联系电话" ng-model="info.phone">
+                <span class="must-input-icon"></span>
+            </div>
+        </div>
+        <!-- <div class="form-group">
+            <label class="col-sm-2 control-label">紧急联系人</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" placeholder="请输入紧急联系人" ng-model="info.emergent_contacts">
+                <span class="must-input-icon">*</span>
+
+            </div>
+            <label class="col-sm-2 control-label">紧急联系电话</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" placeholder="请输入紧急联系电话" ng-model="info.emergent_phone">
+                <span class="must-input-icon">*</span>
+            </div>
+        </div> -->
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">备注</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="请输入备注" ng-model="info.remarks">
+            </div>
+            <!-- <label class="col-sm-2 control-label">站点状态</label>
+            <div class="col-sm-3">
+                <select ng-model="info.status" class="form-control">
+                    <option value="">请选择</option>
+                    <option value="1">运营中</option>
+                    <option value="2">建设中</option>
+                    <option value="3">规划中</option>
+                </select>
+                <span class="must-input-icon">*</span>
+            </div> -->
+        </div>
+        <!-- <div class="form-group"> -->
+            <!-- <label class="col-sm-2 control-label">官方描述</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" placeholder="请输入官方描述" ng-model="info.office_description">
+                <span class="must-input-icon">*</span>
+            </div> -->
+
+            <!-- <label class="col-sm-2 control-label">电费成本</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="请输入电费成本" ng-model="info.prime_cost">
+                    <span class="input-group-addon">
+                        元/度
+                    </span>
+                </div>
+                <span class="must-input-icon">*</span>
+            </div> -->
+            <!-- <label class="col-sm-2 control-label">停车费</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" placeholder="请输入停车费 " ng-model="info.parking_fee">
+            </div> -->
+        <!-- </div> -->
+        <!-- <div class="form-group">
+            <label class="col-sm-2 control-label">直流电费用</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <input type="number" class="form-control" placeholder="请输入直流电费用" ng-model="info.dc_costfee">
+                    <span class="input-group-addon">
+                        元/度
+                    </span>
+                </div>
+            </div>
+            <label class="col-sm-2 control-label">交流电费用</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <input type="number" min='0' step="0.1" class="form-control" placeholder="请输入交流电费用 " ng-model="info.ac_costfee">
+                    <span class="input-group-addon">
+                        元/度
+                    </span>
+                </div>
+            </div>
+        </div> -->
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">建筑场所</label>
+            <div class="col-sm-7">
+                <select class="form-control" ng-model="info.construction_site">
+                    <option value="">请选择</option>
+                    <option value="1">居民区</option>
+                    <option value="2">公共机构</option>
+                    <option value="3">企事业单位</option>
+                    <option value="4">工业园区</option>
+                    <option value="5">交通枢纽</option>
+                    <option value="6">大型文体设施</option>
+                    <option value="7">城市绿地</option>
+                    <option value="8">大型建筑配建停车场</option>
+                    <option value="9">路边停车位</option>
+                    <option value="10">城际高速服务区</option>
+                    <option value="风景区">风景区</option>
+                    <option value="12">公交场站</option>
+                    <option value="13">加油加气站</option>
+                    <option value="14">出租车</option>
+                    <option value="15">其他</option>
+                </select>
+                <span class="must-input-icon"></span>
+            </div>
+            <!-- <label class="col-sm-5 control-label">站点类型</label>
+            <div class="col-sm-7">
+                <select class="form-control" ng-model="info.type">
+                    <option value="1">公用</option>
+                    <option value="2">专用</option>
+                </select>
+                <span class="must-input-icon">*</span>
+
+            </div> -->
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">电费成本</label>
+            <div class="col-sm-7">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="请输入电费成本" ng-model="info.prime_cost">
+                    <span class="input-group-addon">
+                        元/度
+                    </span>
+                </div>
+                <span class="must-input-icon">*</span>
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">详细地址</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="请输入详细地址" ng-model="info.detail_address">
+                <span class="must-input-icon"></span>
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1" ng-if="info.type=='2'">
+            <label class="col-sm-5 control-label">站点具体类型</label>
+            <div class="col-sm-7">
+                <select class="form-control" ng-model="info.type_display">
+                    <option value="0">全部</option>
+                    <option value="1">公共</option>
+                    <option value="50">个人</option>
+                    <option value="100">公交专用</option>
+                    <option value="101">环卫专用</option>
+                    <option value="102">物流专用</option>
+                    <option value="103">出租车专用</option>
+                    <option value="255">其它</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">投入运营时间</label>
+            <div class="col-sm-7">
+                <input type="text" placeholder="站点添加运营时间" id="start-date-station" class="form-control" ng-model="info.open_forbin_date"  autocomplete="off">
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">电蛙账户分账比例</label>
+            <div class="col-sm-7">
+                <input type="number" min="0" step="0.1" class="form-control" placeholder="请输入电蛙账户分账比例" ng-model="info.frog_account_ratio">
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">推荐人分润比例</label>
+            <div class="col-sm-7">
+                <input type="number" min="0" step="0.1" class="form-control" placeholder="请输入推荐人分润比例" ng-model="info.recommend_account_ratio">
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">合伙人分账比例</label>
+            <div class="col-sm-7">
+                <input type="number" min="0" step="0.1" class="form-control" placeholder="请输入合伙人分账比例" ng-model="info.copemate_account_ratio">
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">备用账户分账比例</label>
+            <div class="col-sm-7">
+                <input type="number" min="0" step="0.1" class="form-control" placeholder="请输入备用账户分账比例" ng-model="info.other_account_ratio">
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">电蛙账号</label>
+            <div class="col-sm-7">
+                <div class="input-group">
+                    <div class="form-control">
+                        <span ng-repeat="frog in frogList" style="font-size:12px;overflow:hidden" ng-show="frog.user_id == Frog.user_id">{{frog.name}}</span>
+                    </div>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#ChooseAccountfrog" disabled="disabled">选择</button>
+                    </span>
+                </div>
+            </div>
+            <choose-frog></choose-frog>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">引荐人账号</label>
+            <div class="col-sm-7">
+                <div class="input-group">
+                    <div class="form-control">
+                        <span ng-repeat="recommend in recommendList" style="font-size:12px;overflow:hidden" ng-show="recommend.user_id == Recommend.user_id">{{recommend.name}}</span>
+                    </div>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#Chooserecommend">选择</button>
+                    </span>
+                </div>
+            </div>
+            <choose-recommend></choose-recommend>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">合伙人账号</label>
+            <div class="col-sm-7">
+                <div class="input-group">
+                    <div class="form-control">
+                        <span ng-repeat="copemate in copemateList" style="font-size:12px;overflow:hidden" ng-show="copemate.user_id == Copemate.user_id">{{copemate.name}}</span>
+                    </div>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#Choosecopemate">选择</button>
+                    </span>
+                </div>
+            </div>
+            <choose-copemate></choose-copemate>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">电费账号</label>
+            <div class="col-sm-7">
+                <div class="input-group">
+                    <div class="form-control">
+                        <span ng-repeat="elec in eleList" style="font-size:12px;overflow:hidden" ng-show="elec.user_id == Elec.user_id">{{elec.name}}</span>
+                    </div>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#Chooseelec">选择</button>
+                    </span>
+                </div>
+            </div>
+            <choose-elec></choose-elec>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">备用账号</label>
+            <div class="col-sm-7">
+                <div class="input-group">
+                    <div class="form-control">
+                        <span ng-repeat="other in otherList" style="font-size:12px;overflow:hidden" ng-show="other.user_id == Other.user_id">{{other.name}}</span>
+                    </div>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#Chooseother">选择</button>
+                    </span>
+                </div>
+            </div>
+            <choose-other></choose-other>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label class="col-sm-5 control-label">分润标准</label>
+            <div class="col-sm-7">
+                <select name="" id="" ng-model="info.account_standard" class="form-control">
+                    <option value="1">利润</option>
+                    <option value="2">收入</option>
+                </select>
+            </div>
+        </div>
+        <!-- <div class="form-group">
+            <label class="col-sm-2 control-label">站点图片</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <div class="filePicker" id="filePickerBtn" >选择图片</div>
+                    <button class="btn btn-primary" id="filePicker">立即上传</button>
+                </div>
+            </div>
+
+            <label class="col-sm-2 control-label">app图片</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <div class="filePicker" id="appPickerBtn" >选择图片</div>
+                    <button class="btn btn-primary" id="filePicker">立即上传</button>
+                </div>
+            </div>
+        </div> -->
+        <!-- <div class="form-group">
+            <label class="col-sm-2 control-label">站点图片预览</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <div id="filePickerList" class="uploader-list"></div>
+                </div>
+            </div>
+
+            <label class="col-sm-2 control-label">app图片预览</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <div id="appPickerList" class="uploader-list"></div>
+                </div>
+            </div>
+        </div> -->
+        <div class="dw-form-btn-group col-sm-12">
+            <button type="button" name="button" class="btn btn-default dw-form-btn" ng-click="goback()">取消</button>
+            <button type="button" name="button" class="btn btn-primary dw-form-btn" ng-click="submit()">确认</button>
+        </div>
+    </div>
+</div>
+<!-- 经纬度查询 -->
+<div class="modal inmodal in" id="LocationModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width: 1000px; height: 760px;">
+    <div class="modal-content animated bounceInRight" style="width: 1000px; height: 760px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title">查询经纬度</h4>
+            </div>
+            <div class="modal-body" style="width: 995px; height: 600px;">
+                <div class="form-horizontal map-search-bk" style="position:absolute;z-index:999">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-model="info.address">
+                            <span class="input-group-btn">
+                                <button type="button"  class="btn  btn-info btn-size-12" ng-click="getCity()">搜索</button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="map-lng-lat">
+                            经度:<input ng-model="info.lng"></input>
+                            纬度:<input ng-model="info.lat"></input>
+                            <button class="btn btn-info" ng-click="lnglatSearch()">搜索</button>
+                    </div>
+                </div>
+                <div id="point" style="100%;height:100%">
+                </div>
+            </div>
+            <div style="text-align: center;margin-top: 10px;">
+                <button class="btn btn-outline btn-primary btn-sm" type="button"  data-dismiss="modal">取消</button>
+                <button class="btn btn-outline btn-primary btn-sm" type="button" ng-click="AddressOk()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>

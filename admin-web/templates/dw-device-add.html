@@ -1,0 +1,202 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li> <a href="#">首页</a> </li>
+        <li><a ui-sref="main.device/list">设备列表</a></a></li>
+        <li class="active">设备添加</a></li>
+    </ol>
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <div class="dw-add-form form-horizontal">
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label for="inputEmail3" class="col-sm-5 control-label">设备编号</label>
+            <div class="col-sm-7 must-input">
+                <input type="text" class="form-control" placeholder="请输入设备编号" ng-model="device.device_number">
+                <span class="must-input-icon">*</span>
+            </div>
+            
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label for="inputEmail3" class="col-sm-5 control-label">归属站点</label>
+            <div class="col-sm-7">
+                <div class="input-group">
+                    <div class="form-control">
+                        <span ng-repeat="sta in stations" style="font-size:12px;overflow:hidden" ng-show="sta.id == station.station_id">{{sta.name|limitTo:12}}</span>
+                    </div>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#ChooseStation">选择</button>
+                    </span>
+                </div>
+                <span class="must-input-icon">*</span>
+            <choose-station></choose-station>
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <!-- <label for="inputEmail3" class="col-sm-5 control-label">安装方式</label>
+            <div class="col-sm-7">
+                <select name="" id="" class="form-control" ng-model="device.install_type">
+                    <option value="落地式">落地式</option>
+                    <option value="壁挂式">壁挂式</option>
+                </select>
+            </div> -->
+            <label for="inputEmail3" class="col-sm-5 control-label">端口数</label>
+            <div class="col-sm-7">
+                <!-- <input type="text" class="form-control" placeholder="请输入端口个数" ng-model="device.port_cnt"> -->
+                <select name="" id="" class="form-control" ng-model="device.port_cnt" ng-options="item.value as item.name for item in devicePort">
+                </select>
+                <span class="must-input-icon">*</span>
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label for="inputEmail3" class="col-sm-5 control-label">所在城市</label>
+            <div class="col-sm-7">
+                <area-choose></area-choose>
+                <span class="must-input-icon">*</span>
+            </div>
+        
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label for="inputEmail3" class="col-sm-5 control-label">经纬度</label>
+            <div class="col-sm-7">
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="device.lnglat">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-info btn-outline btn-size-12" data-toggle="modal" data-target="#LocationModal" ng-click="getMap()">选经纬度
+                        </button>
+                    </span>
+                </div>
+                <span class="must-input-icon">*</span>
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label for="inputEmail3" class="col-sm-5 control-label">软件版本</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="请输入软件版本" ng-model="device.soft_version">
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label for="inputEmail3" class="col-sm-5 control-label">投入运营时间</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="请输入投入运营时间" id="start-date-business" ng-model="device.open_forbusiness_date">
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label for="inputEmail3" class="col-sm-5 control-label">总额定功率</label>
+            <div class="col-sm-7">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="请输入总的额定功率" ng-model="device.elec_power">
+                    <span class="input-group-addon">
+                        KW
+                    </span>
+                </div>
+                    <!-- <span class="must-input-icon">*</span> -->
+            </div>
+        
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label for="inputEmail3" class="col-sm-5 control-label">额定电流</label>
+            <div class="col-sm-7">
+                <div class="input-group">
+                <input type="text" class="form-control" placeholder="请输入额定电流" ng-model="device.rated_voltage">
+                <span class="input-group-addon">
+                    A
+                </span>
+                </div>
+                <span class="must-input-icon">*</span>
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label for="inputEmail3" class="col-sm-5 control-label">sim卡号</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="请输入sim卡号" ng-model="device.sim_number">
+            </div>
+
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label for="inputEmail3" class="col-sm-5 control-label">sim到期时间</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="请输入sim到期时间" id="start-sim-date" ng-model="device.sim_expired_at">
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label for="inputEmail3" class="col-sm-5 control-label">生效时间</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="请输入生效时间" id="start-date-accepted" ng-model="device.accepted_at">
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label for="inputEmail3" class="col-sm-5 control-label">详细地址</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="请输入详细地址" ng-model="device.address">
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label for="inputEmail3" class="col-sm-5 control-label">报废日期</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="请输入报废日期" id="start-scrapped-date" ng-model="device.scrapped_at">
+            </div>
+
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label for="inputEmail3" class="col-sm-5 control-label">使用年限</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="请输入使用年限" ng-model="device.serve_year">
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label for="inputEmail3" class="col-sm-5 control-label">保险费用</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="请输入保险费用" ng-model="device.insurance_cost">
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label for="inputEmail3" class="col-sm-5 control-label">资产编号</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="请输入资产编号" ng-model="device.assets_number">
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label for="inputEmail3" class="col-sm-5 control-label">电桩别名</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="请输入电桩别名" ng-model="device.alias_number">
+            </div>
+        </div>
+        <div class="form-group col-sm-5 col-sm-offset-1">
+            <label for="inputEmail3" class="col-sm-5 control-label">备注</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="请输入备注" ng-model="device.remarks">
+            </div>
+        </div>
+        <div class="dw-form-btn-group col-sm-12">
+            <button type="button" name="button" class="btn btn-default dw-form-btn" ng-click="goDeviceList()">取消</button>
+            <button type="button" name="button" class="btn btn-primary dw-form-btn" ng-click="submit()">确认</button>
+            <button type="button" name="button" class="btn btn-primary dw-form-btn" ng-click="submitNext()">确认且下一个</button>
+        </div>
+    </div>
+</div>
+
+<!-- 经纬度查询界面 -->
+<div class="modal inmodal in" id="LocationModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width: 1000px; height: 960px;">
+    <div class="modal-content animated bounceInRight" style="width: 1000px; height: 960px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title">查询经纬度</h4>
+            </div>
+            <div class="modal-body" style="width: 995px; height: 800px;">
+                <div class="form-horizontal" style="position:absolute;z-index:999">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-model="info.city">
+                            <span class="input-group-btn">
+                                <button type="button" placeholder="请输入城市名" class="btn  btn-info btn-size-12" ng-click="getCity()">搜索</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="point" style="width:100%;height:100%;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,156 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li> <a href="#">首页</a> </li>
+        <li><a ui-sref="main.device/list">设备列表</a></a></li>
+        <li class="active">设备配置</a></li>
+    </ol>
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <div class="dw-add-form form-horizontal">
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">过欠压比率</label>
+            <div class="col-sm-3 must-input">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="请输入过欠压比率" ng-model="device.over_voltage"
+                    onkeyup="this.value = this.value.replace(/[^0-9]/g,'')">
+                    <span class="input-group-addon">
+                        %
+                    </span>
+                </div>
+                <span class="must-input-icon">*</span>
+            </div>
+
+            <label for="inputEmail3" class="col-sm-2 control-label">配置结果</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" placeholder="配置结果" ng-model="device.over_voltage_status_name"
+                readonly="readonly">
+                <span class="must-input-icon"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">限流值</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="请输入限流值" ng-model="device.cur_limit"
+                    onkeyup="this.value = this.value.replace(/[^0-9]/g,'')">
+                    <span class="input-group-addon">
+                        MA
+                    </span>
+                </div>
+                <span class="must-input-icon">*</span>
+            </div>
+            
+            <label for="inputEmail3" class="col-sm-2 control-label">配置结果</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" placeholder="配置结果" ng-model="device.cur_limit_status_name"
+                readonly="readonly">
+                <span class="must-input-icon"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">过流保护值</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="请输入过流保护值" ng-model="device.over_limit"
+                    onkeyup="this.value = this.value.replace(/[^0-9]/g,'')">
+                    <span class="input-group-addon">
+                        MA
+                    </span>
+                </div>
+                <span class="must-input-icon"></span>
+            </div>
+        
+            <label for="inputEmail3" class="col-sm-2 control-label">配置结果</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" placeholder="配置结果" ng-model="device.over_limit_status_name"
+                readonly="readonly">
+                <span class="must-input-icon"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">启动电流下限值</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="请输入启动电流下限值" ng-model="device.start_limit"
+                    onkeyup="this.value = this.value.replace(/[^0-9]/g,'')">
+                    <span class="input-group-addon">
+                        MA
+                    </span>
+                </div>
+                <span class="must-input-icon">*</span>
+            </div>
+        
+            <label for="inputEmail3" class="col-sm-2 control-label">配置结果</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" placeholder="配置结果" ng-model="device.start_limit_status_name"
+                readonly="readonly">
+                <span class="must-input-icon"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">充满电流上限值</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="请输入充满电流上限值" ng-model="device.full_limit"
+                    onkeyup="this.value = Number(this.value.replace(/[^0-9]/g,''))">
+                    <span class="input-group-addon">
+                        MA
+                    </span>
+                </div>
+                <span class="must-input-icon">*</span>
+            </div>
+        
+            <label for="inputEmail3" class="col-sm-2 control-label">配置结果</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" placeholder="配置结果" ng-model="device.full_limit_status_name"
+                readonly="readonly">
+                <span class="must-input-icon"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">单路过流保护下限值</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="请输入单路过流保护下限值" ng-model="device.single_limit"
+                    onkeyup="this.value = this.value.replace(/[^0-9]/g,'')">
+                    <span class="input-group-addon">
+                        MA
+                    </span>
+                </div>
+                <span class="must-input-icon">*</span>
+            </div>
+        
+            <label for="inputEmail3" class="col-sm-2 control-label">配置结果</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" placeholder="配置结果" ng-model="device.single_limit_status_name"
+                readonly="readonly">
+                <span class="must-input-icon"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">结束电流上限值</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="请输入结束电流上限值" ng-model="device.end_limit"
+                    onkeyup="this.value = this.value.replace(/[^0-9]/g,'')">
+                    <span class="input-group-addon">
+                        MA
+                    </span>
+                </div>
+                <span class="must-input-icon">*</span>
+            </div>
+        
+            <label for="inputEmail3" class="col-sm-2 control-label">配置结果</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" placeholder="配置结果" ng-model="device.end_limit_status_name"
+                readonly="readonly">
+                <span class="must-input-icon"></span>
+            </div>
+        </div>
+        <div class="dw-form-btn-group">
+            <button type="button" name="button" class="btn btn-default dw-form-btn" ng-click="goDeviceList()">取消</button>
+            <button type="button" name="button" class="btn btn-primary dw-form-btn" ng-click="setting()">配置</button>
+            <button type="button" name="button" class="btn btn-info dw-form-btn" ng-click="get()">获取</button>
+        </div>
+    </div>
+</div>

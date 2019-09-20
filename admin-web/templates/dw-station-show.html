@@ -1,0 +1,224 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+		<li><a href="#">首页</a></li>
+		<li><a ui-sref="main.station/list">站点列表</a></li>
+		<li class="active">站点详情</li>
+	</ol>
+</div>
+<div class="dw-page-detail-container">
+    <div class="detail-basic-info">
+        <div class="row">
+        	<div class="ibox">
+        		<div class="ibox-title">
+        			<p class="detail-basic-title">基本信息</p>
+        		</div>
+        		<div class="ibox-content clearfix">
+        			<div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">经度:</label>
+		                <div class=" each-detail-item-value">{{station.longitude}}</div>
+		            </div>
+		            <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">纬度:</label>
+		                <div class=" each-detail-item-value">{{station.latitude}}</div>
+		            </div>
+		            <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">详细地址:</label>
+		                <div class=" each-detail-item-value">{{station.address}}</div>
+		            </div>
+        			<div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">站点名称:</label>
+		                <div class=" each-detail-item-value">{{station.name}}</div>
+		            </div>
+		            <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">计费规则:</label>
+		                <div class=" each-detail-item-value">{{fee_rules_info}}</div>
+		            </div>
+		            <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">联系人:</label>
+		                <div class=" each-detail-item-value">{{station.contacts}}/{{station.phone}}</div>
+		            </div>
+
+		            <!-- <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">紧急联系人:</label>
+		                <div class=" each-detail-item-value">{{station.emergent_contacts}}/{{station.emergent_phone}}</div>
+		            </div> -->
+
+		            <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">归属公司:</label>
+		                <div class=" each-detail-item-value">{{station.enterprise_name}}</div>
+		            </div>
+
+		            <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">所在城市:</label>
+		                <div class=" each-detail-item-value">{{station.province}} {{station.city}} {{station.district}}</div>
+		            </div>
+					<!-- <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">运营类型:</label>
+		                <div class=" each-detail-item-value">
+		                	<span ng-if="station.provider == 1">电蛙</span>
+		                </div>
+		            </div> -->
+		            <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">建立时间:</label>
+		                <div class=" each-detail-item-value">
+		                	{{station.built_date}}
+		                </div>
+		            </div>
+		            <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">开放时间:</label>
+		                <div class=" each-detail-item-value">
+		                	{{station.open_at}}
+		                </div>
+		            </div>
+		            <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">站点状态:</label>
+		                <div class=" each-detail-item-value">
+		                	<span ng-if="station.status == 1">运营中</span>
+		                	<span ng-if="station.status == 2">建设中</span>
+		                	<span ng-if="station.status == 3">规划中</span>
+		                </div>
+		            </div>
+		            <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">投入运营时间:</label>
+		                <div class=" each-detail-item-value">{{station.open_forbin_date}}</div>
+		            </div>
+		            <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">未联网端口个数:</label>
+		                <div class=" each-detail-item-value">{{station.unconncet_cnt}}</div>
+		            </div>
+					<div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">空闲中端口个数:</label>
+		                <div class=" each-detail-item-value">{{station.available_cnt}}</div>
+		            </div>
+		            <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">占用中端口个数:</label>
+		                <div class=" each-detail-item-value">{{station.occupying_cnt}}</div>
+		            </div>
+		            <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">充电中端口个数:</label>
+		                <div class=" each-detail-item-value">{{station.charging_cnt}}</div>
+		            </div>
+		            <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">故障中端口个数:</label>
+		                <div class=" each-detail-item-value">{{station.fault_cnt}}</div>
+		            </div>
+		            <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">失去连接端口个数:</label>
+		                <div class=" each-detail-item-value">{{station.lost_cnt}}</div>
+		            </div>
+		            <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">推荐人分润比例:</label>
+		                <div class=" each-detail-item-value">{{station.recommend_account_ratio}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">推荐人账号名称:</label>
+		                <div class=" each-detail-item-value">{{station.recommend_account_detail[0].name}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">推荐人关联手机号码:</label>
+		                <div class=" each-detail-item-value">{{station.recommend_account_detail[0].phone}}</div>
+		            </div>
+		            <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">合伙人分账比例:</label>
+		                <div class=" each-detail-item-value">{{station.copemate_account_ratio}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">合伙人账号名称:</label>
+		                <div class=" each-detail-item-value">{{station.copemate_account_detail[0].name}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">合伙人关联手机号码:</label>
+		                <div class=" each-detail-item-value">{{station.copemate_account_detail[0].phone}}</div>
+		            </div>
+		            <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">电蛙分账比例:</label>
+		                <div class=" each-detail-item-value">{{station.frog_account_ratio}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">电蛙账号名称:</label>
+		                <div class=" each-detail-item-value">{{station.frog_account_detail[0].name}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">电蛙账号关联手机号码:</label>
+		                <div class=" each-detail-item-value">{{station.frog_account_detail[0].phone}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">电费成本:</label>
+		                <div class=" each-detail-item-value">{{station.prime_cost/100}}元/度</div>
+		            </div>
+                    <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">电费账号名称:</label>
+		                <div class=" each-detail-item-value">{{station.elec_account_detail[0].name}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">电费账号关联手机号码:</label>
+		                <div class=" each-detail-item-value">{{station.elec_account_detail[0].phone}}</div>
+		            </div>
+		            <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">备用分账比例:</label>
+		                <div class=" each-detail-item-value">{{station.other_account_ratio}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">备用账号名称:</label>
+		                <div class=" each-detail-item-value">{{station.other_account_detail[0].name}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+		                <label class=" each-detail-item-name pull-left">备用账号关联手机号码:</label>
+		                <div class=" each-detail-item-value">{{station.other_account_detail[0].phone}}</div>
+		            </div>
+        		</div>
+        	</div>
+        </div>
+    </div>
+</div>
+
+<div class="dw-page-detail-container" style="margin-top:15px" ng-controller="LoadDevicesCtrl">
+    <div class="detail-basic-info">
+        <div class="row">
+        	<div class="ibox">
+        		<div class="ibox-title">
+        			<p class="detail-basic-title">设备列表</p>
+        		</div>
+        		<div class="ibox-content clearfix" style="padding: 15px;">
+        			<table class="table table-bordered table-td-h">
+        				<thead>
+        					<tr>
+        						<td>序号</td>
+				                <td>设备编号</td>
+				                <td>归属站点</td>
+				                <td>详细地址</td>
+				                <td>供应商</td>
+				                <td>充电类型</td>
+				                <td>功率(KW)</td>
+				                <!-- <td>带枪情况</td> -->
+				                <td>状态</td>
+				                <td>最大实时电流(A)</td>
+				                <td>操作</td>
+        					</tr>
+        				</thead>
+        				<tbody>
+        					<tr ng-repeat="device in devices">
+        						<td>{{$index+1+info.offset}}</td>
+					            <td>{{device.device_number}}</td>
+					            <td>{{device.station_name}}</td>
+					            <td>{{device.address}}</td>
+					            <td>{{device.manufacturer_name}}</td>
+					            <td>{{device.charge_type_name}}</td>
+					            <td>{{device.elec_power}}</td>
+					            <!-- <td>{{device.plug_type_name}}</td> -->
+					            <td>{{device.device_status_name}}</td>
+					            <td>{{device.device_max_current}}</td>
+					            <td>
+					                <button class="btn btn-warning" ng-click="goDetail(device.id)">详情</button>
+					                <button class="btn btn-primary" ng-click="goEdit(device.id)">编辑</button>
+					                <button class="btn btn-danger" ng-click="delete(device.id)">删除</button>
+					            </td>
+	        				</tr>
+        				</tbody>
+        			</table>
+    				<page-nation info="info" start-paging="startPaging()"></page-nation>
+        		</div>
+        	</div>
+        </div>
+    </div>
+</div>

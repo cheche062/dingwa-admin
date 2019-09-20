@@ -1,0 +1,364 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li class="active">数据概览</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:grey; font-size:14px">数据以每天0：00为时间节点核算。。。。。</span></li>
+    </ol>
+</div>
+<div class="dw-page-filter">
+    <div class="dw-page-commany">
+        <h4>{{$root.enterprise_name}}</h4>
+        <form  class="dw-fliter-group form-inline">
+            <div class="form-group">
+                <label for="">选择区域:</label>
+                <fuzzy-search type="enterprise" query='enterprise.name' queryid="enterprise.id"></fuzzy-search>
+            </div>
+                
+            <div class="form-group">
+                <label for="">选择站点:</label>
+                <fuzzy-search type="station" query='station.name' queryid="station.id"></fuzzy-search>
+            </div>
+        </form>
+        <div class="form-inline clearfix">
+            <button class="btn anniu" type="button" name="button" ng-click="searchList()">确认筛选</button>
+        </div>
+    </div>
+        
+    <div class="dw-page-point">
+        <span class="span-title">关键指标</span>
+        <div class="dw-page-point1">
+            <div class="div-page-point">
+                <span>总收入</span>
+                <br>
+                <span class="span-data">22222</span>
+            </div>
+            <div class="div-page-point">
+                <span>昨日收入</span>
+                <br>
+                <span class="span-data">253</span>
+            </div>
+        </div>
+        <div class="dw-page-point2">
+            <div class="div-page-point">
+                <span>总耗电数</span>
+                <br>
+                <span class="span-data">8888</span>
+            </div>
+            <div class="div-page-point">
+                <span>昨日耗电度数</span>
+                <br>
+                <span class="span-data">77</span>
+                <br>
+                <span>日<span class="glyphicon glyphicon-arrow-up" style="color: red;font-size: 10px"></span>79.07%</span>
+            </div>
+        </div>
+        <div class="dw-page-point3">
+            <div class="div-page-point">
+                <span>公司总分润额</span>
+                <br>
+                <span class="span-data">210</span>
+            </div>
+            <div class="div-page-point">
+                <span>昨日分润</span>
+                <br>
+                <span class="span-data">67</span>
+                <br>
+                <span>日<span class="glyphicon glyphicon-arrow-up" style="color: red;font-size: 10px"></span>52.27%</span>
+            </div>
+        </div>
+        <div class="dw-page-point4">
+            <div class="div-page-point">
+                <span>分润比例</span>
+                <br>
+                <span class="span-data">100%</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="div-data-table">
+        <div class="div-data-nav">
+            <span class="span-title">数据势图</span>
+            <ul class="nav nav-pills">
+                <li role="presentation" class="active"><a href="javascript:;">收益</a></li>
+                <li role="presentation"><a href="javascript:;">电费</a></li>
+                <li role="presentation"><a href="javascript:;">用电度数</a></li>
+                <li role="presentation"><a href="javascript:;">使用率</a></li>
+                <li role="presentation"><a href="javascript:;">公司分润额</a></li>
+            </ul>
+        </div>
+        <span>|&nbsp;&nbsp;趋势图</span>
+        <div style="position: absolute;right: 5%;">
+            <form style="display:flex;justify-content: flex-start;">
+                <div class="form-group" style="display:flex;justify-content: flex-start; margin-right: 20px;">
+                    <input class="form-control" id="start-date-start" placeholder="起始时间" style="width: 160px;" ng-model="info.created_st" autocomplete="off">
+                    &nbsp;&nbsp;至&nbsp;&nbsp;
+                    <input class="form-control" id="start-date-end" placeholder="结束时间" style="width: 160px;" ng-model="info.created_et" autocomplete="off">
+                </div>
+                <div class="form-inline clearfix">
+                    <button class="btn anniu" type="button" name="button" ng-click="">日度粒</button>
+                </div>
+            </form>
+        </div>
+        
+
+        <div id="pic-table" class="div-data-pictable" style="width: 100%;height:400px;margin-top:100px;">
+
+        </div>
+        <hr>
+        <span>|&nbsp;&nbsp;详细数据</span>
+        <div class="table-data" style="width: 100%;height:auto">
+            <table id="table-data" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>时间</td>
+                        <td>使用率</td>
+                        <td>收益</td>
+                        <td>用电度数</td>
+                        <td>公司等级</td>
+                        <td>电费</td>
+                        <td>分润额</td>
+                        <td>分润比例</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('pic-table'));
+    
+    todayData = [["00:00",0],["01:00",0],["02:00",0],["03:00",0],["04:00",3],["05:00",5],["06:00",20],["07:00",33],["08:00",15],["09:00",25],["10:00",50],["11:00",68],["12:00",0],["13:00",0],["14:00",0],["15:00",0],["16:00",0],["17:00",0],["18:00",0],["19:00",0],["20:00",0],["21:00",0],["22:00",0],["23:00",0]];
+    yesterdayData = [["00:00",10],["01:00",0],["02:00",0],["03:00",0],["04:00",0],["05:00",0],["06:00",5],["07:00",4],["08:00",9],["09:00",50],["10:00",90],["11:00",135],["12:00",175],["13:00",100],["14:00",60],["15:00",40],["16:00",30],["17:00",29],["18:00",10],["19:00",5],["20:00",2],["21:00",50],["22:00",30],["23:00",40]];
+    sevendayData=[["00:00",0],["01:00",0],["02:00",0],["03:00",0],["04:00",0],["05:00",0],["06:00",0],["07:00",0],["08:00",1],["09:00",22],["10:00",30],["11:00",40],["12:00",2],["13:00",0],["14:00",18],["15:00",100],["16:00",80],["17:00",90],["18:00",100],["19:00",30],["20:00",20],["21:00",28],["22:00",60],["23:00",57]];
+    thirtyData=[];
+    
+    var dateList = todayData.map(function (item) {
+        return item[0];
+    });
+    var valueList = todayData.map(function (item) {
+        return item[1];
+    });
+    var valueList1 = yesterdayData.map(function (item) {
+        return item[1];
+    });
+    var valueList2 = sevendayData.map(function (item) {
+        return item[1];
+    });
+    var valueList3 = thirtyData.map(function (item) {
+        return item[1];
+    });
+    
+    option = {
+        title: [{
+            left: 'center',
+            text: '浏览量（PV）'
+        }],
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            bottom:'10%',
+            data:['今天','昨天','7天前','30天前']
+        },
+        xAxis: [{
+            data: dateList,
+            splitLine: {show: false}
+            
+        }],
+        yAxis: [{
+            axisLine:false
+        }],
+        grid: [{
+            bottom: '30%'
+        }, {
+            top: '30%'
+        }],
+        series: [{
+            name:'今天',
+            type: 'line',
+            color:'#447ED9',
+            showSymbol: false,
+            data: valueList,
+            itemStyle : {
+                normal : {
+                        color : 'rgb(93, 156, 236)',
+                        borderColor : 'rgba(93, 156, 236,0.2)',
+                        borderWidth : 12
+                        }
+            }
+    
+        },{
+            name:'昨天',
+            type:'line',
+            color:'#62C87F',
+            showSymbol:false,
+            data:valueList1,
+            itemStyle : {
+                normal : {
+                        color : 'rgb(98, 200, 127)',
+                        borderColor : 'rgba(98, 200, 127,0.2)',
+                        borderWidth : 12
+                        }
+            }
+        },{
+            name:'7天前',
+            type:'line',
+            color:'#F15755',
+            showSymbol:false,
+            data:valueList2,
+            itemStyle : {
+                normal : {
+                        color : 'rgb(241, 87, 85)',
+                        borderColor : 'rgba(241, 87, 85,0.2)',
+                        borderWidth : 12
+                        }
+            }
+        },{
+            name:'30天前',
+            type:'line',
+            color:'#FC863F',
+            showSymbol:false,
+            data:valueList3,
+            itemStyle : {
+                normal : {
+                        color : 'rgb(252, 134, 63)',
+                        borderColor : 'rgba(252, 134, 63,0.2)',
+                        borderWidth : 12
+                        }
+            }
+        }]
+    };
+    
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+<!-- <div class="index-page-data">
+    <div class="index-warper">
+        <h1 class="index-title-h1">我的平台总数据展示</h1>
+        <div class="index_number">
+            <div class="charge_ele" ng-repeat="number in my_data.quantity_total track by $index">{{number}}</div>
+            <div style="display: inline-block;height: 144px;vertical-align:middle;position: relative;" class="electricity">
+                <span style="position: absolute;top:12px;height: 100%;">度</span>
+            </div>
+        </div>
+        <h2 class="tonow_data">至今累计数据 &nbsp;&nbsp;&nbsp;&nbsp;Cumulative data</h2>
+        <div class="index_data" style="margin-bottom: 45px;">
+            <div class="index_data_div">
+                <div class="index_content">
+                    <div class="content-left">
+
+                        <img src="../img/index-clock.png" alt="" class="index-clock">
+                    </div>
+                    <div class="content-right">
+                        <div class="right-top title-name">累计充电时长</div>
+                        <div class="right-bottom title-content" ng-if="my_data.duration_total/3600 < 10000">
+                            {{my_data.duration_total/3600|number:0}}
+                            <span class="unit">小时</span>
+                        </div>
+                        <div class="right-bottom title-content" ng-if="my_data.duration_total/3600 >= 10000">
+                            {{my_data.duration_total/3600/10000|number:2}}
+                            <span class="unit">万小时</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="index_content">
+                    <div class="content-left">
+                        <img src="../img/index-bicycle.png" alt="" class="index-bicycle">
+                    </div>
+                    <div class="content-right">
+                        <div class="right-top title-name">累计充电车次</div>
+                        <div class="right-bottom title-content" ng-if="my_data.charge_total < 10000">
+                            {{my_data.charge_total}}
+                            <span class="unit">辆</span>
+                        </div>
+                        <div class="right-bottom title-content" ng-if="my_data.charge_total >= 10000">
+                            {{my_data.charge_total/10000 |number:2}}
+                            <span class="unit">万辆</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="index_content">
+                    <div class="content-left">
+
+                        <img src="../img/index-station.png" alt="">
+                    </div>
+                    <div class="content-right">
+                        <div class="right-top title-name" class="index-station">累计站点总数</div>
+                        <div class="right-bottom title-content" ng-if="my_data.station_total < 10000">
+                            {{my_data.station_total}}
+                            <span class="unit">个</span>
+                        </div>
+                        <div class="right-bottom title-content" ng-if="my_data.station_total >= 10000">
+                            {{my_data.station_total/10000 |number:2}}
+                            <span class="unit">万个</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="index_data_div" style="margin-top: 100px;">
+                <div class="index_content">
+                    <div class="content-left">
+
+                        <img src="../img/index-device.png" alt="" class="index-device">
+                    </div>
+                    <div class="content-right">
+                        <div class="right-top title-name">累计充电终端数</div>
+                        <div class="right-bottom title-content" ng-if="my_data.device_total < 10000">
+                            {{my_data.device_total}}
+                            <span class="unit">个</span>
+                        </div>
+                        <div class="right-bottom title-content" ng-if="my_data.device_total >= 10000">
+                            {{my_data.device_total/10000 |number:2}}
+                            <span class="unit">万个</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="index_content">
+                    <div class="content-left">
+                        <img src="../img/index-plug.png" alt="" class="index-plug">
+                    </div>
+                    <div class="content-right">
+                        <div class="right-top title-name">累计充电插座总数</div>
+                        <div class="right-bottom title-content" ng-if="my_data.port_total < 10000">
+                            {{my_data.port_total}}
+                            <span class="unit">个</span>
+                        </div>
+                        <div class="right-bottom title-content" ng-if="my_data.port_total >= 10000">
+                            {{my_data.port_total/10000 |number:2}}
+                            <span class="unit">万个</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="index_content">
+                    <div class="content-left">
+                        <img src="../img/index-user.png" alt="" class="index-user">
+                    </div>
+                    <div class="content-right">
+                        <div class="right-top title-name">累计充电用户数</div>
+                        <div class="right-bottom title-content" ng-if="my_data.user_total < 10000">
+                            {{my_data.user_total}}
+                            <span class="unit">人</span>
+                        </div>
+                        <div class="right-bottom title-content" ng-if="my_data.user_total >= 10000">
+                            {{my_data.user_total/10000 |number:2}}
+                            <span class="unit">万人</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div> -->

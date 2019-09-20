@@ -1,0 +1,73 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li><a href="#/advert/show">广告中心</a></li>
+        <li class="active">广告修改</a></li>
+    </ol>
+</div>
+<div class="dw-page-filter">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <span class="col-sm-2 control-label ">广告名称:</span>
+            <div class="col-sm-3">
+                <input type="text" placeholder="请输入广告名称" id="start-date" class="form-control" ng-model='info.name'> 
+            </div>
+            <span class="col-sm-3 control-label ">广告类型:</span>
+            <div class="col-sm-3">
+                <select class="form-control" name="" id="" ng-model='info.type'>
+                    <option value="standby">待机广告</option>
+                    <!-- <option value="unlock">解锁广告</option>
+                    <option value="unplug">车端还枪广告</option> -->
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label">单张播放时间:</span>
+            <div class="col-sm-3">
+                <input type="number" placeholder="请输入轮播时间" class="form-control" ng-model='info.rotation'>
+                <span style="position: absolute;top: 8px;right: -3px;">秒</span>
+            </div>
+            <!-- <span class="col-sm-3 control-label" ng-if="info.type == '待机广告' ">待机广告播放时间点:</span>
+            <span class='col-sm-2 control-label' ng-if="info.type == '待机广告' "  style="text-align: right;">待机后</span>
+             <div class="col-xs-1" ng-if="info.type == '待机广告'">
+                    <input type="number" class="form-control" placeholder="输入时间" ng-model='info.standby'>
+             </div>
+             <div class="control-label" ng-if="info.type == '待机广告'">秒</div> -->
+            <!-- <span class="col-sm-2 star-red">*</span> -->
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label ">广告图片:</span>
+            <div class="col-lg-3">
+               <div class="input-group">
+                   <div class="form-control" style="border: none;">
+                       <div style="margin-top:-4px;">
+                       <div id="filePicker" class="filePicker ">选择图片</div>
+                       </div>
+                   </div>
+               </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="col-sm-2 control-label ">广告图片预览:</span>
+            <div class="col-lg-3">
+                <div class="input-group">                         
+                    <div id="fileList" class="uploader-list">
+                        <div ng-repeat = 'pic in info.pics'>
+                             <div id='{{pic.id}}' class="file-item thumbnail upload-state-done" style="position:relative">
+                                <span id="{{pic.id}}" >
+                                    <i id="{{pic.id}}"  class="fa fa-times" ng-click='delete($event)'></i>
+                                </span>
+                                <img style="width: 100px;height: 100px" ng-src='{{pic.url}}'>
+                            </div>
+                        </div>                         
+                    </div>
+                </div>
+            </div>
+            <span class="col-sm-2 star-red">&nbsp;</span>
+        </div>
+        <div class="dw-form-btn-group" style="margin-top:100px">
+            <button style="margin-right:10px;" class="btn btn-default btn-sm" type="button" ui-sref="main.advert/show">取消</button>
+            <button class="btn  btn-primary btn-sm" type="button" ng-click="submit()">确定</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,174 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li class="active">设备列表</a></li>
+    </ol>
+</div>
+<div class="dw-page-filter">
+    <form  class="dw-fliter-group form-inline">
+      <!-- <div class="form-group">
+           <label for="">桩类型</label>
+           <select class="form-control" ng-model="info.apply_type">
+               <option value="0">全部</option>
+               <option value="1">普通桩</option>
+               <option value="2">广告桩</option>
+           </select>
+        </div> -->
+        
+        <!-- <div class="form-group">
+           <label for="">补助</label>
+           <select class="form-control" ng-model="info.allowance_apply">
+               <option value="0">全部</option>
+               <option value="1">未申请</option>
+               <option value="2">申请中</option>
+               <option value="3">已申请</option>
+           </select>
+        </div> -->
+        <div class="form-group">
+           <label for="">站点状态</label>
+           <select class="form-control" ng-model="info.status">
+               <option value="0">全部</option>
+               <option value="1">运营中</option>
+               <option value="2">建设中</option>
+               <option value="3">规划中</option>
+           </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="">设备状态</label>
+            <select class="form-control" ng-model="info.device_status">
+               <option value="0">全部</option>
+               <option value="1">未联网</option>
+               <option value="2">运行中</option>
+               <option value="3">限流中</option>
+               <option value="4">失去连接</option>
+               <option value="5">故障中</option>
+           </select>
+        </div>
+
+        <div class="form-group">
+           <label for="">站点名称</label>
+           <fuzzy-search type="station" query="info.station_obj.name" queryid="info.station_obj.id"></fuzzy-search>
+        </div>
+    </form >
+    <form class="dw-fliter-group form-inline">
+        <div class="form-group">
+           <label for="">公司名称</label>
+           <fuzzy-search type="enterprise" query="info.enter_obj.name" queryid="info.enter_obj.id"></fuzzy-search>
+        </div>
+        <div class="form-group">
+           <label for="">设备编号</label>
+           <fuzzy-search type="device" query="info.device_obj.name" queryid="info.device_obj.id"></fuzzy-search>
+        </div>
+
+        <div class="form-group">
+           <label for="">所在城市</label>
+           <area-choose class="form-control" style="border:0px;padding:0px"></area-choose>
+        </div>
+        
+    </form>
+    <form class="dw-fliter-group form-inline">
+        <div class="form-group">
+           <label for="">软件版本</label>
+           <input type="text" class="form-control" ng-model="info.soft_version">
+        </div>
+        
+    </form>
+    <!-- <form class="dw-fliter-group form-inline">
+        <div class="form-group">
+           <label for="">制造商</label>
+           <select  ng-options="m.id as m.name for m in manufacturers" ng-model="manufacturer_id" class="form-control">
+              <option value="">请选择</option>
+           </select>
+        </div>
+        <div class="form-group">
+           <label for="">运营类型</label>
+           <select class="form-control" ng-model="info.provider">
+               <option value="0">全部</option>
+               <option value="1">电蛙</option>
+           </select>
+        </div>
+    </form> -->
+    <div class="form-inline clearfix">
+        <button class="btn btn-primary pull-right" type="button" name="button" ng-click="search()">查询</button>
+    </div>
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <div class="form-inline clearfix" style="margin-bottom:15px;padding-right:15px;">
+        <a ui-sref="main.device/add" class="pull-right">
+            <button class="btn btn-primary" ng-if="userAuthId.indexOf(25) != -1">
+                    添加
+            </button>
+        </a>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td ng-click="sort('device_number')" class="table-sort">
+                    设备编号
+                    <i class="fa fa-sort table-sort-icon" aria-hidden="true" ng-if="info.order_by !== 'device_number'"></i>
+                    <i class="fa fa-sort-asc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'device_number' && info.order =='asc'"></i>
+                    <i class="fa fa-sort-desc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'device_number' && info.order =='desc'"></i>
+                </td>
+                <td ng-click="sort('station_id')" class="table-sort">
+                    归属站点
+                    <i class="fa fa-sort table-sort-icon" aria-hidden="true" ng-if="info.order_by !== 'station_id'"></i>
+                    <i class="fa fa-sort-asc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'station_id' && info.order =='asc'"></i>
+                    <i class="fa fa-sort-desc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'station_id' && info.order =='desc'"></i>
+                </td>
+                <td>详细地址</td>
+                <td>供应商</td>
+                <td>软件型号</td>
+                <td>软件版本</td>
+                <td>充电类型</td>
+                <td>功率(KW)</td>
+                <!-- <td>带枪情况</td> -->
+                <td ng-click="sort('device_status')" class="table-sort">
+                    状态
+                    <i class="fa fa-sort table-sort-icon" aria-hidden="true" ng-if="info.order_by !== 'device_status'"></i>
+                    <i class="fa fa-sort-asc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'device_status' && info.order =='asc'"></i>
+                    <i class="fa fa-sort-desc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'device_status' && info.order =='desc'"></i>
+                </td>
+                <td>最大实时电流(A)</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="device in devices">
+              <td>{{$index+1+info.offset}}</td>
+              <td>{{device.device_number}}</td>
+              <td>{{device.station_name}}</td>
+              <td>{{device.address}}</td>
+              <td>{{device.manufacturer_name}}</td>
+              <td>{{device.model}}</td>
+              <td>{{device.soft_version}}</td>
+              <td>{{device.charge_type_name}}</td>
+              <td>{{device.elec_power}}</td>
+              <!-- <td>{{device.plug_type_name}}</td> -->
+              <td>{{device.device_status_name}}</td>
+              <td>{{device.device_max_current}}</td>
+              <td>
+                  <button class="btn btn-warning" ng-click="goDetail(device.id)" ng-if="userAuthId.indexOf(24) != -1">详情</button>
+                  <button class="btn btn-primary" ng-click="goEdit(device.id)" ng-if="userAuthId.indexOf(26) != -1">编辑</button> 
+                  <button class="btn btn-danger" ng-click="delete(device.id)" ng-if="userAuthId.indexOf(27) != -1">删除</button>
+                  <button class="btn" ng-click="forbid(device)" ng-class="device.forbid_status == 1 ? 'btn-success':'btn-info'">
+                      <span ng-if="device.forbid_status == 1">封禁</span>
+                      <span ng-if="device.forbid_status == 2">解封</span>
+                  </button>
+                  <button class="btn btn-default" ng-click="setting(device.id)">配置</button>
+              </td>
+            </tr>
+        </tbody>
+    </table>
+    <page-nation info="info" start-paging="startPaging()"></page-nation>
+    <!-- <div class="table-bottom">
+        <div class="more-operation-btn-group">
+            <a ui-sref="main.device/add">
+                <button class="btn btn-primary">
+                        添加
+                </button>
+            </a>
+        </div>
+    </div> -->
+</div>

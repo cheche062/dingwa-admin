@@ -1,0 +1,39 @@
+<!-- <div class="flex-right" ng-show="info.pageCnt>0">
+    <div class="btn" style="cursor: default">
+        当前页 {{info.page}} / {{info.pageCnt}}
+    </div>
+    <div class="btn-group">
+        <button type="button" class="btn btn-white" ng-click="first();">
+            首页
+        </button>
+        <button type="button" class="btn btn-white" ng-click="prev();">
+            <i class="fa fa-chevron-left"></i>
+        </button>
+        <button class="btn" ng-class="{'btn-primary': page == info.page, 'btn-white': page != info.page}" ng-repeat="page in pages" ng-click="jump(page);">
+            {{page}}
+        </button>
+        <button type="button" class="btn btn-white" ng-click="next();">
+            <i class="fa fa-chevron-right"></i>
+        </button>
+        <button type="button" class="btn btn-white" ng-click="last();">
+            尾页
+        </button>
+    </div>
+</div> -->
+<nav ng-show="info.pageCnt>0" class="page-nation">
+  <ul class="pagination">
+    <li>
+      <a href="javascript:void(0);" ng-click="first()">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li ng-repeat="page in pages" ng-class="{'active': page == info.page, '': page != info.page}" ng-click="jump(page)">
+        <a href="javascript:void(0);">{{page}}</a>
+    </li>
+    <li>
+      <a href="javascript:void(0);"  ng-click="last();">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>

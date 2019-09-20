@@ -1,0 +1,243 @@
+/* 修改：开（数据中心） */
+.dw-page-commany{
+    margin-top: 10px;
+    height: auto;
+    width: 100%;
+}
+.dw-page-commany>h4{
+    font-size: 20px;
+    float: left;
+    left: 10%;
+    margin-right: 200px;
+    margin-top:40px; 
+}
+.dw-page-commany>.dw-fliter-group{
+    float: left;
+    font-size: 20px;
+    color: #000;
+}
+.dw-page-commany>.dw-fliter-group>.form-group{
+    margin-right:40px 
+}
+.dw-page-commany>.dw-fliter-group>.form-group>label{
+    display: block;
+    width: 150px;
+    color: rgba(0,0,0,.65);
+    text-align: left
+}
+
+.dw-page-commany>.form-inline>.anniu{
+    float: left;
+    margin-top:30px;
+    right:5%;
+} 
+
+
+/* 修改：结（数据中心） */
+
+/* 修改：按钮样式 */
+.anniu{
+    color: white;
+    background-color:#5677FC; 
+    box-shadow:0px 10px 10px #C4C4C4;
+}
+
+.anniu:hover{
+    color: white;
+    background-color: #337ab7; 
+}
+
+
+.dw-page-point{
+    margin-top:20px; 
+    height: 200px;
+    width: 100%;
+    border: 1px solid #ccc;
+    background-color: #F9F9F9;
+    position: relative;
+}
+.span-title{
+    margin-left:20px;
+    font-size: 20px;
+}
+.dw-page-point .dw-page-point1,.dw-page-point2,.dw-page-point3,.dw-page-point4{
+    height: 180px;
+    width: 25%;
+    background-color:white;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    line-height: 30px
+}
+.dw-page-point .dw-page-point1{
+   position: absolute;
+}
+.dw-page-point .dw-page-point2{
+    position: absolute;
+    top: 27px;
+    left: 25%;
+}
+.dw-page-point .dw-page-point3{
+    position: absolute;
+    top: 27px;
+    left: 50%;
+}
+.dw-page-point .dw-page-point4{
+    position: absolute;
+    top: 27px;
+    left: 75%;
+}
+
+.dw-page-point .div-page-point{
+    margin-left: 20px;
+    margin-top: 40px; 
+}
+.dw-page-point .div-page-point:nth-child(2){
+    margin-right: 20px;
+}
+.dw-page-point .div-page-point span{
+    font-size:14px;
+}
+.dw-page-point .div-page-point .span-data{
+    font-size:35px;
+    font-weight: bold;
+}
+
+.div-data-table{
+    margin-top:200px; 
+    height: auto;
+    width: 100%;
+    border: 1px solid #ccc;
+    background-color: white;
+    position: relative;
+}
+.div-data-table .div-data-nav{
+    height: 35px;
+    border: 1px solid #ccc;
+    background-color: #F9F9F9;
+    display: flex;
+    justify-content: inherit;
+    margin-bottom: 20px;
+}
+.div-data-nav ul{
+    position: absolute;
+    top: -8px;
+    left: 10%;
+}
+.div-data-nav ul li{
+    margin: 0px;
+    width: 120px;
+    border: 1px solid #ccc;
+    background-color: #F9F9F9;
+    text-align: center;
+}
+.div-data-table>span{
+    margin-top: 20px;
+    margin-left: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.div-data-table .table-data{
+    margin-top: 20px;
+}
+/* 全局表格样式 */
+table{
+    color: grey;
+}
+table thead tr{
+    color: black;
+    font-weight: bold;
+    background-color: #F9F9F9;
+}
+table tbody tr:nth-child(even){
+    background-color: #F9F9F9;
+}
+
+
+.dw-page-points{
+    margin-top:20px; 
+    height: 380px;
+    width: 100%;
+    border: 1px solid #ccc;
+    background-color: #F9F9F9;
+    position: relative;
+}
+.dw-page-points .dw-page-point1,.dw-page-point2,.dw-page-point3,.dw-page-point4,.dw-page-point5,.dw-page-point6{
+    height: 180px;
+    background-color:white;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    line-height: 30px
+}
+.dw-page-points .dw-page-point1{
+   position: absolute;
+   width: 50%;
+}
+.dw-page-points .dw-page-point2{
+    position: absolute;
+    width: 25%;
+    top: 27px;
+    left: 50%;
+}
+.dw-page-points .dw-page-point3{
+    position: absolute;
+    width: 25%;
+    top: 27px;
+    left: 75%;
+}
+.dw-page-points .dw-page-point4{
+    position: absolute;
+    width: 33%;
+    top: 207px;
+}
+.dw-page-points .dw-page-point5{
+    position: absolute;
+    width: 34%;
+    top: 207px;
+    left: 33%;
+}
+.dw-page-points .dw-page-point6{
+    position: absolute;
+    width: 33%;
+    top: 207px;
+    left: 67%;
+}
+.dw-page-points .div-page-point{
+    margin-left: 20px;
+    margin-top: 40px; 
+}
+.dw-page-points .div-page-point:nth-child(2){
+    margin-right: 20px;
+}
+.dw-page-points .div-page-point span{
+    font-size:14px;
+}
+.dw-page-points .div-page-point .span-data{
+    font-size:35px;
+    font-weight: bold;
+}
+
+/* 批量导入样式 */
+/* .anniu1{
+    color: white;
+    background:#5677FC;
+    border: 1px solid #5677FC;
+    box-shadow:0px 10px 10px #C4C4C4;
+	position: relative;
+	overflow: hidden;   
+}
+.anniu1 input{
+    position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	opacity: 0;
+}
+.anniu1:hover{
+    color: white;
+    background-color: #337ab7; 
+} */
+

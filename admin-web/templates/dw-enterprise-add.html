@@ -1,0 +1,195 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li><a ui-sref="main.enterprise/list">公司列表</a></li>
+        <li class="active">公司添加</li>
+    </ol>
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <form class="dw-add-form form-horizontal">
+        <div class="form-group">
+            <label  class="col-sm-2 control-label">上级公司</label>
+            <div class="col-sm-3 must-input">
+                <div class="input-group">
+                    <div class="form-control">
+                        <span ng-repeat="ent in enterprises" style="font-size:12px;overflow:hidden" ng-show="ent.id == enterprise.parent_id">{{ent.name|limitTo:15}}</span>
+                    </div>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ChooseEnterprise">选择</button>
+                    </span>
+                </div>
+            <span class="must-input-icon">*</span>
+            </div>
+            <choose-enterprise2 ></choose-enterprise2>
+
+            <label  class="col-sm-2 control-label">公司名称</label>
+            <div class="col-sm-3 must-input">
+                <input type="text" class="form-control" ng-model="add.name" placeholder="请输入公司名称">
+                <span class="must-input-icon">*</span>
+            </div>
+        </div>
+        <div class="form-group">
+            
+            <label  class="col-sm-2 control-label">公司编码</label>
+            <div class="col-sm-3  must-input">
+                <input type="text" class="form-control" ng-model="add.code" placeholder="请输入公司编码">
+                <span class="must-input-icon">*</span>
+            </div>
+
+            <label  class="col-sm-2 control-label">所在城市</label>
+            <div class="col-sm-3 must-input">
+                <area-choose></area-choose>
+                <span class="must-input-icon">*</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-2 control-label">联系人</label>
+            <div class="col-sm-3 must-input">
+                <input type="text" class="form-control" ng-model="add.contacts" placeholder="请输入联系人">
+                <!-- <span class="must-input-icon">*</span> -->
+            </div>
+
+            <label  class="col-sm-2 control-label">联系电话</label>
+            <div class="col-sm-3 must-input">
+                <input type="text" class="form-control" ng-model="add.phone" placeholder="请输入联系电话">
+                <!-- <span class="must-input-icon">*</span> -->
+            </div>
+        </div>
+        <!-- <div class="form-group">
+            <label  class="col-sm-2 control-label">紧急联系人</label>
+            <div class="col-sm-3 must-input">
+                <input type="text" class="form-control" ng-model="add.emergent_contacts" placeholder="请输入紧急联系人">
+                <span class="must-input-icon">*</span>
+            </div>
+
+            <label  class="col-sm-2 control-label">紧急联系电话</label>
+            <div class="col-sm-3 must-input">
+                <input type="text" class="form-control" ng-model="add.emergent_phone" placeholder="请输入紧急联系电话">
+                <span class="must-input-icon">*</span>
+            </div>
+        </div> -->
+        <div class="form-group">
+            <label  class="col-sm-2 control-label">公司类型</label>
+            <div class="col-sm-3 must-input">
+                <select class="form-control" ng-model="add.type" ng-options="type.name for type in enterpriseTypeOpts" placeholder="请输入公司类型"></select>
+                <span class="must-input-icon">*</span>
+            </div>
+            
+            <label  class="col-sm-2 control-label">详细地址</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" ng-model="add.address"  placeholder="请输入详细地址">
+                <span class="must-input-icon">*</span>
+            </div>
+        </div>
+        <div class="form-group" >
+            <label  class="col-sm-2 control-label">电蛙账户</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <div class="form-control">
+                        <span ng-repeat="frog in frogList" style="font-size:12px;overflow:hidden" ng-show="frog.checked && info.level == 1">{{frog.name|limitTo:13}}</span>
+                        <span ng-repeat="frog in frogList" style="font-size:12px;overflow:hidden" ng-show="(frog.user_id == Frog.user_id) && info.level == 2">{{frog.name}}</span>
+                    </div>
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ChooseAccountfrog" disabled="disabled">选择</button>
+                    </div>
+                </div>
+            </div>
+            <!-- <choose-account type='frog'></choose-account> -->
+            <choose-frog></choose-frog>
+            <label  class="col-sm-2 control-label">引荐账户</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <div class="form-control">
+                        <span ng-repeat="recommend in recommendList" style="font-size:12px;overflow:hidden" ng-show="recommend.checked && info.level == 1">{{recommend.name|limitTo:13}}</span>
+
+                        <span ng-repeat="recommend in recommendList" style="font-size:12px;overflow:hidden" ng-show="(recommend.user_id == Recommend.user_id) && info.level == 2">{{recommend.name}}</span>
+                    </div>
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Chooserecommend">选择</button>
+                    </div>
+                </div>
+            </div>
+            <choose-recommend></choose-recommend>
+            <!-- <choose-account type='recommend'></choose-account> -->
+        </div>
+        <div class="form-group" ng-if="info.level != 1">
+            <label  class="col-sm-2 control-label">合伙人账户</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <div class="form-control">
+                        <span ng-repeat="copemate in copemateList" style="font-size:12px;overflow:hidden" ng-show="copemate.checked && info.level == 1">{{copemate.name|limitTo:13}}</span>
+                        <span ng-repeat="copemate in copemateList" style="font-size:12px;overflow:hidden" ng-show="(copemate.user_id == Copemate.user_id) && info.level == 2">{{copemate.name}}</span>
+                    </div>
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Choosecopemate">选择</button>
+                    </div>
+                </div>
+            </div>
+            <choose-copemate></choose-copemate>
+            <!-- <choose-account type='copemate'></choose-account> -->
+
+            <label  class="col-sm-2 control-label">电费账户</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <div class="form-control">
+                        <span ng-repeat="elec in eleList" style="font-size:12px;overflow:hidden" ng-show="elec.checked && info.level == 1">{{elec.name|limitTo:13}}</span>
+                        <span ng-repeat="elec in eleList" style="font-size:12px;overflow:hidden" ng-show="(elec.user_id == Elec.user_id) && info.level == 2">{{elec.name}}</span>
+                    </div>
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Chooseelec">选择</button>
+                    </div>
+                </div>
+            </div>
+            <choose-elec></choose-elec>
+            <!-- <choose-account type='elec'></choose-account> -->
+        </div>
+        <div class="form-group"  ng-if="info.level != 1">
+            <label  class="col-sm-2 control-label">备用账户</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <div class="form-control">
+                        <span ng-repeat="other in otherList" style="font-size:12px;overflow:hidden" ng-show="other.checked && info.level == 1">{{other.name|limitTo:13}}</span>
+                        <span ng-repeat="other in otherList" style="font-size:12px;overflow:hidden" ng-show="(other.user_id == Other.user_id) && info.level == 2">{{other.name}}</span>
+                    </div>
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Chooseother">选择</button>
+                    </div>
+                </div>
+            </div>
+            <choose-other></choose-other>
+            <!-- <choose-account type='other'></choose-account> -->
+            <label  class="col-sm-2 control-label">备注</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" ng-model="add.remarks"  placeholder="请输入备注">
+            </div>
+        </div>
+        <div class="form-group" ng-if="EnterpriseLevel == 1">
+            <label  class="col-sm-2 control-label">默认系统用户组</label>
+            <div class="col-sm-3 must-input" style="display: inline-flex;">
+                <input type="checkbox" ng-model='add.is_creuser' style="margin:10px 5px 0 -18px">
+                <input type="text" class="form-control" placeholder="默认用户组名" ng-disabled='!add.is_creuser' ng-model='add.cust_user_group'>
+                <span class="must-input-icon">*</span>
+            </div>
+            <!-- <label for="inputEmail3" class="col-sm-2 control-label">公司logo</label>
+            <div class="col-sm-3">
+                <div class="filePicker" id="filePickerBtn" >选择图片</div>
+                <button class="btn btn-primary" id="filePicker" ng-click="upload()">立即上传</button>
+            </div> -->
+        </div>
+        <!-- <div class="form-group">
+            <label class="col-sm-5"></label>
+
+            <label for="inputEmail3" class="col-sm-2 control-label">logo图片预览</label>
+            <div class="col-sm-3">
+                <div class="input-group">                         
+                    <div id="filePickerList" class="uploader-list"></div> 
+                </div>
+            </div>
+        </div> -->
+
+        <div class="dw-form-btn-group">
+            <button type="button" name="button" class="btn btn-default dw-form-btn" ng-click="back()">取消</button>
+            <button type="button" name="button" class="btn btn-primary dw-form-btn" ng-click="submit()">确认</button>
+        </div>
+    </form>
+</div>

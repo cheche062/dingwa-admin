@@ -1,0 +1,69 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb"> 
+        <li><a href="#">首页</a> </li>
+        <li> <a ui-sref="main.user/list">用户列表</a></li>
+        <li class="active">用户编辑</li>
+    </ol>
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <form class="dw-add-form form-horizontal">
+
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">手机号</label>
+            <div class="col-sm-3">
+                <input class="form-control" placeholder="请输入手机号" ng-model="user.phone">
+                <span class="must-input-icon">*</span>
+            </div>
+            
+            <label  class="col-sm-2 control-label">所在城市</label>
+            <div class="col-sm-3 must-input">
+                <area-choose></area-choose>
+                <span class="must-input-icon">*</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">详细地址</label>
+            <div class="col-sm-3">
+                <input class="form-control" placeholder="请输入详细地址" ng-model="user.address">
+                <span class="must-input-icon">*</span>
+            </div>
+
+            <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+            <div class="col-sm-3">
+                    <input class="form-control" placeholder="请输入用户名" ng-model="user.name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">真实姓名</label>
+            <div class="col-sm-3">
+                <input class="form-control" placeholder="请输入真实姓名" ng-model="user.realname">
+            </div>
+
+            <label for="inputEmail3" class="col-sm-2 control-label">生日</label>
+            <div class="col-sm-3">
+                <input class="form-control" placeholder="请输入生日" id="start-date-birth" ng-model="user.birthday">
+            </div>
+        </div>
+        <div class="form-group">
+             <!-- <label for="inputEmail3" class="col-sm-2 control-label">性别</label>
+            <div class="col-sm-3">
+                <select class="form-control">
+                    <option value="">请选择</option>
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+                </select>
+            </div> -->
+            
+             <label for="inputEmail3" class="col-sm-2 control-label">邮箱</label>
+            <div class="col-sm-3">
+                <input class="form-control" placeholder="请输入邮箱" ng-model="user.email">
+            </div>
+            
+        </div>
+
+        <div class="dw-form-btn-group">
+            <button type="button" name="button" class="btn btn-default dw-form-btn" ng-click="goUserList()">取消</button>
+            <button type="button" name="button" class="btn btn-primary dw-form-btn" ng-click="submit()">确认</button>
+        </div>
+    </form>
+</div>

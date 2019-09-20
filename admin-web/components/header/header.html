@@ -1,0 +1,164 @@
+<div class="dw-left">
+    <!-- 改：加个div -->
+    <div class="left-nav"></div>
+    <div class="sider-menu-box">
+        <ul class="metismenu" id="menu">
+            <!-- 修改：去掉小青蛙图标 -->
+            <!-- <li class="left-bar-header">
+                    <a ui-sref="main.index">
+                        <img src="../img/index_logo.png" alt="" class="index_logo">
+                    </a>
+                </li> -->
+            <li class="first_level">
+                <a href="javascript:;" class="first_level_a">
+                    <i class="glyphicon glyphicon-home"></i>
+                    <i class="first_level_icon iconfont icon-arrow-down"></i>
+                    财务数据
+                </a>
+                <ul class="second_level">
+                    <a ui-sref="main.data/center">
+                        <li class="second_level_li">基础数据</li>
+                    </a>
+                    <a ui-sref="main.data/centerTest">
+                        <li class="second_level_li">基础数据(test)</li>
+                    </a>
+                    <a ui-sref="main.profit/list">
+                        <li class="second_level_li">分润数据</li>
+                    </a>
+                    <a ui-sref="main.withDraw/list">
+                        <li class="second_level_li">提现申请</li>
+                    </a>
+                    <a ui-sref="main.withDraw/apply">
+                        <li class="second_level_li">提现审批</li>
+                    </a>
+                </ul>
+            </li>
+            <li class="first_level">
+                <a href="javascript:;" class="first_level_a">
+                    <i class="glyphicon glyphicon-home"></i>
+                    <i class="first_level_icon iconfont icon-arrow-down"></i>
+                    订单管理
+                </a>
+                <ul class="second_level">
+                    <a ui-sref="main.charge/orders">
+                        <li class="second_level_li">订单详情</li>
+                    </a>
+                    <a ui-sref="main.user/list">
+                        <li class="second_level_li">用户管理</li>
+                    </a>
+                    <a ui-sref="main.card/list">
+                        <li class="second_level_li">充值卡管理</li>
+                    </a>
+                </ul>
+            </li>
+            <li class="first_level">
+                <a href="javascript:;" class="first_level_a">
+                    <i class="glyphicon glyphicon-home"></i>
+                    <i class="first_level_icon iconfont icon-arrow-down"></i>
+                    业务配置
+                </a>
+                <ul class="second_level">
+                    <a ui-sref="main.active/station">
+                        <li class="second_level_li">区域管理</li>
+                    </a>
+                    <a ui-sref="main.enterprise/list">
+                        <li class="second_level_li">公司管理</li>
+                    </a>
+                </ul>
+            </li>
+            <li class="first_level">
+                <a href="javascript:;" class="first_level_a">
+                    <i class="glyphicon glyphicon-home"></i>
+                    <i class="first_level_icon iconfont icon-arrow-down"></i>
+                    设备管理
+                </a>
+                <ul class="second_level">
+                    <a ui-sref="main.station/list">
+                        <li class="second_level_li">站点管理</li>
+                    </a>
+                    <a ui-sref="main.device/list">
+                        <li class="second_level_li">设备管理（SIM卡）</li>
+                    </a>
+                    <a ui-sref="main.upgrade/package">
+                        <li class="second_level_li">软件升级</li>
+                    </a>
+                </ul>
+            </li>
+            <!-- <li class="first_level active"  ng-repeat="auth in userAuth track by auth.id">
+                      <a href="#" aria-expanded="true" class="first_level_a"> -->
+            <!-- 修改：换掉图标 -->
+            <!-- <i class="glyphicon glyphicon-home" ng-show="auth.key == 'ManageCenter'"></i>
+                        <i class="glyphicon glyphicon-home" ng-show="auth.key == 'FinanceCenter'"></i>
+                        <i class="glyphicon glyphicon-home" ng-show="auth.name == '系统设置'"></i>
+                        <i class="glyphicon glyphicon-home" ng-show="auth.name == 'sim卡'"></i> -->
+            <!-- <i class="first_level_icon iconfont icon-arrow-down"></i>
+                        <i class="iconfont icon-guanli" ng-show="auth.key == 'ManageCenter'"></i>
+                        <i class="iconfont icon-caiwu" ng-show="auth.key == 'FinanceCenter'"></i>
+                        <i class="iconfont icon-xitongshezhi" ng-show="auth.name == '系统设置'"></i>
+                        <i class="fa fa-credit-card" ng-show="auth.name == 'sim卡'"></i> -->
+            <!-- {{auth.name}} -->
+            <!-- 修改：一级菜单名称 -->
+            <!-- <span ng-if="auth.key == 'ManageCenter'">财务数据</span>
+                        <span ng-if="auth.key == 'FinanceCenter'">订单管理</span>
+                        <span ng-if="auth.name == '系统设置'">业务配置</span>
+                        <span ng-if="auth.name == 'sim卡'">设备管理</span>
+                      </a>      
+                  <ul class="second_level collapse" aria-expanded="true">
+                        
+                        <a ui-sref="{{secondnav.frontRoute}}" ng-repeat="secondnav in auth.child track by secondnav.id"  ng-if="secondnav.child.length == 0">
+                            <li ng-if="secondnav.child.length == 0" class="second_level_li" repeat-finish-third>
+                                {{secondnav.name}}
+                            </li>
+                        </a>
+                        <li ng-repeat="secondnav in auth.child track by secondnav.id" ng-if="secondnav.child.length > 0" class="has_third_li">
+                            <a ng-show="secondnav.child.length > 0" href="#" ng-click="stop($event)" aria-expanded="true" class="third_level_a">{{secondnav.name}}</a>
+                            <i class="second_level_icon iconfont icon-arrow-right"></i>
+                            <ul class="third_level collapse" aria-expanded="false">
+                                <a ui-sref="{{thirdnav.frontRoute}}" ng-repeat="thirdnav in secondnav.child track by thirdnav.id" repeat-finish>
+                                    <li class="third_level_li">{{thirdnav.name}}</li>
+                                </a>
+                            </ul>
+                        </li> -->
+            <!-- 修改：添加二级菜单及修改菜单名称 -->
+            <!-- <a ui-sref="main.data/center" ng-if="auth.key == 'ManageCenter'">
+                            <li class="second_level_li">基础数据</li>
+                        </a>
+                        <a ui-sref="main.profit/list" ng-if="auth.key == 'ManageCenter'">
+                            <li class="second_level_li">分润数据</li>
+                        </a>
+                        <a ui-sref="main.withDraw/list" ng-if="auth.key == 'ManageCenter'">
+                            <li class="second_level_li">提现申请</li>
+                        </a>
+                        <a ui-sref="main.withDraw/apply" ng-if="auth.key == 'ManageCenter'">
+                            <li class="second_level_li">提现审批</li>
+                        </a>
+                        <a ui-sref="main.charge/orders" ng-if="auth.key == 'FinanceCenter'">
+                            <li class="second_level_li">订单详情</li>
+                        </a>
+                        <a ui-sref="main.user/list" ng-if="auth.key == 'FinanceCenter'">
+                            <li class="second_level_li">用户管理</li>
+                        </a>
+                        <a ui-sref="main.card/list" ng-if="auth.key == 'FinanceCenter'">
+                            <li class="second_level_li">充值卡管理</li>
+                        </a>
+                        <a ui-sref="main.active/station" ng-if="auth.name == '系统设置'">
+                            <li class="second_level_li">区域管理</li>
+                        </a>
+                        <a ui-sref="main.enterprise/list" ng-if="auth.name == '系统设置'">
+                            <li class="second_level_li">公司管理</li>
+                        </a>
+                        <a ui-sref="main.station/list" ng-if="auth.name == 'sim卡'">
+                            <li class="second_level_li">站点管理</li>
+                        </a>
+                        <a ui-sref="main.device/list" ng-if="auth.name == 'sim卡'">
+                            <li class="second_level_li">设备管理（SIM卡）</li>
+                        </a>
+                        <a ui-sref="main.upgrade/package" ng-if="auth.name == 'sim卡'">
+                            <li class="second_level_li">软件升级</li>
+                        </a> -->
+            <!-- </ul> -->
+            <!-- </li> -->
+        </ul>
+    </div>
+    <h3 class="version" >版本:V1.5</h3>
+</div>

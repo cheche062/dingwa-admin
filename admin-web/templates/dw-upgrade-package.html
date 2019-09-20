@@ -1,0 +1,199 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">首页</a>
+        </li>
+        <li class="active">
+            升级包
+        </li>
+    </ol>
+</div>
+<!-- 顶部搜索 -->
+<div class="dw-page-filter-upgrade">
+    <div class="tabs-container">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a ui-sref="main.upgrade/package">升级包</a>
+            </li>
+            <li class="">
+                <a ui-sref="main.upgrade/device">升级桩</a>
+            </li>
+            <li class="">
+                <a ui-sref="main.upgrade/report">升级报告</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="tab-3" class="tab-pane active">
+                <div class="panel-body">
+                    <div role="form" class="form-inline">
+                    <div class="form-group margin-r-5">
+                        <div class="form-group">
+                            <label for="">创建时间:</label>
+                            <input class="form-control" id="start-date-start" placeholder="起始时间" style="width: 150px;" ng-model="info.created_st"><span style="margin-left:5px;">-</span>
+                            <input class="form-control" id="start-date-end" placeholder="结束时间" style="width: 150px;" ng-model="info.created_et">
+                        </div>
+                        <div class="form-group margin-r-5 upgrade">
+                            <label>包名:</label>
+                            <fuzzy-search type="packs" query='info.pack_name' queryid="info.pack_id"></fuzzy-search>
+                        </div>
+                        <div class="form-group margin-r-5">
+                            <label>软件版本:</label>
+                            <input type="text" placeholder="软件版本" class="form-control width-150" ng-model="info.soft_version">
+                        </div>
+                        <div class="form-group margin-r-5">
+                            <label for="exampleInputPassword2">软件型号:</label>
+                            <input type="text" placeholder="软件型号" class="form-control width-150" ng-model="info.model">
+                            <button class="btn btn-primary btn-sm btn-outline" type="button" ng-click="search()" style="margin-right:5px;">确定</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-sm pull-right btn-outline" data-target="#UploadPackage" data-toggle="modal" type="button">上传</button>
+                    <div style="padding-top:10px;">
+                        <table class="table table-bordered table-td-h">
+                            <thead>
+                                <tr class="tr-no-wrap">
+                                    <td>序号</td>
+                                    <td>包名</td>
+                                    <td>软件版本</td>
+                                    <td>软件型号</td>
+                                    <td>适用升级版本</td>
+                                    <td>下载链接</td>
+                                    <td>上传时间</td>
+                                    <td>操作</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in packages">
+                                    <td>{{$index + info.offset + 1}}</td>
+                                    <td>{{x.name}}</td>
+                                    <td>{{x.soft_version}}</td>
+                                    <td>{{x.model}}</td>
+                                    <td style="max-width:300px;word-wrap:break-word;">{{x.apply_version}}</td>
+                                    <td style="max-width:300px;word-wrap:break-word;">{{x.pack_addr}}</td>
+                                    <td>{{x.created_at}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-info btn-sm" data-target="#EditPackage" data-toggle="modal" ng-click="info.apply_version=x.apply_version;info.current_id=x.id">编辑</button>
+                                        <button type="button" class="btn btn-info btn-sm" ng-click="download(x)">下载</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <page-nation info="info" start-paging="startPaging()"></page-nation>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 上传升级包 -->
+<div class="modal inmodal" id="UploadPackage" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title text-center">上传升级文件</h4>
+            </div>
+            <div class="modal-body" style="overflow-y: scroll;padding-bottom:5px;">
+                <div role="form" class="dw-add-form form-horizontal">
+                    <div class="form-group ">
+                        <label class="control-label col-sm-3">软件型号:</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" ng-model="fileDetail.model">
+                        </div>
+                        <label class="control-label col-sm-3">软件版本号:</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" onkeyup="this.value=this.value.replace(/[^V\d.$]/g,'')"  ng-model="fileDetail.ver">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">升级包大小(字节):</label>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" ng-model="fileDetail.len" min="1">
+                        </div>
+                        <label class="control-label col-sm-3">升级包校验和:</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" ng-model="fileDetail.sum" onkeyup="this.value=this.value.replace(/[^0-9a-fA-F]/g,'')">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">升级方式:</label>
+                        <div class="col-sm-3">
+                            <select class="form-control" ng-model="fileDetail.upmode">
+                                <option value="TCP" select>TCP</option>
+                                <option value="FTP">FTP</option>
+                                <option value="HTTP">HTTP</option>
+                            </select>
+                        </div>
+                        <label class="control-label col-sm-3">分段下载字节数:</label>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" ng-model="fileDetail.dbytes" min="1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">适用版本号:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" onkeyup="this.value=this.value.replace(/[^V\d.;$]/g,'')" ng-model="fileDetail.apver">
+                        </div>
+                        <label class="control-label">(多个版本用“;”隔开)</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">归属公司:</label>
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <div class="form-control">
+                                    <span ng-repeat="ent in enterprises" style="font-size:12px;overflow:hidden" ng-show="ent.id == enterprise.parent_id">{{ent.name|limitTo:20}}</span>
+                                </div>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#ChooseEnterprise">选择</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">升级文件:</label>
+                        <div class="col-sm-6">
+                            <div id="thelist" class="uploader-list"></div>
+                            <div class="input-group" style="width: 300px;display:flex;">
+                                <div class="filePicker" id="filePickerBtn" style="display:inline-block; ">选择升级文件</div>
+                                <!-- <button class="btn btn-primary" id="filePicker" style="height: 35px;">开始上传</button> -->
+                                <button class="btn btn-primary" id="filePicker" style="height: 35px;margin-left:10px;" ng-click="upload()">开始上传</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+                <!-- <button type="button" class="btn btn-primary" ng-click="confirmUpload()">确认</button> -->
+                <button type="button" class="btn btn-primary" ng-click="reduce()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+<choose-enterprise></choose-enterprise>
+
+<!-- 编辑 -->
+<div class="modal inmodal" id="EditPackage" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title">编辑适用升级版本</h4>
+            </div>
+            <div class="modal-body" style="overflow-y: scroll;padding-bottom:5px;">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <span class="col-lg-3 control-label">适用升级版本:</span>
+                        <div class="col-lg-5">
+                            <input type="text" placeholder="适用升级版本" class="form-control" ng-model="info.apply_version">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" ng-click="editApplyVersion()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>

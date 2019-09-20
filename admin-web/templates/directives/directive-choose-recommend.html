@@ -1,0 +1,33 @@
+<div class="modal inmodal" id="Chooserecommend" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">选择账户</h4>
+            </div>
+            <div class="modal-body">
+                <div class="ibox-content">
+                    <div class="choose-user-groups choose-user-groups2" ng-show="info.level == 1 ">
+                        <div class="choose-user-groups-item checkbox cdot-checkbox-level-{{ent.level}}" ng-repeat="x in recommendList">
+                            <input ng-model="x.checked"  type="checkbox"   name="radio-1s-set" class="directive-modal-check-box"  value="{{x.id}}" />
+                            <label for="radio-1-{{x.id}}"></label>
+                            <span >{{x.name}}</span>
+                        </div>
+                    </div>
+                    <div class="choose-user-groups choose-user-groups2" ng-show="info.level == 2 ">
+                        <div class="choose-user-groups-item checkbox cdot-checkbox-level-{{ent.level}}" ng-repeat="x in recommendList">
+                            <input type="radio" ng-model="$parent.Recommend.user_id" name="radio-1s-set-recommend"  id="radio-1-recommend-{{x.user_id}}" class="regular-radio"  value="{{x.user_id}}" />
+                            <!-- <input type="radio" ng-model="$parent.Recommend.user_id" name="radio-1s-set-recommend"  id="radio-1-recommend-{{x.user_id}}" class="regular-radio"  value="{{x.user_id}}" /> -->
+                            <label for="radio-1-recommend-{{x.user_id}}" style="vertical-align:bottom;"></label>
+                            <span>{{x.name}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">确认</button>
+            </div>
+        </div>
+    </div>
+</div>

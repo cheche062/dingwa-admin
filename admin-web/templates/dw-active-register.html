@@ -1,0 +1,364 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li> <a href="#">首页</a> </li>
+        <li class="active">注册即送</a></li>
+    </ol>
+</div>
+<div class="dw-page-filter">
+    <div class="wrapper wrapper-content">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li>
+                    <a ui-sref="main.active/station">站点卡</a>
+                </li>
+                <li class="active">
+                    <a>注册即送</a>
+                </li>
+                <li>
+                    <a ui-sref="main.active/charge">充电送次数</a>
+                </li>
+                <li>
+                    <a ui-sref="main.active/recharge">充值返余额</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-3" class="tab-pane active">
+                    <div class="panel-body">
+                        <div role="form" class="form-inline">
+                            <div class="form-group margin-r-5">
+                                <span>名称:</span>
+                                <input type="text" placeholder="名称" class="form-control width-150" ng-model="info.name">
+                            </div>
+                            <div class="form-group margin-r-5">
+                                <span>状态:</span>
+                                <select name="" id="" class="form-control width-150" ng-model="info.status">
+                                    <option value="0">全部</option>
+                                    <option value="1">待发布</option>
+                                    <option value="2">已发布</option>
+                                    <option value="3">进行中</option>
+                                    <option value="4">已结束</option>
+                                    <option value="5">已关闭</option>
+                                    <option value="6">自动关闭</option>
+                                </select>
+                            </div>
+                            <div class="form-group margin-r-5">
+                                <span for="">创建时间:</span>
+                                <input class="form-control" id="start-date-start" placeholder="起始时间" style="width: 150px;" ng-model="info.created_st"><span style="margin-left:5px;">-</span>
+                                <input class="form-control" id="start-date-end" placeholder="结束时间" style="width: 150px;" ng-model="info.created_et">
+                            </div>
+                            <button class="btn btn-primary btn-sm btn-outline" type="button" ng-click="search()" style="margin-right:5px;">确定</button>
+                            <button class="btn btn-primary btn-sm pull-right btn-outline margin-r-5" data-target="#ContentAdd" data-toggle="modal" type="button" style="margin-right: 15px;" ng-if="userAuthId.indexOf(54) != -1">添加</button>
+                        </div>
+                        <div style="padding-top:10px;">
+                            <table class="table table-bordered table-td-h">
+                                <thead>
+                                    <tr class="tr-no-wrap">
+                                        <td>序号</td>
+                                        <td>活动名称</td>
+                                        <td>活动类型</td>
+                                        <td>赠送余额(元)</td>
+                                        <td>适用对象</td>
+                                        <td ng-click="order('crated_at')">
+                                            发布日期
+                                            <!-- <span ng-class="{'fa fa-sort': info.order_by != 'created_at', 'fa fa-sort-desc': info.order_by == 'created_at' && info.order == 'desc', 'fa fa-sort-asc': info.order_by == 'created_at' && info.order == 'asc'}"></span> -->
+                                        </td>
+                                        <td>起始时间</td>
+                                        <td>截止时间</td>
+                                        <td>状态</td>
+                                        <td ng-if="userAuthId.indexOf(55) != -1 && userAuthId.indexOf(56) != -1">操作</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="x in activeList">
+                                        <td>{{$index+1+info.offset}}</td>
+                                        <td style="max-width:300px;">{{x.coupon_name}}</td>
+                                        <td>
+                                            <span ng-if="x.coupon_type == 1">站点卡</span>
+                                            <span ng-if="x.coupon_type == 2">注册即送</span>
+                                            <span ng-if="x.coupon_type == 3">充电送次数</span>
+                                            <span ng-if="x.coupon_type == 4">充值返余额</span>
+                                        </td>
+                                        <td style="max-width:300px;">{{x.payment_fix}}</td>
+                                        <td>
+                                            <span ng-if="x.applicable_object == 0">全部</span>
+                                            <span ng-if="x.applicable_object == 1">小程序</span>
+                                            <span ng-if="x.applicable_object == 2">app</span>
+                                        </td>
+                                        <td>{{x.created_at}}</td>
+                                        <td>{{x.started_at}}</td>
+                                        <td>{{x.end_at}}</td>
+                                        <td class="no-wrap">{{x.status_name}}</td>
+                                        <td class="no-wrap" ng-if="userAuthId.indexOf(55) != -1 && userAuthId.indexOf(56) != -1">
+                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" ng-click="edit(x.id)" data-target="#ContentEdit" ng-disabled="x.status === 4 || x.status === 5||x.status === 6" ng-if="userAuthId.indexOf(55) != -1">编辑</button>
+                                            <button type="button" class="btn btn-danger btn-sm" ng-click="delete(x.id)" ng-if="userAuthId.indexOf(56) != -1">删除</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <page-nation info="info" start-paging="startPaging()"></page-nation>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<!-- 添加内容 -->
+<div class="modal inmodal" id="ContentAdd" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title">注册即送</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <span class="col-sm-3 control-label">名称:</span>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" ng-model="addContent.name" placeholder="名称">
+                        </div>
+                        <span class="col-sm-1 star-red">*</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-sm-3 control-label">注册即送:</span>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" ng-model="addContent.payment_fix" placeholder="注册即送">
+                        </div>
+                        <span class="col-sm-1 star-red">*</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-sm-3 control-label">绑定站点:</span>
+                        <div class="col-sm-6">
+                            <div class="col-sm-4 active-radio-parent">
+                                <input type="radio" ng-model="addContent.appoint_station" id="radio-1-200" name="radio-1-appoint_station" class="regular-radio" value="1" />
+                                <label for="radio-1-200"></label>
+                                <span class="active-radio-span">否</span>
+                            </div>
+                            <div class="col-sm-4 active-radio-parent">
+                                <input type="radio" ng-model="addContent.appoint_station" id="radio-1-201" name="radio-1-appoint_station" class="regular-radio ng-valid-parse" value="2" />
+                                <label for="radio-1-201"></label>
+                                <span class="active-radio-span">是</span>
+                            </div>
+                            <div class="col-sm-4">
+                                <button type="button" class="btn btn-default btn-sm" ng-if="addContent.appoint_station== 2" data-toggle="modal" data-target="#ChooseStationModal">选择站点</button>
+                            </div>
+                        </div>
+                        <span class="col-sm-1 star-red">*</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-sm-3 control-label">有限期限:</span>
+                            <div class="col-sm-6">
+                                <div class="col-sm-4 active-radio-parent">
+                                    <input type="radio" ng-model="addContent.appoint_date" id="radio-1-202" name="radio-1-appoint_date" class="regular-radio" value="1" />
+                                    <label for="radio-1-202"></label>
+                                    <span class="active-radio-span">无</span>
+                                </div>
+                                <div class="col-sm-4 active-radio-parent">
+                                    <input type="radio" ng-model="addContent.appoint_date" id="radio-1-203" name="radio-1-appoint_date" class="regular-radio ng-valid-parse" value="2" />
+                                    <label for="radio-1-203"></label>
+                                    <span class="active-radio-span">有</span>
+                                </div>
+                            </div>
+                        <span class="col-sm-1 star-red">*</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-sm-3 control-label">状态:</span>
+                        <div class="col-sm-6">
+                            <div class="col-sm-4 active-radio-parent">
+                                <input type="radio" ng-model="addContent.status" id="radio-1-110" name="radio-1-status" class="regular-radio" value="1" />
+                                <label for="radio-1-110"></label>
+                                <span class="active-radio-span">待发布</span>
+                            </div>
+                            <div class="col-sm-4 active-radio-parent">
+                                <input type="radio" ng-model="addContent.status" id="radio-1-111" name="radio-1-status" class="regular-radio ng-valid-parse" value="2" />
+                                <label for="radio-1-111"></label>
+                                <span class="active-radio-span">已发布</span>
+                            </div>
+                        </div>
+                        <span class="col-sm-1 star-red">*</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-sm-3 control-label">适用对象:</span>
+                        <div class="col-sm-6">
+                            <select class="form-control" ng-model="addContent.applicable_object">
+                                <option value="0">全部</option>
+                                <option value="1">小程序</option>
+                                <option value="2">app</option>
+                            </select>
+                        </div>
+                        <span class="col-sm-1 star-red"></span>
+                    </div>
+                    <div class="form-group" ng-show="addContent.appoint_date == 2">
+                        <span class="col-sm-3 control-label">有效期起始时间:</span>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="date-start" ng-model="addContent.started_at" placeholder="有效期起始时间" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="addContent.appoint_date == 2">
+                        <span class="col-sm-3 control-label">有效期截止时间:</span>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="date-end" ng-model="addContent.end_at" placeholder="有效期截止时间" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-outline" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary btn-outline" ng-click="add()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 编辑内容 -->
+<div class="modal fade" id="ContentEdit" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title">注册即送</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <span class="col-sm-3 control-label">名称:</span>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" ng-model="editContent.coupon_name" placeholder="名称">
+                        </div>
+                        <span class="col-sm-1 star-red">*</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-sm-3 control-label">注册即送:</span>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" ng-model="editContent.payment_fix" placeholder="赠送充电次数">
+                        </div>
+                        <span class="col-sm-1 star-red">*</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-sm-3 control-label">绑定站点:</span>
+                        <div class="col-sm-6">
+                            <div class="col-sm-4 active-radio-parent">
+                                <input type="radio" ng-model="editContent.appoint_station" id="radio-1-204" name="radio-1-appoint_station_edit" class="regular-radio" value="1" />
+                                <label for="radio-1-204"></label>
+                                <span class="active-radio-span">没有</span>
+                            </div>
+                            <div class="col-sm-4 active-radio-parent">
+                                <input type="radio" ng-model="editContent.appoint_station" id="radio-1-205" name="radio-1-appoint_station_edit" class="regular-radio ng-valid-parse" value="2" />
+                                <label for="radio-1-205"></label>
+                                <span class="active-radio-span">有</span>
+                            </div>
+                            <div class="col-sm-4">
+                                <button type="button" class="btn btn-default btn-sm" ng-if="editContent.appoint_station== 2" data-toggle="modal" data-target="#ChooseStationModal">选择站点</button>
+                            </div>
+                        </div>
+                        <span class="col-sm-1 star-red">*</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-sm-3 control-label">有限期限:</span>
+                            <div class="col-sm-6">
+                                <div class="col-sm-4 active-radio-parent">
+                                    <input type="radio" ng-model="editContent.appoint_date" id="radio-1-206" name="radio-1-appoint_date_edit" class="regular-radio" value="1" />
+                                    <label for="radio-1-206"></label>
+                                    <span class="active-radio-span">没有</span>
+                                </div>
+                                <div class="col-sm-4 active-radio-parent">
+                                    <input type="radio" ng-model="editContent.appoint_date" id="radio-1-207" name="radio-1-appoint_date_edit" class="regular-radio ng-valid-parse" value="2" />
+                                    <label for="radio-1-207"></label>
+                                    <span class="active-radio-span">有</span>
+                                </div>
+                            </div>
+                        <span class="col-sm-1 star-red">*</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-sm-3 control-label">状态:</span>
+                        <div class="col-sm-6">
+                            <div class="col-sm-4 active-radio-parent" ng-if="singleActive.status == 1">
+                                <input type="radio" ng-model="editContent.status" id="radio-1-208" name="radio-1-status_edit" class="regular-radio" value="1" />
+                                <label for="radio-1-208"></label>
+                                <span class="active-radio-span">待发布</span>
+                            </div>
+                            <div class="col-sm-4 active-radio-parent" ng-if="singleActive.status == 1 ||singleActive.status == 2">
+                                <input type="radio" ng-model="editContent.status" id="radio-1-209" name="radio-1-status_edit" class="regular-radio ng-valid-parse" value="2" />
+                                <label for="radio-1-209"></label>
+                                <span class="active-radio-span">已发布</span>
+                            </div>
+                            <div class="col-sm-4 active-radio-parent" ng-if="singleActive.status == 3 ">
+                                <input type="radio" ng-model="editContent.status" id="radio-1-210" name="radio-1-status_edit" class="regular-radio ng-valid-parse" value="3" />
+                                <label for="radio-1-210"></label>
+                                <span class="active-radio-span">进行中</span>
+                            </div>
+                            <div class="col-sm-4 active-radio-parent" ng-if="singleActive.status == 4">
+                                <input type="radio" ng-model="editContent.status" id="radio-1-211" name="radio-1-status_edit" class="regular-radio ng-valid-parse" value="4" />
+                                <label for="radio-1-211"></label>
+                                <span class="active-radio-span">已结束</span>
+                            </div>
+                            <div class="col-sm-4 active-radio-parent" ng-if="singleActive.status == 2 ||singleActive.status == 3 || singleActive.status == 6 || singleActive.status == 5">
+                                <input type="radio" ng-model="editContent.status" id="radio-1-212" name="radio-1-status_edit" class="regular-radio ng-valid-parse" value="5" />
+                                <label for="radio-1-212"></label>
+                                <span class="active-radio-span">已关闭</span>
+                            </div>
+                        </div>
+                        <span class="col-sm-1 star-red">*</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-sm-3 control-label">适用对象:</span>
+                        <div class="col-sm-6">
+                            <select class="form-control" ng-model="editContent.applicable_object">
+                                <option value="0">全部</option>
+                                <option value="1">小程序</option>
+                                <option value="2">app</option>
+                            </select>
+                        </div>
+                        <span class="col-sm-1 star-red"></span>
+                    </div>
+                    <div class="form-group" ng-show="editContent.appoint_date == 2">
+                        <span class="col-sm-3 control-label">有效期起始时间:</span>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="date-start-edit" ng-model="editContent.started_at" placeholder="有效期起始时间" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="editContent.appoint_date == 2">
+                        <span class="col-sm-3 control-label">有效期截止时间:</span>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="date-end-edit" ng-model="editContent.end_at" placeholder="有效期截止时间" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" ng-click="update()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 添加站点卡选择站点 -->
+<div class="modal fade" id="ChooseStationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">选择站点</h4>
+            </div>
+            <div class="modal-body" style="min-height: 250px;">
+                <div class="form-inline">
+                    <div class="form-group" style="position: relative;">
+                        <input type="text" placeholder="站点" class="form-control search_station width-200" ng-change="searchStation()" ng-model="query">
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="searchStation()">搜索</button>
+                        <ul class="search_stationList" ng-show="showDropdownFlag">
+                            <li ng-repeat="station in stationList" class="station-item" ng-click="clickStationItem(station)">{{station.name}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6" ng-repeat="station in chooseStationList" style="margin-top: 15px;">
+                    <span style="position:relative;">{{station.name}}<span class="red-clear" ng-click="clearStation(station.id)">x</span></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" ng-click="confirmChooseStation()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>

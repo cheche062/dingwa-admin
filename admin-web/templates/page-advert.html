@@ -1,0 +1,72 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li class="active">广告中心</a></li>
+    </ol>
+</div>
+<div class="dw-page-filter">
+<div class="wrapper wrapper-content">
+    <div class="tabs-container" style="margin-bottom: 20px;">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a ui-sref="main.advert/show">广告中心</a>
+            </li>
+            <li>
+                <a ui-sref="main.advert/lssued">广告下发</a>
+            </li>  
+        </ul>
+        <div class="tab-content">
+            <div id="tab-3" class="tab-pane active">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="inline-block-60">创建时间</div>
+    					<input type="text" id="start-date" ng-model='info.start_time' class="form-control" placeholder="开始时间" style="width: 117px;display: inline-block;" autocomplete="off">
+    					<!-- <div class="inline-block-60" style="text-align: center;">至</div> -->
+                        <span style="margin: 0 5px;">至</span>
+    					<input type="text" id="end-date"   ng-model='info.end_time' class="form-control" placeholder="结束时间" style="width:117px;display: inline-block;" autocomplete="off">
+    					<div class="inline-block-60" style="margin-left:20px;">广告类型</div>
+    					<select ng-model='info.type' class="form-control" style="display: inline-block;width: 200px;">
+                          <option value="全部">全部</option>
+    					  <option value="standby">待机广告</option>
+    					  <!-- <option value="unlock">解锁广告</option>
+    					  <option value="unplug">车端还枪广告</option> -->
+    					</select>
+    					<button class="btn btn-sm btn-outline btn-primary" ng-click="search()">确定</button>	
+                        <div class="pull-right">
+                            <a ui-sref="main.advert/add">
+                        	  <button class="btn btn-sm btn-primary" ng-if="userAuthId.indexOf(60) != -1">添加</button>
+                            </a>
+                        </div>
+                    </div>
+                    <table class="table table-bordered">
+							  <thead>
+							  	<tr>
+							  		<td>序号</td>
+							  		<td>广告名称</td>
+							  		<td>创建时间</td>
+							  		<td>广告类型</td>
+							  		<td ng-if="userAuthId.indexOf(61) != -1 && userAuthId.indexOf(62) != -1">操作</td>
+							  	</tr>
+							  </thead>
+							  <tbody>
+                                <tr ng-repeat='advert in adverts'>
+                                    <td>{{$index+1}}</td>
+                                    <td>{{advert.name}}</td>
+                                    <td>{{advert.created_at}}</td>
+                                    <td>{{advert.type}}</td>
+                                    <td ng-if="userAuthId.indexOf(61) != -1 && userAuthId.indexOf(62) != -1">
+                                        <a ui-sref='main.advertshow/edit({id:advert.id})'>
+                                            <button type="button" class="btn btn-primary btn-sm" ng-if="userAuthId.indexOf(61) != -1">编辑</button>
+                                        </a>
+                                        <button type="button" class="btn  btn-danger btn-sm" ng-click='delete(advert.id)' ng-if="userAuthId.indexOf(62) != -1">删除</button>
+                                    </td>
+                                </tr>                     
+                              </tbody>
+					</table>
+                    <page-nation info="info" start-paging="startPaging()"></page-nation>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,214 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li class="active">用户管理</li>
+    </ol>
+</div>
+<div class="dw-page-filter">
+    <div class="dw-page-commany">
+        <form  class="dw-fliter-group form-inline ">
+            <div class="form-group">
+                <label for="">用户标识</label>
+                <fuzzy-search type="user" query="info.user_obj.name" queryid="info.user_obj.id"></fuzzy-search>
+            </div>
+            <div class="form-group">
+                <label for="">卡号</label>
+                <fuzzy-search type="card" query="card.name" queryid="card.id"></fuzzy-search>
+                <!-- <label for="">创建时间</label>
+                <input class="form-control" id="start-date-start" placeholder="起始时间" style="width: 150px;" ng-model="info.created_st">-
+                <input class="form-control" id="start-date-end" placeholder="结束时间" style="width: 150px;" ng-model="info.created_et"> -->
+            </div>
+            <div class="form-group">
+                <label for="">卡类型</label>
+                <fuzzy-search type="card" query="card.name" queryid="card.id"></fuzzy-search>
+                <!-- <label for="">所在城市</label>
+                <area-choose class="form-control" style="border:0px;padding:0px"></area-choose> -->
+            </div>
+        </form>
+        <div class="form-inline clearfix">
+            <button class="btn anniu" type="button" name="button" ng-click="filterSearch()">查询</button>
+        </div>
+    </div>
+
+    <div class="div-data-table" style="margin-top:80px;padding: 20px;">
+        <span style="margin-left: 0px;">|&nbsp;&nbsp;用户详情</span>
+        <button style="position: absolute;right: 3.5%;top: 1%;" class="btn anniu" ng-if="userAuthId.indexOf(29) != -1"  ng-click="addCard()">
+            添加
+        </button>
+        <div class="table-data" style="width: 100%;height:auto">
+            <table id="table-data" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>用户标识</td>
+                        <td>用户名</td>
+                        <td>账户额度</td>
+                        <td>用户类型</td>
+                        <td>截止日期</td>
+                        <td>状态</td>
+                        <td>操作</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in users">
+                        <td>{{user.phone}}</td>
+                        <td>{{user.name}}</td>
+                        <td>{{user.balance}}</td>
+                        <td>{{user.type_name}}</td>
+                        <td>{{user.finished_at}}</td>
+                        <td>
+                            <span ng-if="user.status == 1">未注册</span>
+                            <span ng-if="user.status == 2">已注册</span>
+                        </td>
+                        <td>
+                            <button class="btn btn-warning" ng-click="goDetail(user.id)" ng-if="userAuthId.indexOf(28) != -1">详情</button>
+                            <button class="btn btn-primary" ng-click="goEdit(user.id)" ng-if="userAuthId.indexOf(30) != -1" ng-disabled="user.type == 3 || user.type == 5">编辑</button>
+                            <button class="btn btn-danger" ng-click="delete(user.id)" ng-if="userAuthId.indexOf(31) != -1" ng-disabled="user.type == 3 || user.type == 5">删除</button> 
+                            <!-- 手机用户充值 -->
+                            <button class="btn btn-success" ng-click="go_recharge(user.id)" ng-if="userAuthId.indexOf(49) != -1 && user.type == 1 ||user.type == 2">充值</button> 
+                            <!-- 包月时卡充值 -->
+                            <button class="btn btn-success" ng-click="rechargeByTime(user)" ng-if="userAuthId.indexOf(49) != -1 && user.type == 3">充值</button>
+                            <button class="btn btn-success" ng-click="rechargeByTime(user)" ng-if="userAuthId.indexOf(49) != -1 && user.type == 5">充值</button>
+                            <button class="btn btn-default" ng-click="clear(user.id)" ng-if="authKey.indexOf('UserClear') != -1">清除</button>
+                        </td>        
+                    </tr>
+                </tbody>
+            </table>
+            <page-nation info="info" start-paging="startPaging()"></page-nation> 
+        </div>
+    </div>
+</div>
+<!-- 修改：注释 -->
+<!-- <div class="dw-page-detail-container table-responsive">
+	<div class="form-inline clearfix" style="margin-bottom:15px;padding-right:15px;">
+        <a ui-sref="main.user/add" class="pull-right">
+            <button class="btn btn-primary" ng-if="userAuthId.indexOf(29) != -1">
+                    添加
+            </button>
+        </a>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>用户标识</td>
+                <td>用户名</td>
+                <td>账户额度</td>
+                <td>用户类型</td>
+                <td>截止日期</td>
+                <td>状态</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in users">
+               <td>{{$index+1+(info.page-1)*info.limit}}</td>
+               <td>{{user.phone}}</td>
+               <td>{{user.name}}</td>
+               <td>{{user.balance}}</td>
+               <td> -->
+
+
+                   <!-- <span ng-if="user.month_card == 1">非月卡用户</span>
+                   <span ng-if="user.month_card == 2">月卡用户</span> -->
+
+
+                   <!-- {{user.type_name}}
+               </td>
+               <td>{{user.finished_at}}</td>
+               <td>
+                   <span ng-if="user.status == 1">未注册</span>
+                   <span ng-if="user.status == 2">已注册</span>
+               </td>
+               <td>
+                    <button class="btn btn-warning" ng-click="goDetail(user.id)" ng-if="userAuthId.indexOf(28) != -1">详情</button>
+                    <button class="btn btn-primary" ng-click="goEdit(user.id)" ng-if="userAuthId.indexOf(30) != -1" ng-disabled="user.type == 3 || user.type == 5">编辑</button>
+                    <button class="btn btn-danger" ng-click="delete(user.id)" ng-if="userAuthId.indexOf(31) != -1" ng-disabled="user.type == 3 || user.type == 5">删除</button> -->
+                    <!-- 手机用户充值 -->
+                    <!-- <button class="btn btn-success" ng-click="go_recharge(user.id)" ng-if="userAuthId.indexOf(49) != -1 && user.type == 1 ||user.type == 2">充值</button> -->
+                    <!-- 包月时卡充值 -->
+                    <!-- <button class="btn btn-success" ng-click="rechargeByTime(user)" ng-if="userAuthId.indexOf(49) != -1 && user.type == 3">充值</button>
+                    <button class="btn btn-success" ng-click="rechargeByTime(user)" ng-if="userAuthId.indexOf(49) != -1 && user.type == 5">充值</button>
+                    <button class="btn btn-default" ng-click="clear(user.id)" ng-if="authKey.indexOf('UserClear') != -1">清除</button>
+               </td>
+            </tr>
+        </tbody>
+    </table>
+    <page-nation info="info" start-paging="startPaging()"></page-nation> -->
+
+
+    <!-- <div class="table-bottom">
+        <div class="more-operation-btn-group">
+            <a ui-sref="main.user/add">
+                <button class="btn btn-primary">
+                    添加
+                </button>
+            </a>
+        </div>
+    </div> -->
+
+
+<!-- </div> -->
+<!-- 用户充值 -->
+<div class="modal fade" id="ChargeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title text-center" id="myModalLabel">用户充值</h4>
+      </div>
+      <div class="modal-body">
+         <div class="form-group clearfix">
+             <label class="col-sm-3">金额(元)</label>
+             <input type="number" class="col-sm-5 form-control"style="width: 200px;position:relative;" ng-model="info.count">
+             <span style="color:#ff0000;margin-left: 5px;">*</span>
+
+         </div>
+         <div class="form-group clearfix" style="margin-top: 15px;">
+             <label class="col-sm-3">原因</label>
+             <input type="text" class="col-sm-5 form-control"style="width: 200px;position:relative;" ng-model="info.remarks">
+             <span style="color:#ff0000;margin-left: 5px;">*</span>
+             
+         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="confirmRecharge()">确认</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 卡用户充值 -->
+<div class="modal fade selfModal" id="ChargeModal-Card" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title text-center" id="myModalLabel">用户充值</h4>
+      </div>
+      <div class="modal-body">
+         <div class="form-group clearfix">
+             <label class="col-sm-3">截止日期</label>
+             <input type="text" class="col-sm-5 form-control"style="width: 200px;position:relative;" ng-model="cardTime.deadline" id="deadline">
+             <span style="color:#ff0000;margin-left: 5px;">*</span>
+         </div>
+         <div class="form-group clearfix" style="margin-top: 15px;" ng-if="cardType == 5">
+            <label class="col-sm-3" style="line-height: 34px;margin-bottom: 0;">充值金额</label>
+            <div class="col-sm-5"style="width: 200px;position:relative;padding: 0;">
+                <input type="checkbox" ng-model='cardTime.isRechargeBalance' style="position: absolute;left: -25px;top: 5px;">
+                <input type="number" class="form-control" min="0" placeholder="请输入充值金额" ng-disabled='!cardTime.isRechargeBalance' ng-model='cardTime.count'>
+            </div>
+            <span style="margin-left: 5px;">元</span>
+         </div>
+         <div class="form-group clearfix" style="margin-top: 15px;">
+             <label class="col-sm-3">原因</label>
+             <textarea name="" id="" cols="30" rows="3" class="col-sm-5 form-control" style="width: 200px;position:relative;" ng-model="cardTime.remarks"></textarea>
+             <span style="color:#ff0000;margin-left: 5px;"></span>
+         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="confirmByCard()">确认</button>
+      </div>
+    </div>
+  </div>
+</div>

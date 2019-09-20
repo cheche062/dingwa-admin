@@ -1,0 +1,91 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li class="active">sim卡管理</li>
+    </ol>
+</div>
+<div class="dw-page-filter">
+    <form  class="dw-fliter-group form-inline ">
+        <div class="form-group">
+           <label for="">公司名称:</label>
+           <fuzzy-search type="enterprise" query='enterprise.name' queryid="enterprise.id"></fuzzy-search>
+        </div>
+        <div class="form-group">
+           <label for="">站点名称:</label>
+           <fuzzy-search type="station" query="info.station_obj.name" queryid="info.station_obj.id"></fuzzy-search>
+        </div>
+        <div class="form-group">
+           <label for="">设备桩号:</label>
+           <input class="form-control" ng-model="info.device_number"  placeholder="设备桩号">
+        </div>
+    </form>
+    <form  class="dw-fliter-group form-inline ">
+        <div class="form-group">
+            <label for="">激活时间:</label>
+            <input class="form-control" id="active-start-date" placeholder="起始时间" style="width: 150px;" ng-model="info.activate_st">-
+            <input class="form-control" id="active-end-date" placeholder="结束时间" style="width: 150px;" ng-model="info.activate_et">
+        </div>
+        <div class="form-group">
+            <label for="">停机时间:</label>
+            <input class="form-control" id="halt-start-date" placeholder="起始时间" style="width: 150px;" ng-model="info.shutdown_st">-
+            <input class="form-control" id="halt-end-date" placeholder="结束时间" style="width: 150px;" ng-model="info.shutdown_et">
+        </div>
+         <div class="form-group">
+            <label for="">是否关机</label>
+            <select ng-model="info.is_open" class="form-control">
+                <option value="全部">全部</option>
+                <option value="开机">开机</option>
+                <option value="关机">关机</option>
+            </select>
+         </div>
+    </form>
+    <div class="clearfix form-inline">
+        <button class="btn btn-primary pull-right" type="button" name="button" ng-click="btnSearch()">查询</button>
+    </div>
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <div class="form-inline clearfix" style="padding-right: 15px;margin-bottom: 15px;">
+        <button class="btn btn-primary pull-right" type="button" name="button" ng-click="downExcel()">导出</button>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td class="no-wrap">序号</td>
+                <td>桩号</td>
+                <td>SIM卡号</td>
+                <td>归属站点</td>
+                <td>归属公司</td>
+                <td>是否关机</td>
+                <td ng-click="sort('activate_time')" class="table-sort">
+                    激活时间
+                    <i class="fa fa-sort table-sort-icon" aria-hidden="true" ng-if="info.order_by !== 'activate_time'"></i>
+                    <i class="fa fa-sort-asc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'activate_time' && info.order =='asc'"></i>
+                    <i class="fa fa-sort-desc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'activate_time' && info.order =='desc'"></i>
+                </td>
+                <td ng-click="sort('shutdown_time')" class="table-sort">
+                    停机时间
+                    <i class="fa fa-sort table-sort-icon" aria-hidden="true" ng-if="info.order_by !== 'shutdown_time'"></i>
+                    <i class="fa fa-sort-asc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'shutdown_time' && info.order =='asc'"></i>
+                    <i class="fa fa-sort-desc table-sort-icon" aria-hidden="true" ng-if="info.order_by == 'shutdown_time' && info.order =='desc'"></i>
+                </td>
+                <td>已使用流量(MB)</td>
+                <td>套餐名称</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in cardList">
+                <td>{{$index+1+info.offset}}</td>
+                <td>{{item.device_number}}</td>
+                <td>{{item.msi_sdn}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.enterprise_name}}</td>
+                <td>{{item.isopen}}</td>
+                <td>{{item.activate_time}}</td>
+                <td>{{item.shutdown_time}}</td>
+                <td>{{item.data_usage}}</td>
+                <td>{{item.card_cate}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <page-nation info="info" start-paging="startPaging()"></page-nation>
+</div>

@@ -1,0 +1,21 @@
+<div class="dw-rights-list-page">
+    <table class="table table-bordered ">
+        <thead>
+            <tr>
+                <td>名称</td>
+                <td>标识</td>
+                <td>级别</td>
+                <td>上级模块</td>
+                <td>计费参数</td>
+            </tr>
+        </thead>
+        <tr ng-repeat="item in info.list">
+            <td>{{item.name}}</td>
+            <td>{{item.key}}</td>
+            <td>{{item.level}}</td>
+            <td>{{item.parent_id}}</td>
+            <td>{{item.purchase_type}}</td>
+
+        </tr>
+    </table>
+</div>

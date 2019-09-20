@@ -1,0 +1,66 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li><a ui-sref="main.systemuser/list">系统用户列表</a></li>
+        <li class="active">系统用户详情</li>
+    </ol>
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <div class="detail-basic-info">
+        <div class="row">
+            <div class="each-detail-item col-sm-3">
+                <label class="pull-left each-detail-item-name">用户名:</label>
+                <div class="each-detail-item-value">{{detail.name}}</div>
+            </div>
+
+            <div class="each-detail-item col-sm-3">
+                <label class="pull-left each-detail-item-name">账户类型:</label>
+                <div class="each-detail-item-value">
+                    <span ng-if="detail.type == 1">普通用户</span>
+                    <span ng-if="detail.type == 2">分润用户</span>
+                </div>
+            </div>
+
+            <div class="each-detail-item col-sm-3">
+                <label class="pull-left each-detail-item-name">归属公司:</label>
+                <div class="each-detail-item-value">{{detail.enterprise_name}}</div>
+            </div>
+
+            <div class="each-detail-item col-sm-3">
+                <label class="pull-left each-detail-item-name">手机号:</label>
+                <div class="each-detail-item-value">{{detail.phone}}</div>
+            </div>
+            <div class="each-detail-item col-sm-3">
+                    <label class="pull-left each-detail-item-name">提现账号:</label>
+                    <div class="each-detail-item-value">{{detail.transfer_account}}</div>
+                </div>
+            <div class="each-detail-item col-sm-3">
+                <label class="pull-left each-detail-item-name">电子邮箱:</label>
+                <div class="each-detail-item-value">{{detail.email}}</div>
+            </div>
+
+            <div class="each-detail-item col-sm-3">
+                <label class="pull-left each-detail-item-name">真实姓名:</label>
+                <div class="each-detail-item-value">{{detail.realname}}</div>
+            </div>
+
+            <div class="each-detail-item col-sm-3">
+                <label class="pull-left each-detail-item-name">性别:</label>
+                <div class="each-detail-item-value">
+                    <span ng-if="detail.gender == 1">男</span>
+                    <span ng-if="detail.gender == 2">女</span>
+                </div>
+            </div>
+
+            <div class="each-detail-item col-sm-3">
+                <label class="pull-left each-detail-item-name">地区:</label>
+                <div class="each-detail-item-value">{{detail.province}} {{detail.city}} {{detail.district}}</div>
+            </div>
+
+            <div class="each-detail-item col-sm-3">
+                <label class="pull-left each-detail-item-name">详细地址:</label>
+                <div class="each-detail-item-value">{{detail.address}}</div>
+            </div>
+        </div>
+    </div>
+</div>

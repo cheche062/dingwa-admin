@@ -1,0 +1,139 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li><a ui-sref="main.user/list">用户列表</a></li>
+        <li class="active">用户详情</li>
+    </ol>
+</div>
+<div class="dw-page-detail-container table-responsive">
+    <div class="detail-basic-info">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <p class="detail-basic-title">基本信息</p>
+                </div>
+                <div class="ibox-content">
+                    <div class="each-detail-item col-sm-3">
+                        <label class="pull-left each-detail-item-name">用户:</label>
+                        <div class="each-detail-item-value">{{user.phone}}</div>
+                    </div>
+                    <!-- <div class="each-detail-item col-sm-3">
+                        <label class="pull-left each-detail-item-name">用户性别:</label>
+                        <div class="each-detail-item-value" ng-if="user.gender=='0'">
+                            <span ng-if="user.gender=='1'">男</span>
+                            <span ng-if="user.gender=='2'">女 </span>
+                        </div>
+                    </div> -->
+
+                    <div class="each-detail-item col-sm-3">
+                        <label class="pull-left each-detail-item-name">用户名:</label>
+                        <div class="each-detail-item-value">{{user.name}}</div>
+                    </div>
+                    
+                    <div class="each-detail-item col-sm-3">
+                        <label class="pull-left each-detail-item-name">状态:</label>
+                        <div class="each-detail-item-value">
+                            <span ng-if="user.status == 1">未注册</span>
+                            <span ng-if="user.status == 2">已注册</span>
+                        </div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class="pull-left each-detail-item-name">月卡:</label>
+                        <div class="each-detail-item-value">
+                            <span ng-if="user.month_card == 1">非月卡用户</span>
+                            <span ng-if="user.month_card == 2">月卡用户</span>
+                        </div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class="pull-left each-detail-item-name">注册渠道:</label>
+                        <div class="each-detail-item-value">
+                            <span ng-if="user.user_src == 1">公众号</span>
+                            <span ng-if="user.user_src == 2">app</span>
+                            <span ng-if="user.user_src == 3">平台注册</span>
+                            <span ng-if="user.user_src == 4">小程序注册</span>
+                        </div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class="pull-left each-detail-item-name">封禁状态:</label>
+                        <div class="each-detail-item-value">
+                            <span ng-if="user.forbid_status == 1">正常</span>
+                            <span ng-if="user.forbid_status == 2">封禁</span>
+                        </div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class="pull-left each-detail-item-name">邮箱:</label>
+                        <div class="each-detail-item-value">{{user.email}}</div>
+                    </div>
+
+                    <div class="each-detail-item col-sm-3">
+                        <label class="pull-left each-detail-item-name">真实姓名:</label>
+                        <div class="each-detail-item-value">{{user.realname}}</div>
+                    </div>
+
+                    <div class="each-detail-item col-sm-3">
+                        <label class="pull-left each-detail-item-name">生日:</label>
+                        <div class="each-detail-item-value">{{user.birthday}}</div>
+                    </div>
+
+                    <div class="each-detail-item col-sm-3">
+                        <label class="pull-left each-detail-item-name">所在城市:</label>
+                        <div class="each-detail-item-value">{{user.province}}{{user.city}}{{user.district}}</div>
+                    </div>
+
+                    <div class="each-detail-item col-sm-3">
+                        <label class="pull-left each-detail-item-name">详细地址:</label>
+                        <div class="each-detail-item-value">{{user.address}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class="pull-left each-detail-item-name">占用桩时间:</label>
+                        <div class="each-detail-item-value">{{user.try_occupy_update_at}}</div>
+                    </div>
+                    <div class="each-detail-item col-sm-3">
+                        <label class="pull-left each-detail-item-name">占用桩号:</label>
+                        <div class="each-detail-item-value">{{user.try_occupy_device_number}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="dw-page-detail-container table-responsive" style="margin-top:20px;">
+    <div class="row">
+        <div class="ibox">
+            <div class="ibox-title">
+                <p class="detail-basic-title" style="display:inline-block;">余额记录</p>
+                <div class="date-select-absolute date-select-absolute2" style="left: 110px;position: absolute;">
+                    <input ng-model="info.created_st" type="text" id="balance-start-date" class="form-control"><span class="spline-">-</span>
+                    <input ng-model="info.created_et" type="text" id="balance-end-date" class="form-control">
+                    <button type="button" class="btn btn-primary btn-sm btn-outline" ng-click="search()" style="margin-left:10px;">确定</button>
+                </div>
+            </div>
+            <div class="ibox-content" style="padding: 20px 20px;">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>序号</td>
+                            <td>明细发生时间</td>
+                            <td>操作人</td>
+                            <td>数额</td>
+                            <td>当前额度</td>
+                            <td>原因</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in balance_water">
+                            <td>{{$index+1+info.offset}}</td>
+                            <td>{{x.payed_at}}</td>
+                            <td>{{x.system_user_name}}</td>
+                            <td>{{x.pay_balance}}</td>
+                            <td ng-if='x.cur_balance === "" '></td>
+                            <td ng-if='x.cur_balance !== "" '>{{x.cur_balance}}</td>
+                            <td>{{x.remarks}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <page-nation info="info" start-paging="startPaging()"></page-nation>
+            </div>
+        </div>
+    </div>
+</div>

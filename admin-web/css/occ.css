@@ -1,0 +1,60 @@
+.div-data-table-1{
+    margin-top: -20px;
+    margin-left: 0px;
+    padding-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.div-table-border{
+    border: 1px solid #ccc;
+    margin-top: 20px;
+}
+
+.search-button{
+    margin: 60px -130px;
+}
+
+/* 分页添加 */
+.fenye{
+    margin: 10px auto;
+    /* border: 1px solid green; */
+    position: relative;
+
+}
+.fenye .sum{
+    display: inline-block;
+    width:130px;
+    text-align: center;
+    height: 50px;
+}
+.pagefenye{
+    display: inline-block;
+    vertical-align: middle;
+}
+.pagefenye ul li{
+    padding-left: 10px;
+    display: inline-block;
+    
+}
+
+.pagefenye ul li:nth-child(7){
+    position: relative;
+    top: -15px;
+}
+
+.pagefenye ul li:nth-child(11){
+    position: relative;
+    top: -12px;
+    color: #BFBFBF;
+
+}
+.pagefenye .lastText{
+   width: 80px;
+}
+.pagefenye .lastText a{
+    display:inline-block;
+    padding-right: 40px;
+    box-sizing: border-box;
+ }

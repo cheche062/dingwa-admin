@@ -1,0 +1,492 @@
+<div class="dw-page-nav">
+    <ol class="breadcrumb">
+        <li><a href="#">首页</a></li>
+        <li class="active">分润数据</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ccc; font-size:14px">数据以每天0：00为时间节点核算</span></li>
+    </ol>
+</div>
+<div class="dw-page-filter">
+	<div class="dw-page-commany">
+		<form  class="dw-fliter-group form-inline">
+			<div class="form-group">
+				<label for="">选择推荐人:</label>
+				<fuzzy-search type="enterprise" query='enterprise.name' queryid="enterprise.id"></fuzzy-search>
+			</div>
+						
+			<div class="form-group">
+				<label for="">选择代理商:</label>
+				<fuzzy-search type="station" query='station.name' queryid="station.id"></fuzzy-search>
+			</div>
+			<div class="form-group">
+				<label for="">选择物业:</label>
+				<fuzzy-search type="enterprise" query='enterprise.name' queryid="enterprise.id"></fuzzy-search>
+			</div>
+							
+			<div class="form-group">
+				<label for="">选择合同:</label>
+				<fuzzy-search type="station" query='station.name' queryid="station.id"></fuzzy-search>
+			</div>
+			<div class="form-group" style="display:flex;position: absolute;top:185px;justify-content: flex-start;left: 25%;">
+				<input class="form-control" id="start-date-start" placeholder="起始时间" style="width: 160px;" ng-model="info.created_st" autocomplete="off">
+				&nbsp;&nbsp;至&nbsp;&nbsp;
+				<input class="form-control" id="start-date-end" placeholder="结束时间" style="width: 160px;" ng-model="info.created_et" autocomplete="off">
+			</div>
+		</form>
+		<div style="margin-left:800px;margin-bottom:50px;">
+			<div class="form-inline clearfix">
+				<button class="btn anniu" type="button" name="button" ng-click="searchList()">确认筛选</button>
+			</div>
+		</div>
+		
+	</div>
+
+
+	<div class="dw-page-points">
+        <span class="span-title">分润数据</span>
+        <div class="dw-page-point1">
+            <div class="div-page-point">
+                <span>总收益</span>
+                <br>
+                <span class="span-data">22222</span>
+            </div>
+            <div class="div-page-point">
+                <span>顶蛙收益</span>
+                <br>
+                <span class="span-data">253</span>
+			</div>
+			<div class="div-page-point">
+                <span>总分润额</span>
+                <br>
+                <span class="span-data">253</span>
+			</div>
+			<div class="div-page-point">
+                <span>剩余分润额</span>
+                <br>
+                <span class="span-data">253</span>
+			</div>
+			<div class="div-page-point">
+                <span>可提取分润额</span>
+                <br>
+                <span class="span-data">253</span>
+            </div>
+        </div>
+        <div class="dw-page-point2">
+            <!-- <div class="div-page-point">
+                <span>总耗电数</span>
+                <br>
+                <span class="span-data">8888</span>
+            </div>
+            <div class="div-page-point">
+                <span>昨日耗电度数</span>
+                <br>
+                <span class="span-data">77</span>
+                <br>
+                <span>日<span class="glyphicon glyphicon-arrow-up" style="color: red;font-size: 10px"></span>79.07%</span>
+            </div> -->
+        </div>
+        <div class="dw-page-point3">
+            <div class="div-page-point">
+                <span>总用电度数</span>
+                <br>
+                <span class="span-data">253</span>
+            </div>
+            <div class="div-page-point">
+                <span>总用电费用</span>
+                <br>
+                <span class="span-data">253</span>
+            </div>
+        </div>
+        <div class="dw-page-point4">
+            <div class="div-page-point">
+                <span>代理商总分润</span>
+                <br>
+                <span class="span-data">20.25</span>
+			</div>
+			<div class="div-page-point">
+                <span>可提取分润额</span>
+                <br>
+                <span class="span-data">10.20</span>
+			</div>
+			<div class="div-page-point">
+                <span>代理商分润比例</span>
+                <br>
+                <span class="span-data">？？？</span>
+            </div>
+		</div>
+		<div class="dw-page-point5">
+            <div class="div-page-point">
+                <span>物业总分润</span>
+                <br>
+                <span class="span-data">20.25</span>
+			</div>
+			<div class="div-page-point">
+                <span>可提取分润额</span>
+                <br>
+                <span class="span-data">10.20</span>
+			</div>
+			<div class="div-page-point">
+                <span>物业分润比例</span>
+                <br>
+                <span class="span-data">？？？</span>
+            </div>
+		</div>
+		<div class="dw-page-point6">
+            <div class="div-page-point">
+                <span>推荐人总分润</span>
+                <br>
+                <span class="span-data">20.25</span>
+			</div>
+			<div class="div-page-point">
+                <span>可提取分润额</span>
+                <br>
+                <span class="span-data">10.20</span>
+			</div>
+			<div class="div-page-point">
+                <span>推荐人分润比例</span>
+                <br>
+                <span class="span-data">10%</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="dw-top-display">
+    <div class="row display-flex" style="padding-left: 15px;">
+        <div class="flex-item-grow">
+            <div class="flex-item-content">
+                <span class="left-item-label green-backgroud">订单总数量</span>
+                <span class="right-item-content" ng-switch="tab">
+                    <span ng-switch-when="frog">{{statistics.order_count.frog}}笔</span>
+                    <span ng-switch-when="recommend">{{statistics.order_count.recommend}}笔</span>
+                    <span ng-switch-when="copemate">{{statistics.order_count.copemate}}笔</span>
+                    <span ng-switch-when="elec">{{statistics.order_count.elec}}笔</span>
+                    <span ng-switch-when="other">{{statistics.order_count.other}}笔</span>
+                </span>
+            </div>
+        </div>
+        <div class="flex-item-grow">
+            <div class="flex-item-content">
+                <span class="left-item-label blue-backgroud">支付总金额</span>
+                <span class="right-item-content" ng-switch="tab">
+                    <span ng-switch-when="frog">{{statistics.order_payment.frog/100}}元</span>
+                    <span ng-switch-when="recommend">{{statistics.order_payment.recommend/100}}元</span>
+                    <span ng-switch-when="copemate">{{statistics.order_payment.copemate/100}}元</span>
+                    <span ng-switch-when="elec">{{statistics.order_payment.elec/100}}元</span>
+                    <span ng-switch-when="other">{{statistics.order_payment.other/100}}元</span>
+                </span>
+            </div>
+        </div>
+        <div class="flex-item-grow">
+            <div class="flex-item-content">
+                <span class="left-item-label yellow-backgroud">收益总金额</span>
+                <span class="right-item-content" ng-switch="tab">
+                    <span ng-switch-when="frog">{{statistics.account_fee.frog/100}}元</span>
+                    <span ng-switch-when="recommend">{{statistics.account_fee.recommend/100}}元</span>
+                    <span ng-switch-when="copemate">{{statistics.account_fee.copemate/100}}元</span>
+                    <span ng-switch-when="elec">{{statistics.account_fee.elec/100}}元</span>
+                    <span ng-switch-when="other">{{statistics.account_fee.other/100}}元</span>
+                </span>
+            </div>
+        </div>
+        <div class="flex-item-grow">
+            <div class="flex-item-content">
+                <span class="left-item-label gray-backgroud">已提现金额</span>
+                <span class="right-item-content" ng-switch="tab">
+                    <span ng-switch-when="frog">{{statistics.apply_fee.frog/100}}元</span>
+                    <span ng-switch-when="recommend">{{statistics.apply_fee.recommend/100}}元</span>
+                    <span ng-switch-when="copemate">{{statistics.apply_fee.copemate/100}}元</span>
+                    <span ng-switch-when="elec">{{statistics.apply_fee.elec/100}}元</span>
+                    <span ng-switch-when="other">{{statistics.apply_fee.other/100}}元</span>
+                </span>
+            </div>
+        </div>
+        <div class="flex-item-grow">
+            <div class="flex-item-content" style="margin-right: -20px;">
+                <span class="left-item-label red-backgroud">未提现金额</span>
+                <span class="right-item-content" ng-switch="tab">
+                    <span ng-switch-when="frog">{{statistics.has_fee.frog/100}}元</span>
+                    <span ng-switch-when="recommend">{{statistics.has_fee.recommend/100}}元</span>
+                    <span ng-switch-when="copemate">{{statistics.has_fee.copemate/100}}元</span>
+                    <span ng-switch-when="elec">{{statistics.has_fee.elec/100}}元</span>
+                    <span ng-switch-when="other">{{statistics.has_fee.other/100}}元</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="dw-page-detail-container table-responsive">
+    <div class="tabs-container">
+		<ul class="nav nav-tabs" role="tablist">  
+		  <li role="presentation" class="frog_tab">
+		  	<a href="javascript:void(0)" role="tab" data-toggle="tab" ng-click="change_tab('frog',1)" ng-if="system_user.type == 1 || system_user.type == 0 || (system_user.type ==2 && system_user.frog_account.length > 0)">电蛙账户</a>
+		  </li>  
+		  <li role="presentation" class="recommend_tab">
+		  	<a href="javascript:void(0)" role="tab" data-toggle="tab" ng-click="change_tab('recommend',2)" ng-if="system_user.type == 1 || system_user.type == 0 || (system_user.type ==2 && system_user.recommend_account.length > 0)">引荐账户</a>
+		  </li>  
+		  <li role="presentation" class="copemate_tab">
+		  	<a href="javascript:void(0)" role="tab" data-toggle="tab" ng-click="change_tab('copemate',3)" ng-if="system_user.type == 1 || system_user.type == 0 || (system_user.type ==2 && system_user.copemate_account.length > 0)">合作账户</a>
+		  </li>  
+		  <li role="presentation" class="elec_tab">
+		  	<a href="javascript:void(0)" role="tab" data-toggle="tab" ng-click="change_tab('elec',4)" ng-if="system_user.type == 1 || system_user.type == 0 || (system_user.type ==2 && system_user.elec_account.length > 0)">电费账户</a>
+		  </li>  
+		  <li role="presentation" class="other_tab">
+		  	<a href="javascript:void(0)" role="tab" data-toggle="tab" ng-click="change_tab('other',5)" ng-if="system_user.type == 1 || system_user.type == 0 || (system_user.type ==2 && system_user.other_account.length > 0)">备用账户</a>
+		  </li>
+		</ul>
+		<div class="tab-content" style="padding:10px;">
+		  <div role="tabpanel" class="tab-pane active" id="home" ng-class="{'active': tab == 'frog'}" ng-controller="FrogCtrl">
+			  	<form  class="dw-fliter-group form-inline ">
+					<div class="form-group  margin-r-5">
+				        <div class="form-group">
+				           <label for="">汇总时间:</label>
+				           <input class="form-control" id="start-date-start" placeholder="起始时间" style="width: 150px;" ng-model="info.created_st">-
+				           <input class="form-control" id="start-date-end" placeholder="结束时间" style="width: 150px;" ng-model="info.created_et">
+				        </div>
+
+				        <div class="form-group margin-r-5 profit" ng-if="role_type != 2">
+				           <label for="">用户:</label>
+				           <fuzzy-search-profit type="systemuser" query='info.user_obj.phone' queryid="info.user_obj.id"></fuzzy-search-profit>
+				        </div>
+				        <button class="btn btn-primary" type="button" name="button" ng-click="search()" style="margin-left:10px;">查询</button>
+					</div>
+			    </form>
+			  	<table class="table table-bordered">
+			        <thead>
+			            <tr>
+			                <td>序号</td>
+			                <td>系统用户手机号</td>
+			                <td>系统用户名称</td>
+			                <td>公司名称</td>
+			                <td>角色名</td>
+			                <td>订单数量</td>
+			                <td>用户支付总金额(元)</td>
+			                <td>收益钱数(元)</td>
+			                <td>汇总日期</td>
+			                <td>操作</td>
+			            </tr>
+			        </thead>
+			        <tbody>
+			            <tr ng-repeat="frog in frog_list" ng-class="{'tablecell-gray-backgroud': frog.is_deal_apply}">
+			               <td>{{$index+1+info.offset}}</td>
+			               <td>{{frog.system_phone}}</td>
+			               <td>{{frog.system_name}}</td>
+			               <td>{{frog.enterprise_name}}</td>
+			               <td>{{frog.role_name}}</td>
+			               <td>{{frog.order_cnt}}</td>
+			               <td>{{frog.order_payment/100}}</td>
+			               <td>{{frog.account_fee/100}}</td>
+			               <td>{{frog.created_at}}</td>
+			               <td>
+			                  <button class="btn btn-warning btn-sm" ng-disabled="frog.is_deal_apply" ng-click="goDetail(frog.id)">站点汇总</button>
+			                  <button class="btn btn-default btn-sm" ng-disabled="frog.is_deal_apply" ng-click="goOrder(frog.id)">订单详情</button>
+			               </td>
+			            </tr>
+			        </tbody>
+			    </table>
+	            <page-nation info="info" start-paging="startPaging()"></page-nation>
+		  </div>
+		  <div role="tabpanel" class="tab-pane" id="profile"  ng-class="{'active':tab == 'recommend'}" ng-controller="RecommendCtrl">
+		  	<form  class="dw-fliter-group form-inline ">
+					<div class="form-group  margin-r-5">
+				        <div class="form-group">
+				           <label for="">汇总时间:</label>
+				           <input class="form-control" id="start-date-start" placeholder="起始时间" style="width: 150px;" ng-model="info.created_st">-
+				           <input class="form-control" id="start-date-end" placeholder="结束时间" style="width: 150px;" ng-model="info.created_et">
+				        </div>
+
+				        <div class="form-group margin-r-5 profit" ng-if="role_type != 2">
+				           <label for="">用户:</label>
+				           <fuzzy-search-profit type="systemuser" query='info.user_obj.phone' queryid="info.user_obj.id"></fuzzy-search-profit>
+				        </div>
+				        <button class="btn btn-primary" type="button" name="button" ng-click="search()" style="margin-left:10px;">查询</button>
+					</div>
+			    </form>
+		  	<table class="table table-bordered">
+			        <thead>
+			            <tr>
+			                <td>序号</td>
+			                <td>系统用户手机号</td>
+			                <td>系统用户名称</td>
+			                <td>公司名称</td>
+			                <td>角色名</td>
+			                <td>订单数量</td>
+			                <td>用户支付总金额(元)</td>
+			                <td>收益钱数(元)</td>
+			                <td>汇总日期</td>
+			                <td>操作</td>
+			            </tr>
+			        </thead>
+			        <tbody>
+			            <tr ng-repeat="recommend in recommend_list" ng-class="{'tablecell-gray-backgroud': recommend.is_deal_apply}">
+			               <td>{{$index+1+info.offset}}</td>
+			               <td>{{recommend.system_phone}}</td>
+			               <td>{{recommend.system_name}}</td>
+			               <td>{{recommend.enterprise_name}}</td>
+			               <td>{{recommend.role_name}}</td>
+			               <td>{{recommend.order_cnt}}</td>
+			               <td>{{recommend.order_payment/100}}</td>
+			               <td>{{recommend.account_fee/100}}</td>
+			               <td>{{recommend.created_at}}</td>
+			               <td>
+			                  <button class="btn btn-warning btn-sm" ng-disabled="recommend.is_deal_apply"  ng-click="goDetail(recommend.id)">站点汇总</button>
+			                  <button class="btn btn-default btn-sm" ng-disabled="recommend.is_deal_apply"  ng-click="goOrder(recommend.id)">订单详情</button>
+			               </td>
+			            </tr>
+			        </tbody>
+			    </table>
+	            <page-nation info="info" start-paging="startPaging()"></page-nation>
+		  </div>
+		  <div role="tabpanel" class="tab-pane" id="messages" ng-class="{'active':tab == 'copemate'}" ng-controller="CompemateCtrl">
+		  	<form  class="dw-fliter-group form-inline ">
+					<div class="form-group  margin-r-5">
+				        <div class="form-group">
+				           <label for="">汇总时间:</label>
+				           <input class="form-control" id="start-date-start" placeholder="起始时间" style="width: 150px;" ng-model="info.created_st">-
+				           <input class="form-control" id="start-date-end" placeholder="结束时间" style="width: 150px;" ng-model="info.created_et">
+				        </div>
+
+				        <div class="form-group margin-r-5 profit" ng-if="role_type != 2">
+				           <label for="">用户:</label>
+				           <fuzzy-search-profit type="systemuser" query='info.user_obj.phone' queryid="info.user_obj.id"></fuzzy-search-profit>
+				        </div>
+				        <button class="btn btn-primary" type="button" name="button" ng-click="search()" style="margin-left:10px;">查询</button>
+					</div>
+			    </form>
+		  	<table class="table table-bordered">
+			        <thead>
+			            <tr>
+			                <td>序号</td>
+			                <td>系统用户手机号</td>
+			                <td>系统用户名称</td>
+			                <td>公司名称</td>
+			                <td>角色名</td>
+			                <td>订单数量</td>
+			                <td>用户支付总金额(元)</td>
+			                <td>收益钱数(元)</td>
+			                <td>汇总日期</td>
+			                <td>操作</td>
+			            </tr>
+			        </thead>
+			        <tbody>
+			            <tr ng-repeat="compemate in compemate_list" ng-class="{'tablecell-gray-backgroud': compemate.is_deal_apply}">
+			               <td>{{$index+1+info.offset}}</td>
+			               <td>{{compemate.system_phone}}</td>
+			               <td>{{compemate.system_name}}</td>
+			               <td>{{compemate.enterprise_name}}</td>
+			               <td>{{compemate.role_name}}</td>
+			               <td>{{compemate.order_cnt}}</td>
+			               <td>{{compemate.order_payment/100}}</td>
+			               <td>{{compemate.account_fee/100}}</td>
+			               <td>{{compemate.created_at}}</td>
+			               <td>
+			                  <button class="btn btn-warning btn-sm" ng-disabled="compemate.is_deal_apply" ng-click="goDetail(compemate.id)">站点汇总</button>
+			                  <button class="btn btn-default btn-sm" ng-disabled="compemate.is_deal_apply" ng-click="goOrder(compemate.id)">订单详情</button>
+			               </td>
+			            </tr>
+			        </tbody>
+			    </table>
+	            <page-nation info="info" start-paging="startPaging()"></page-nation>
+		  </div>
+		  <div role="tabpanel" class="tab-pane" id="messages" ng-class="{'active':tab == 'elec'}" ng-controller="ElecCtrl">
+		  	<form  class="dw-fliter-group form-inline ">
+					<div class="form-group  margin-r-5">
+				        <div class="form-group">
+				           <label for="">汇总时间:</label>
+				           <input class="form-control" id="start-date-start" placeholder="起始时间" style="width: 150px;" ng-model="info.created_st">-
+				           <input class="form-control" id="start-date-end" placeholder="结束时间" style="width: 150px;" ng-model="info.created_et">
+				        </div>
+
+				        <div class="form-group margin-r-5 profit" ng-if="role_type != 2">
+				           <label for="">用户:</label>
+				           <fuzzy-search-profit type="systemuser" query='info.user_obj.phone' queryid="info.user_obj.id"></fuzzy-search-profit>
+				        </div>
+				        <button class="btn btn-primary" type="button" name="button" ng-click="search()" style="margin-left:10px;">查询</button>
+					</div>
+			    </form>
+		  	<table class="table table-bordered">
+			        <thead>
+			            <tr>
+			                <td>序号</td>
+			                <td>系统用户手机号</td>
+			                <td>系统用户名称</td>
+			                <td>公司名称</td>
+			                <td>角色名</td>
+			                <td>订单数量</td>
+			                <td>用户支付总金额(元)</td>
+			                <td>收益钱数(元)</td>
+			                <td>汇总日期</td>
+			                <td>操作</td>
+			            </tr>
+			        </thead>
+			        <tbody>
+			            <tr ng-repeat="elec in elec_list" ng-class="{'tablecell-gray-backgroud': elec.is_deal_apply}">
+			               <td>{{$index+1+info.offset}}</td>
+			               <td>{{elec.system_phone}}</td>
+			               <td>{{elec.system_name}}</td>
+			               <td>{{elec.enterprise_name}}</td>
+			               <td>{{elec.role_name}}</td>
+			               <td>{{elec.order_cnt}}</td>
+			               <td>{{elec.order_payment/100}}</td>
+			               <td>{{elec.account_fee/100}}</td>
+			               <td>{{elec.created_at}}</td>
+			               <td>
+			                  <button class="btn btn-warning btn-sm" ng-disabled="elec.is_deal_apply" ng-click="goDetail(elec.id)">站点汇总</button>
+			                  <button class="btn btn-default btn-sm" ng-disabled="elec.is_deal_apply" ng-click="goOrder(elec.id)">订单详情</button>
+			               </td>
+			            </tr>
+			        </tbody>
+			    </table>
+	            <page-nation info="info" start-paging="startPaging()"></page-nation>
+		  </div>
+		  <div role="tabpanel" class="tab-pane" id="messages" ng-class="{'active':tab == 'other'}" ng-controller="OtherCtrl">
+		  	<form  class="dw-fliter-group form-inline ">
+					<div class="form-group  margin-r-5">
+				        <div class="form-group">
+				           <label for="">汇总时间:</label>
+				           <input class="form-control" id="start-date-start" placeholder="起始时间" style="width: 150px;" ng-model="info.created_st">-
+				           <input class="form-control" id="start-date-end" placeholder="结束时间" style="width: 150px;" ng-model="info.created_et">
+				        </div>
+
+				        <div class="form-group margin-r-5 profit" ng-if="role_type != 2">
+				           <label for="">用户:</label>
+				           <fuzzy-search-profit type="systemuser" query='info.user_obj.phone' queryid="info.user_obj.id"></fuzzy-search-profit>
+				        </div>
+				        <button class="btn btn-primary" type="button" name="button" ng-click="search()" style="margin-left:10px;">查询</button>
+					</div>
+			    </form>
+		  	<table class="table table-bordered">
+			        <thead>
+			            <tr>
+			                <td>序号</td>
+			                <td>系统用户手机号</td>
+			                <td>系统用户名称</td>
+			                <td>公司名称</td>
+			                <td>角色名</td>
+			                <td>订单数量</td>
+			                <td>用户支付总金额(元)</td>
+			                <td>收益钱数(元)</td>
+			                <td>汇总日期</td>
+			                <td>操作</td>
+			            </tr>
+			        </thead>
+			        <tbody>
+			            <tr ng-repeat="other in other_list" ng-class="{'tablecell-gray-backgroud': other.is_deal_apply}">
+			               <td>{{$index+1+info.offset}}</td>
+			               <td>{{other.system_phone}}</td>
+			               <td>{{other.system_name}}</td>
+			               <td>{{other.enterprise_name}}</td>
+			               <td>{{other.role_name}}</td>
+			               <td>{{other.order_cnt}}</td>
+			               <td>{{other.order_payment/100}}</td>
+			               <td>{{other.account_fee/100}}</td>
+			               <td>{{other.created_at}}</td>
+			               <td>
+			                  <button class="btn btn-warning btn-sm" ng-disabled="other.is_deal_apply" ng-click="goDetail(other.id)">站点汇总</button>
+			                  <button class="btn btn-default btn-sm" ng-disabled="other.is_deal_apply" ng-click="goOrder(other.id)">订单详情</button>
+			               </td>
+			            </tr>
+			        </tbody>
+			    </table>
+	            <page-nation info="info" start-paging="startPaging()"></page-nation>
+		  </div>
+		</div>  
+   	</div>
+</div>

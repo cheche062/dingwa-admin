@@ -1,0 +1,27 @@
+<div class="modal inmodal" id="ChooseStation" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">选择归属站点</h4>
+            </div>
+            <div class="modal-body" style="max-height: 600px;overflow-y: auto;">
+                <input type="text" class="form-control" placeholder="搜索公司" style="width: 272px;display: inline-block;" ng-model="enter_name" ng-change="enterValueChange()">
+                <input type="text" class="form-control" placeholder="搜索站点" style="width: 272px;display: inline-block;" ng-model="searchValue" ng-change="searchValueChange()">
+                <div class="ibox-content" style="border-top:none;">
+                    <div class="choose-user-groups choose-user-groups2">
+                        <div class="choose-user-groups-item chooseStation checkbox cdot-checkbox-level" ng-repeat="station in stations">
+                            <input  type="radio" ng-model="$parent.station.station_id" id="radio-1-{{station.id}}" name="radio-1s-set" class="regular-radio" value="{{station.id}}" />
+                            <label for="radio-1-{{station.id}}" style="vertical-align:bottom"></label>
+                            <span >{{station.name}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" ng-click="cancle()">取消</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="confirm()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
