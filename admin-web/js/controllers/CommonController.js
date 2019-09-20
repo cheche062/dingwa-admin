@@ -1,4 +1,5 @@
 angular.module('CommonController',['SystemUserService','LoginService','headerModule'])
+
 .controller('MainCtrl', 
     ['$scope',"$rootScope", '$state', '$location', '$timeout','SystemUserService','LoginService',
     function($scope,$rootScope,$state, $location,$timeout,SystemUserService,LoginService) {

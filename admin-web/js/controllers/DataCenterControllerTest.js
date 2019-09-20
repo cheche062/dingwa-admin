@@ -1,9 +1,10 @@
 angular.module('qqqqq', [])
-    .controller('testCtrol', ['$scope', 'IndexService', "myTestFactory1", function ($scope, IndexService, myTestFactory1) {
+    .controller('testCtrol', function ($scope, IndexService, myTestFactory1, mainFac1) {
         $scope.a = 1234
-        console.log("IndexService====  ", myTestFactory1)
+        // console.log("IndexService====  ", changeDefaultAuth)
+        console.log("IndexService====  ", $scope.testNumber)
 
-    }])
+    })
 
 
 angular.module("mainGlobalMod", [])

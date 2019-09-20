@@ -1,5 +1,5 @@
 angular.module('main', ['ui.router', 'oc.lazyLoad', 'CommonService', 'Directive', 'Filter'])
-    .config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
+    .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 
         function ($stateProvider, $urlRouterProvider, $httpProvider) {
             $httpProvider.interceptors.push('HttpRequestInterceptor');
 
@@ -1504,3 +1504,8 @@ angular.module('main', ['ui.router', 'oc.lazyLoad', 'CommonService', 'Directive'
             $urlRouterProvider.otherwise('index');
         }
     ])
+    .factory("mainFac1", function() {
+        return {
+            name: "mainFac1"
+        }
+    })
